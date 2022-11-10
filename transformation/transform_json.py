@@ -366,23 +366,24 @@ class TranslateJson:
     def translate(
         source: str,
         destination: str
-    ) -> None:
+    ) -> {}:
         benchmark = None
         if os.path.exists(source):
             benchmark = TranslateJson._read_json(source=source)
-
-            if benchmark:
-                TranslateJson._write_to_json(
-                    benchmark=benchmark, destination=destination)
-            else:
-                print("Conversion failed.")
-        else:
-            print (f"Source file on path {source} not found")
+            return benchmark.to_dict()
+        #     if benchmark:
+        #         TranslateJson._write_to_json(
+        #             benchmark=benchmark, destination=destination)
+        #     else:
+        #         print("Conversion failed.")
+        # else:
+        #     print (f"Source file on path {source} not found")
 
     def _write_to_json(
         benchmark: Benchmark,
         destination: str
     ) -> None:
+        
         os.makedirs(os.path.dirname(destination), exist_ok=True)
         with open(destination, "w") as f:
             f.write(json.dumps(benchmark.to_dict(), indent=4))
@@ -478,7 +479,7 @@ class TranslateJson:
                         queries=TranslateJson._process_queries(
                             queries=item,
                             workloadType=workloadType,
-                            percentagesString=percentages.get_string()
+                            percentagesString=""
                         )
                     )
                 )
