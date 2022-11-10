@@ -23,6 +23,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
+            "baseHref":"/benchgraph",
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -125,6 +126,9 @@
               "src/**/*.ts"
             ]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
