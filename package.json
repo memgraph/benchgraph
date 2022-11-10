@@ -7,7 +7,7 @@
     "start:dev-proxy": "ng serve --configuration development",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
-    "deploy": "ng deploy --base-href=/angular-app/",
+    "build:deploy": "ng build --output-path docs --base-href /benchgraph/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -41,7 +41,6 @@
     "@types/lodash": "^4.14.186",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
-    "angular-cli-ghpages": "^1.0.3",
     "eslint": "^8.25.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.5.0",
