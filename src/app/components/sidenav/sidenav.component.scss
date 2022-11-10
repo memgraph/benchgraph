@@ -1,0 +1,111 @@
+@import 'colors';
+
+.sidenav {
+  height: 100%;
+  width: 4rem;
+  background: $brand-black;
+  color: $brand-light;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 100;
+
+  .vertical-title {
+    transform: rotate(-90deg);
+    font-size: 24px;
+    line-height: 40px;
+    width: fit-content;
+    position: absolute;
+    bottom: 8rem;
+    left: -5rem;
+    height: 4rem;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .size-button {
+    align-self: center;
+    margin-top: 1.75rem;
+    cursor: pointer;
+    width: 2.5rem;
+    z-index: 200;
+
+    &.collapse {
+      height: 2rem;
+    }
+  }
+
+  .opened {
+    position: absolute;
+    height: 100%;
+    width: 24.5rem;
+    top: 0;
+    left: 2rem;
+    background: $brand-black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: $brand-light;
+    padding-right: 2rem;
+
+    .title {
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 4rem;
+      margin-bottom: 2rem;
+    }
+
+    .github {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-end;
+      gap: 1rem;
+      cursor: pointer;
+      width: fit-content;
+
+      img {
+        align-self: center;
+      }
+
+      &-title {
+        border-bottom: 1px solid transparent;
+        transition: all 0.3s linear;
+      }
+
+      &:hover {
+        .github-title {
+          border-bottom: 1px solid $brand-light;
+        }
+      }
+    }
+
+    .subtitle {
+      font-weight: 500;
+      font-size: 1.5rem;
+      line-height: 2.5rem;
+      color: $brand-ash;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .docs {
+      display: flex;
+      cursor: pointer;
+      gap: 1rem;
+      width: fit-content;
+
+      &-title {
+        border-bottom: 1px solid transparent;
+        transition: all 0.3s linear;
+      }
+
+      &:hover {
+        .docs-title {
+          border-bottom: 1px solid $brand-light;
+        }
+      }
+    }
+  }
+}

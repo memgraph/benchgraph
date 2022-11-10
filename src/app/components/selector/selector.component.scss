@@ -1,0 +1,130 @@
+@import 'colors';
+
+:host {
+  width: 22.5rem;
+  min-width: 14.5rem;
+  background-color: $brand-light;
+  height: 100%;
+  border-right: 1px solid $brand-ash;
+  padding: 0 1.875rem;
+  font-family: 'Roboto';
+  color: $brand-black;
+  overflow-y: auto;
+}
+
+.header {
+  margin-top: 4.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: black;
+}
+
+.description {
+  color: $brand-gray;
+  font-family: 'Roboto';
+}
+
+.setting {
+  margin: 1.75rem 0;
+
+  .title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .vendors, .vendor {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .conditions {
+    display: flex;
+    gap: 1rem;
+
+    .condition {
+      cursor: pointer;
+      padding: 0 0.5rem;
+      user-select: none;
+
+      &.activated {
+        background: #F9E3D1;
+        border-radius: 2px;
+        font-weight: 600;
+        pointer-events: none;
+        cursor: initial;
+      }
+
+      &.single {
+        pointer-events: none;
+      }
+    }
+  }
+
+  .categories {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+    .category {
+      .checkbox {
+        width: 1rem;
+        height: 1rem;
+        border: 1px solid black;
+        border-radius: 2px;
+        display: flex;
+        cursor: pointer;
+
+        .icon-ui-ok {
+          font-size: 0.6rem;
+          color: white;
+        }
+
+        &.activated {
+          background-color: #FAAB6E;
+          border: 1px solid transparent;
+        }
+      }
+
+      &-main {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+          &-name {
+            font-weight: 600;
+          }
+    
+          &-length {
+            background: #E6E6E6;
+            opacity: 0.5;
+            border-radius: 100%;
+            padding: 0 0.5rem;
+            color: black;
+          }
+    
+          &-caret {
+            margin-left: auto;
+            user-select: none;
+            cursor: pointer;
+    
+            &.expanded {
+              color: $brand-orange;
+            }
+          }
+      }
+
+      &-queries {
+        margin-left: 1rem;
+        margin-top: 1rem;
+
+        &-query {
+          display: flex;
+          gap: 0.5rem;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+}

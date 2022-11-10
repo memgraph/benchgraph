@@ -1,0 +1,1358 @@
+{
+  "runConfig": {
+    "vendor": "Neo4j",
+    "condition": "cold"
+  },
+  "datasets": [
+      {
+        "name": "pokec",
+        "size": "small",
+          "workloads": [
+            {
+              "type": "isolated",
+                "queries": [
+                  {
+                    "name": "aggregate",
+                    "category": "aggregate",
+                      "stats": {
+                        "executedQueries": 883,
+                        "duration": 7.4776666480000005,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 25000.0,
+                                "maximum": 25000.0,
+                                "minimum": 25000.0
+                            },
+                            "parsingTime": {
+                                "average": 0.0004397856387315969,
+                                "maximum": 0.024783201,
+                                "minimum": 7.9131e-05
+                            },
+                            "planExecutionTime": {
+                                "average": 0.10050255376896941,
+                                "maximum": 0.132246564,
+                                "minimum": 0.082515684
+                            },
+                            "planningTime": {
+                                "average": 9.92360113250283e-05,
+                                "maximum": 0.001840968,
+                                "minimum": 5.8527e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 418.08496441014388,
+                        "database": {
+                            "cpu": 91.41,
+                            "memory": 482720896
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.080757968,
+                            "max": 0.09479875,
+                            "mean": 0.08230618681999999,
+                            "p99": 0.094557516,
+                            "p95": 0.08460138,
+                            "p90": 0.083803085,
+                            "p50": 0.081642449
+                        }
+                      }
+                  },
+                  {
+                    "name": "aggregate_with_filter",
+                    "category": "aggregate",
+                      "stats": {
+                        "executedQueries": 748,
+                        "duration": 7.4202831881666675,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 25000.0,
+                                "maximum": 25000.0,
+                                "minimum": 25000.0
+                            },
+                            "parsingTime": {
+                                "average": 0.00044212897459893044,
+                                "maximum": 0.01971357,
+                                "minimum": 9.9525e-05
+                            },
+                            "planExecutionTime": {
+                                "average": 0.11793553163235294,
+                                "maximum": 0.159249766,
+                                "minimum": 0.09367478
+                            },
+                            "planningTime": {
+                                "average": 0.00012679877673796793,
+                                "maximum": 0.003050843,
+                                "minimum": 6.0553e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 200.80477807004138,
+                        "database": {
+                            "cpu": 90.75,
+                            "memory": 489090176
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.092755937,
+                            "max": 0.105505339,
+                            "mean": 0.09384336166000001,
+                            "p99": 0.09844374,
+                            "p95": 0.095293441,
+                            "p90": 0.094637065,
+                            "p50": 0.093531464
+                        }
+                      }
+                  },
+                  {
+                    "name": "executedQueries",
+                    "category": "aggregate",
+                      "stats": {
+                        "executedQueries": 217,
+                        "duration": 1.1748626410833336,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 10000.0,
+                                "maximum": 10000.0,
+                                "minimum": 10000.0
+                            },
+                            "parsingTime": {
+                                "average": 0.00150412332718894,
+                                "maximum": 0.025885729,
+                                "minimum": 8.0598e-05
+                            },
+                            "planExecutionTime": {
+                                "average": 0.06278020162672811,
+                                "maximum": 0.085414062,
+                                "minimum": 0.049623532
+                            },
+                            "planningTime": {
+                                "average": 0.000129459,
+                                "maximum": 0.001547911,
+                                "minimum": 5.6293e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 484.70244300210757,
+                        "database": {
+                            "cpu": 15.92,
+                            "memory": 480365696
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.048210905,
+                            "max": 0.060702031,
+                            "mean": 0.04937286035,
+                            "p99": 0.051150211,
+                            "p95": 0.050559416,
+                            "p90": 0.049944667,
+                            "p50": 0.04922166
+                        }
+                      }
+                  },
+                  {
+                    "name": "expansion_1",
+                    "category": "analytical",
+                      "stats": {
+                        "executedQueries": 2667,
+                        "duration": 0.23529646616666666,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 23.300037495312992,
+                                "maximum": 371.2,
+                                "minimum": 11.6
+                            },
+                            "parsingTime": {
+                                "average": 0.00019671800712410943,
+                                "maximum": 0.015971638,
+                                "minimum": 9.5195e-05
+                            },
+                            "planExecutionTime": {
+                                "average": 0.0002756589167604049,
+                                "maximum": 0.004657073,
+                                "minimum": 2.8775e-05
+                            },
+                            "planningTime": {
+                                "average": 9.477040494938131e-05,
+                                "maximum": 0.005437839,
+                                "minimum": 6.0134e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 41334.636866628052,
+                        "database": {
+                            "cpu": 4.12,
+                            "memory": 482663552
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.000527867,
+                            "max": 0.011211269,
+                            "mean": 0.00079672551,
+                            "p99": 0.001622084,
+                            "p95": 0.000894259,
+                            "p90": 0.000729361,
+                            "p50": 0.000655398
+                        }
+                      }
+                  },
+                  {
+                    "name": "expansion_1_with_filter",
+                    "category": "analytical",
+                      "stats": {
+                        "executedQueries": 2758,
+                        "duration": 0.24820993824999996,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 23.380855692530716,
+                                "maximum": 371.2,
+                                "minimum": 11.6
+                            },
+                            "parsingTime": {
+                                "average": 0.00021861243219724438,
+                                "maximum": 0.015973594,
+                                "minimum": 0.000119779
+                            },
+                            "planExecutionTime": {
+                                "average": 0.00028012891841914427,
+                                "maximum": 0.007199676,
+                                "minimum": 2.8845e-05
+                            },
+                            "planningTime": {
+                                "average": 8.773282813633072e-05,
+                                "maximum": 0.002884131,
+                                "minimum": 6.3696e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 41111.561525075238,
+                        "database": {
+                            "cpu": 4.32,
+                            "memory": 482185984
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.000583251,
+                            "max": 0.011792145,
+                            "mean": 0.00084078113,
+                            "p99": 0.00181827,
+                            "p95": 0.000911999,
+                            "p90": 0.000806118,
+                            "p50": 0.000692484
+                        }
+                      }
+                  },
+                  {
+                    "name": "expansion_2",
+                    "category": "analytical",
+                      "stats": {
+                        "executedQueries": 538,
+                        "duration": 0.38484349916666666,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 56.108689591078075,
+                                "maximum": 1645.6,
+                                "minimum": 51.425
+                            },
+                            "parsingTime": {
+                                "average": 0.0005164038643122676,
+                                "maximum": 0.017074165,
+                                "minimum": 0.000115309
+                            },
+                            "planExecutionTime": {
+                                "average": 0.006618952414498143,
+                                "maximum": 0.042948091,
+                                "minimum": 2.9893e-05
+                            },
+                            "planningTime": {
+                                "average": 0.00015836314869888474,
+                                "maximum": 0.003971363,
+                                "minimum": 6.4744e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 4397.970866508011,
+                        "database": {
+                            "cpu": 5.94,
+                            "memory": 513151744
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.007539528,
+                            "max": 0.020255544,
+                            "mean": 0.00806001927,
+                            "p99": 0.011399563,
+                            "p95": 0.008720558,
+                            "p90": 0.008475063,
+                            "p50": 0.007766166
+                        }
+                      }
+                  },
+                  {
+                    "name": "expansion_2_with_filter",
+                    "category": "analytical",
+                      "stats": {
+                        "executedQueries": 358,
+                        "duration": 0.25137210941666666,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 53.72332402234634,
+                                "maximum": 822.8,
+                                "minimum": 51.425
+                            },
+                            "parsingTime": {
+                                "average": 0.0009020199273743017,
+                                "maximum": 0.023054887,
+                                "minimum": 0.000134585
+                            },
+                            "planExecutionTime": {
+                                "average": 0.006362800639664805,
+                                "maximum": 0.048767198,
+                                "minimum": 2.9613e-05
+                            },
+                            "planningTime": {
+                                "average": 0.00019007825698324018,
+                                "maximum": 0.003407947,
+                                "minimum": 6.8166e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 4424.183457865607,
+                        "database": {
+                            "cpu": 4.64,
+                            "memory": 500273920
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.001455161,
+                            "max": 0.013083316,
+                            "mean": 0.0017557612999999999,
+                            "p99": 0.002419541,
+                            "p95": 0.001803673,
+                            "p90": 0.001744726,
+                            "p50": 0.001621664
+                        }
+                    }
+                  },
+                  {
+                    "name": "min_max_avg",
+                    "category": "aggregate",
+                      "stats": {
+                        "executedQueries": 206,
+                        "duration": 2.1472642711666663,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 10000.0,
+                                "maximum": 10000.0,
+                                "minimum": 10000.0
+                            },
+                            "parsingTime": {
+                                "average": 0.00124673759223301,
+                                "maximum": 0.019102451,
+                                "minimum": 0.000101201
+                            },
+                            "planExecutionTime": {
+                                "average": 0.12313491546116503,
+                                "maximum": 0.173477443,
+                                "minimum": 0.096598021
+                            },
+                            "planningTime": {
+                                "average": 0.00023105098058252423,
+                                "maximum": 0.002557619,
+                                "minimum": 5.9436e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 95.93602555873323,
+                        "database": {
+                            "cpu": 27.57,
+                            "memory": 500744960
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.094246995,
+                            "max": 0.107081116,
+                            "mean": 0.09639453304,
+                            "p99": 0.105069801,
+                            "p95": 0.098588452,
+                            "p90": 0.097732816,
+                            "p50": 0.095982712
+                        }
+                    }
+                  },
+                  {
+                    "name": "pattern_cycle",
+                    "category": "analytical",
+                      "stats": {
+                        "executedQueries": 2163,
+                        "duration": 0.27927178583333334,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 155.1316689782714,
+                                "maximum": 2470.4,
+                                "minimum": 38.6
+                            },
+                            "parsingTime": {
+                                "average": 0.00028398597873324094,
+                                "maximum": 0.02213339,
+                                "minimum": 0.000127671
+                            },
+                            "planExecutionTime": {
+                                "average": 0.00064113853259362,
+                                "maximum": 0.011338032,
+                                "minimum": 2.7657e-05
+                            },
+                            "planningTime": {
+                                "average": 0.00010228774664817384,
+                                "maximum": 0.003806257,
+                                "minimum": 6.6838e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 7745.143296683959,
+                        "database": {
+                            "cpu": 4.72,
+                            "memory": 488782976
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.001005029,
+                            "max": 0.012144359,
+                            "mean": 0.0012663083,
+                            "p99": 0.002054895,
+                            "p95": 0.001408646,
+                            "p90": 0.001271127,
+                            "p50": 0.00111922
+                        }
+                    }
+                  },
+                  {
+                    "name": "pattern_long",
+                    "category": "analytical",
+                      "stats": {
+                        "executedQueries": 2945,
+                        "duration": 0.24370335983333336,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 768.7284397283521,
+                                "maximum": 3073.87,
+                                "minimum": 384.23375
+                            },
+                            "parsingTime": {
+                                "average": 0.00026627346926994905,
+                                "maximum": 0.017918767,
+                                "minimum": 0.000146808
+                            },
+                            "planExecutionTime": {
+                                "average": 0.00012652085738539898,
+                                "maximum": 0.000619779,
+                                "minimum": 2.9543e-05
+                            },
+                            "planningTime": {
+                                "average": 0.00011765087707979627,
+                                "maximum": 0.008005374,
+                                "minimum": 6.6979e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 42084.36355581663,
+                        "database": {
+                            "cpu": 4.21,
+                            "memory": 514306816
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.000607138,
+                            "max": 0.013474293,
+                            "mean": 0.00092661437,
+                            "p99": 0.001661195,
+                            "p95": 0.001081016,
+                            "p90": 0.000877846,
+                            "p50": 0.000762676
+                        }
+                    }
+                  },
+                  {
+                    "name": "pattern_short",
+                    "category": "analytical",
+                      "stats": {
+                        "executedQueries": 3131,
+                        "duration": 0.2203916455,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 7.424273395081407,
+                                "maximum": 908.8,
+                                "minimum": 7.1
+                            },
+                            "parsingTime": {
+                                "average": 0.000187411582561482,
+                                "maximum": 0.01558143,
+                                "minimum": 9.8268e-05
+                            },
+                            "planExecutionTime": {
+                                "average": 9.105436122644523e-05,
+                                "maximum": 0.000176631,
+                                "minimum": 2.8705e-05
+                            },
+                            "planningTime": {
+                                "average": 9.028828904503357e-05,
+                                "maximum": 0.004960258,
+                                "minimum": 6.0693e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 44206.527624478396,
+                        "database": {
+                            "cpu": 3.89,
+                            "memory": 488162048
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.000550425,
+                            "max": 0.012383219,
+                            "mean": 0.0008260822099999999,
+                            "p99": 0.001667411,
+                            "p95": 0.00094245,
+                            "p90": 0.000808632,
+                            "p50": 0.000677608
+                        }
+                    }
+                  },
+                  {
+                    "name": "single_edge",
+                    "category": "write",
+                      "stats":  {
+                        "executedQueries": 631,
+                        "duration": 0.07586668733333334,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 9.851188589540403,
+                                "maximum": 18.700000000000003,
+                                "minimum": 2.2
+                            },
+                            "parsingTime": {
+                                "average": 0.0006983859778129953,
+                                "maximum": 0.027131083,
+                                "minimum": 0.000151976
+                            },
+                            "planExecutionTime": {
+                                "average": 9.956763391442156e-05,
+                                "maximum": 0.000238301,
+                                "minimum": 7.8083e-05
+                            },
+                            "planningTime": {
+                                "average": 0.00015180956893819336,
+                                "maximum": 0.00389747,
+                                "minimum": 6.4883e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 8317.220932918726,
+                        "database": {
+                            "cpu": 2.72,
+                            "memory": 484416640
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.000672929,
+                            "max": 0.013388317,
+                            "mean": 0.00098536982,
+                            "p99": 0.001851445,
+                            "p95": 0.001167551,
+                            "p90": 0.000980654,
+                            "p50": 0.000804861
+                        }
+                    }
+                  },
+                  {
+                    "name": "single_vertex_property",
+                    "category": "update",
+                      "stats":  {
+                        "executedQueries": 126,
+                        "duration": 0.6722997089166666,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 25000.0,
+                                "maximum": 25000.0,
+                                "minimum": 25000.0
+                            },
+                            "parsingTime": {
+                                "average": 0.001181047579365079,
+                                "maximum": 0.011823295,
+                                "minimum": 7.948e-05
+                            },
+                            "planExecutionTime": {
+                                "average": 0.06200821214285714,
+                                "maximum": 0.083842543,
+                                "minimum": 0.045185133
+                            },
+                            "planningTime": {
+                                "average": 0.0002859846746031746,
+                                "maximum": 0.003913184,
+                                "minimum": 5.4128e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 487.41641313966127,
+                        "database": {
+                            "cpu": 9.91,
+                            "memory": 481623168
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.044594479,
+                            "max": 0.053663968,
+                            "mean": 0.04566357726,
+                            "p99": 0.047230461,
+                            "p95": 0.046533785,
+                            "p90": 0.046260632,
+                            "p50": 0.045503684
+                        }
+                    }
+                  },
+                  {
+                    "name": "single_vertex_read",
+                    "category": "read",
+                      "stats":  {
+                        "executedQueries": 3372,
+                        "duration": 0.20544550433333333,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 17.559223013048648,
+                                "maximum": 17.6,
+                                "minimum": 1.1
+                            },
+                            "parsingTime": {
+                                "average": 0.00015077879418742588,
+                                "maximum": 0.0151255,
+                                "minimum": 7.6547e-05
+                            },
+                            "planExecutionTime": {
+                                "average": 8.175725741399764e-05,
+                                "maximum": 0.000129906,
+                                "minimum": 6.5093e-05
+                            },
+                            "planningTime": {
+                                "average": 7.732530960854092e-05,
+                                "maximum": 0.00257934,
+                                "minimum": 5.5873e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 46413.11164701352,
+                        "database": {
+                            "cpu": 3.84,
+                            "memory": 480891648
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.000494272,
+                            "max": 0.00930353,
+                            "mean": 0.0007495393999999999,
+                            "p99": 0.001520463,
+                            "p95": 0.000782651,
+                            "p90": 0.000719374,
+                            "p50": 0.000638985
+                        }
+                    }
+                  },
+                  {
+                    "name": "single_vertex_write",
+                    "category": "write",
+                      "stats":  {
+                        "executedQueries": 1398,
+                        "duration": 0.10391420950000001,
+                        "metadata": {
+                            "costEstimate": {
+                                "average": 0.0,
+                                "maximum": 0.0,
+                                "minimum": 0.0
+                            },
+                            "parsingTime": {
+                                "average": 0.00021025298712446354,
+                                "maximum": 0.013325739,
+                                "minimum": 7.6058e-05
+                            },
+                            "planExecutionTime": {
+                                "average": 6.691985264663806e-05,
+                                "maximum": 0.000157564,
+                                "minimum": 5.3359e-05
+                            },
+                            "planningTime": {
+                                "average": 8.480739771101572e-05,
+                                "maximum": 0.002296479,
+                                "minimum": 5.6432e-05
+                            }
+                        },
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 43453.405522947272,
+                        "database": {
+                            "cpu": 2.85,
+                            "memory": 480977664
+                        },
+                        "queryStatistics": {
+                            "iterations": 100,
+                            "min": 0.000557968,
+                            "max": 0.009934693,
+                            "mean": 0.00081991515,
+                            "p99": 0.001702052,
+                            "p95": 0.001346346,
+                            "p90": 0.0008314,
+                            "p50": 0.000671392
+                        }
+                    }
+                  }
+                ]
+          },
+          {
+            "type": "mixed",
+            "percentages": {
+                "numOfQueries": 1000,
+                "writePerc": 30,
+                "readPerc": 0,
+                "updatePerc": 0,
+                "analyticalPerc": 0,
+                "queryPerc": 70
+            },
+              "queries": [
+                {
+                  "name": "aggregate",
+                  "category": "aggregate",
+                    "stats": {
+                      "executedQueries": 883,
+                      "duration": 7.4776666480000005,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 25000.0,
+                              "maximum": 25000.0,
+                              "minimum": 25000.0
+                          },
+                          "parsingTime": {
+                              "average": 0.0004397856387315969,
+                              "maximum": 0.024783201,
+                              "minimum": 7.9131e-05
+                          },
+                          "planExecutionTime": {
+                              "average": 0.10050255376896941,
+                              "maximum": 0.132246564,
+                              "minimum": 0.082515684
+                          },
+                          "planningTime": {
+                              "average": 9.92360113250283e-05,
+                              "maximum": 0.001840968,
+                              "minimum": 5.8527e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 448.08496441014388,
+                      "database": {
+                          "cpu": 91.41,
+                          "memory": 482720896
+                      }
+                    }
+                },
+                {
+                  "name": "aggregate_with_filter",
+                  "category": "aggregate",
+                    "stats": {
+                      "executedQueries": 748,
+                      "duration": 7.4202831881666675,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 25000.0,
+                              "maximum": 25000.0,
+                              "minimum": 25000.0
+                          },
+                          "parsingTime": {
+                              "average": 0.00044212897459893044,
+                              "maximum": 0.01971357,
+                              "minimum": 9.9525e-05
+                          },
+                          "planExecutionTime": {
+                              "average": 0.11793553163235294,
+                              "maximum": 0.159249766,
+                              "minimum": 0.09367478
+                          },
+                          "planningTime": {
+                              "average": 0.00012679877673796793,
+                              "maximum": 0.003050843,
+                              "minimum": 6.0553e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 200.80477807004138,
+                      "database": {
+                          "cpu": 90.75,
+                          "memory": 489090176
+                      }
+                    }
+                },
+                {
+                  "name": "executedQueries",
+                  "category": "aggregate",
+                    "stats": {
+                      "executedQueries": 217,
+                      "duration": 1.1748626410833336,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 10000.0,
+                              "maximum": 10000.0,
+                              "minimum": 10000.0
+                          },
+                          "parsingTime": {
+                              "average": 0.00150412332718894,
+                              "maximum": 0.025885729,
+                              "minimum": 8.0598e-05
+                          },
+                          "planExecutionTime": {
+                              "average": 0.06278020162672811,
+                              "maximum": 0.085414062,
+                              "minimum": 0.049623532
+                          },
+                          "planningTime": {
+                              "average": 0.000129459,
+                              "maximum": 0.001547911,
+                              "minimum": 5.6293e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 404.70244300210757,
+                      "database": {
+                          "cpu": 15.92,
+                          "memory": 480365696
+                      }
+                    }
+                },
+                {
+                  "name": "expansion_1",
+                  "category": "analytical",
+                    "stats": {
+                      "executedQueries": 2667,
+                      "duration": 0.23529646616666666,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 23.300037495312992,
+                              "maximum": 371.2,
+                              "minimum": 11.6
+                          },
+                          "parsingTime": {
+                              "average": 0.00019671800712410943,
+                              "maximum": 0.015971638,
+                              "minimum": 9.5195e-05
+                          },
+                          "planExecutionTime": {
+                              "average": 0.0002756589167604049,
+                              "maximum": 0.004657073,
+                              "minimum": 2.8775e-05
+                          },
+                          "planningTime": {
+                              "average": 9.477040494938131e-05,
+                              "maximum": 0.005437839,
+                              "minimum": 6.0134e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 44334.636866628052,
+                      "database": {
+                          "cpu": 4.12,
+                          "memory": 482663552
+                      }
+                    }
+                },
+                {
+                  "name": "expansion_1_with_filter",
+                  "category": "analytical",
+                    "stats": {
+                      "executedQueries": 2758,
+                      "duration": 0.24820993824999996,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 23.380855692530716,
+                              "maximum": 371.2,
+                              "minimum": 11.6
+                          },
+                          "parsingTime": {
+                              "average": 0.00021861243219724438,
+                              "maximum": 0.015973594,
+                              "minimum": 0.000119779
+                          },
+                          "planExecutionTime": {
+                              "average": 0.00028012891841914427,
+                              "maximum": 0.007199676,
+                              "minimum": 2.8845e-05
+                          },
+                          "planningTime": {
+                              "average": 8.773282813633072e-05,
+                              "maximum": 0.002884131,
+                              "minimum": 6.3696e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 44111.561525075238,
+                      "database": {
+                          "cpu": 4.32,
+                          "memory": 482185984
+                      }
+                    }
+                },
+                {
+                  "name": "expansion_2",
+                  "category": "analytical",
+                    "stats": {
+                      "executedQueries": 538,
+                      "duration": 0.38484349916666666,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 56.108689591078075,
+                              "maximum": 1645.6,
+                              "minimum": 51.425
+                          },
+                          "parsingTime": {
+                              "average": 0.0005164038643122676,
+                              "maximum": 0.017074165,
+                              "minimum": 0.000115309
+                          },
+                          "planExecutionTime": {
+                              "average": 0.006618952414498143,
+                              "maximum": 0.042948091,
+                              "minimum": 2.9893e-05
+                          },
+                          "planningTime": {
+                              "average": 0.00015836314869888474,
+                              "maximum": 0.003971363,
+                              "minimum": 6.4744e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 4697.970866508011,
+                      "database": {
+                          "cpu": 5.94,
+                          "memory": 513151744
+                      }
+                    }
+                },
+                {
+                  "name": "expansion_2_with_filter",
+                  "category": "analytical",
+                    "stats": {
+                      "executedQueries": 358,
+                      "duration": 0.25137210941666666,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 53.72332402234634,
+                              "maximum": 822.8,
+                              "minimum": 51.425
+                          },
+                          "parsingTime": {
+                              "average": 0.0009020199273743017,
+                              "maximum": 0.023054887,
+                              "minimum": 0.000134585
+                          },
+                          "planExecutionTime": {
+                              "average": 0.006362800639664805,
+                              "maximum": 0.048767198,
+                              "minimum": 2.9613e-05
+                          },
+                          "planningTime": {
+                              "average": 0.00019007825698324018,
+                              "maximum": 0.003407947,
+                              "minimum": 6.8166e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 4424.183457865607,
+                      "database": {
+                          "cpu": 4.64,
+                          "memory": 500273920
+                      }
+                  }
+                },
+                {
+                  "name": "min_max_avg",
+                  "category": "aggregate",
+                    "stats": {
+                      "executedQueries": 206,
+                      "duration": 2.1472642711666663,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 10000.0,
+                              "maximum": 10000.0,
+                              "minimum": 10000.0
+                          },
+                          "parsingTime": {
+                              "average": 0.00124673759223301,
+                              "maximum": 0.019102451,
+                              "minimum": 0.000101201
+                          },
+                          "planExecutionTime": {
+                              "average": 0.12313491546116503,
+                              "maximum": 0.173477443,
+                              "minimum": 0.096598021
+                          },
+                          "planningTime": {
+                              "average": 0.00023105098058252423,
+                              "maximum": 0.002557619,
+                              "minimum": 5.9436e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 95.93602555873323,
+                      "database": {
+                          "cpu": 27.57,
+                          "memory": 500744960
+                      }
+                  }
+                },
+                {
+                  "name": "pattern_cycle",
+                  "category": "analytical",
+                    "stats": {
+                      "executedQueries": 2163,
+                      "duration": 0.27927178583333334,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 155.1316689782714,
+                              "maximum": 2470.4,
+                              "minimum": 38.6
+                          },
+                          "parsingTime": {
+                              "average": 0.00028398597873324094,
+                              "maximum": 0.02213339,
+                              "minimum": 0.000127671
+                          },
+                          "planExecutionTime": {
+                              "average": 0.00064113853259362,
+                              "maximum": 0.011338032,
+                              "minimum": 2.7657e-05
+                          },
+                          "planningTime": {
+                              "average": 0.00010228774664817384,
+                              "maximum": 0.003806257,
+                              "minimum": 6.6838e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 7745.143296683959,
+                      "database": {
+                          "cpu": 4.72,
+                          "memory": 488782976
+                      }
+                  }
+                },
+                {
+                  "name": "pattern_long",
+                  "category": "analytical",
+                    "stats": {
+                      "executedQueries": 2945,
+                      "duration": 0.24370335983333336,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 768.7284397283521,
+                              "maximum": 3073.87,
+                              "minimum": 384.23375
+                          },
+                          "parsingTime": {
+                              "average": 0.00026627346926994905,
+                              "maximum": 0.017918767,
+                              "minimum": 0.000146808
+                          },
+                          "planExecutionTime": {
+                              "average": 0.00012652085738539898,
+                              "maximum": 0.000619779,
+                              "minimum": 2.9543e-05
+                          },
+                          "planningTime": {
+                              "average": 0.00011765087707979627,
+                              "maximum": 0.008005374,
+                              "minimum": 6.6979e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 45084.36355581663,
+                      "database": {
+                          "cpu": 4.21,
+                          "memory": 514306816
+                      }
+                  }
+                },
+                {
+                  "name": "pattern_short",
+                  "category": "analytical",
+                    "stats": {
+                      "executedQueries": 3131,
+                      "duration": 0.2203916455,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 7.424273395081407,
+                              "maximum": 908.8,
+                              "minimum": 7.1
+                          },
+                          "parsingTime": {
+                              "average": 0.000187411582561482,
+                              "maximum": 0.01558143,
+                              "minimum": 9.8268e-05
+                          },
+                          "planExecutionTime": {
+                              "average": 9.105436122644523e-05,
+                              "maximum": 0.000176631,
+                              "minimum": 2.8705e-05
+                          },
+                          "planningTime": {
+                              "average": 9.028828904503357e-05,
+                              "maximum": 0.004960258,
+                              "minimum": 6.0693e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 44206.527624478396,
+                      "database": {
+                          "cpu": 3.89,
+                          "memory": 488162048
+                      }
+                  }
+                },
+                {
+                  "name": "single_edge",
+                  "category": "write",
+                    "stats":  {
+                      "executedQueries": 631,
+                      "duration": 0.07586668733333334,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 9.851188589540403,
+                              "maximum": 18.700000000000003,
+                              "minimum": 2.2
+                          },
+                          "parsingTime": {
+                              "average": 0.0006983859778129953,
+                              "maximum": 0.027131083,
+                              "minimum": 0.000151976
+                          },
+                          "planExecutionTime": {
+                              "average": 9.956763391442156e-05,
+                              "maximum": 0.000238301,
+                              "minimum": 7.8083e-05
+                          },
+                          "planningTime": {
+                              "average": 0.00015180956893819336,
+                              "maximum": 0.00389747,
+                              "minimum": 6.4883e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 8317.220932918726,
+                      "database": {
+                          "cpu": 2.72,
+                          "memory": 484416640
+                      }
+                  }
+                },
+                {
+                  "name": "single_vertex_property",
+                  "category": "update",
+                    "stats":  {
+                      "executedQueries": 126,
+                      "duration": 0.6722997089166666,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 25000.0,
+                              "maximum": 25000.0,
+                              "minimum": 25000.0
+                          },
+                          "parsingTime": {
+                              "average": 0.001181047579365079,
+                              "maximum": 0.011823295,
+                              "minimum": 7.948e-05
+                          },
+                          "planExecutionTime": {
+                              "average": 0.06200821214285714,
+                              "maximum": 0.083842543,
+                              "minimum": 0.045185133
+                          },
+                          "planningTime": {
+                              "average": 0.0002859846746031746,
+                              "maximum": 0.003913184,
+                              "minimum": 5.4128e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 407.41641313966127,
+                      "database": {
+                          "cpu": 9.91,
+                          "memory": 481623168
+                      }
+                  }
+                },
+                {
+                  "name": "single_vertex_read",
+                  "category": "read",
+                    "stats":  {
+                      "executedQueries": 3372,
+                      "duration": 0.20544550433333333,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 17.559223013048648,
+                              "maximum": 17.6,
+                              "minimum": 1.1
+                          },
+                          "parsingTime": {
+                              "average": 0.00015077879418742588,
+                              "maximum": 0.0151255,
+                              "minimum": 7.6547e-05
+                          },
+                          "planExecutionTime": {
+                              "average": 8.175725741399764e-05,
+                              "maximum": 0.000129906,
+                              "minimum": 6.5093e-05
+                          },
+                          "planningTime": {
+                              "average": 7.732530960854092e-05,
+                              "maximum": 0.00257934,
+                              "minimum": 5.5873e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 46413.11164701352,
+                      "database": {
+                          "cpu": 3.84,
+                          "memory": 480891648
+                      }
+                  }
+                },
+                {
+                  "name": "single_vertex_write",
+                  "category": "write",
+                    "stats":  {
+                      "executedQueries": 1398,
+                      "duration": 0.10391420950000001,
+                      "metadata": {
+                          "costEstimate": {
+                              "average": 0.0,
+                              "maximum": 0.0,
+                              "minimum": 0.0
+                          },
+                          "parsingTime": {
+                              "average": 0.00021025298712446354,
+                              "maximum": 0.013325739,
+                              "minimum": 7.6058e-05
+                          },
+                          "planExecutionTime": {
+                              "average": 6.691985264663806e-05,
+                              "maximum": 0.000157564,
+                              "minimum": 5.3359e-05
+                          },
+                          "planningTime": {
+                              "average": 8.480739771101572e-05,
+                              "maximum": 0.002296479,
+                              "minimum": 5.6432e-05
+                          }
+                      },
+                      "numWorkers": 12,
+                      "retries": 0,
+                      "throughput": 46453.405522947272,
+                      "database": {
+                          "cpu": 2.85,
+                          "memory": 480977664
+                      }
+                  }
+                }
+              ]
+          },
+          {
+            "type": "realistic",
+            "percentages": {
+                "numOfQueries": 1000,
+                "writePerc": 30,
+                "readPerc": 20,
+                "updatePerc": 20,
+                "analyticalPerc": 30,
+                "queryPerc": 0
+            },
+            "stats":  {
+                "executedQueries": 1398,
+                "duration": 0.10391420950000001,
+                "numWorkers": 12,
+                "retries": 0,
+                "throughput": 16453.405522947272,
+                "database": {
+                    "cpu": 2.85,
+                    "memory": 680977664
+                }
+            }
+        },
+        {
+            "type": "realistic",
+            "percentages": {
+                "numOfQueries": 1000,
+                "writePerc": 50,
+                "readPerc": 20,
+                "updatePerc": 20,
+                "analyticalPerc": 10,
+                "queryPerc": 0
+            },
+            "stats":  {
+                "executedQueries": 1398,
+                "duration": 0.10391420950000001,
+                "numWorkers": 12,
+                "retries": 0,
+                "throughput": 6453.405522947272,
+                "database": {
+                    "cpu": 2.85,
+                    "memory": 480977664
+                }
+            }
+        },
+        {
+            "type": "realistic",
+            "percentages": {
+                "numOfQueries": 1000,
+                "writePerc": 10,
+                "readPerc": 20,
+                "updatePerc": 20,
+                "analyticalPerc": 50,
+                "queryPerc": 0
+            },
+            "stats":  {
+                "executedQueries": 1398,
+                "duration": 0.10391420950000001,
+                "numWorkers": 12,
+                "retries": 0,
+                "throughput": 66453.405522947272,
+                "database": {
+                    "cpu": 2.85,
+                    "memory": 780977664
+                }
+            }
+        }
+        ]
+    }
+  ]
+}

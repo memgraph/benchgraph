@@ -1,0 +1,86 @@
+<div class="header">Testing Environment Setup</div>
+<div class="description">Set up your desired testing environment for results most relevant to you.</div>
+
+<div *ngIf="settings$ | async as settings">
+
+  <div class="setting">
+    <div class="title">Engines under testing</div>
+    <div class="vendors">
+      <div class="vendor" *ngFor="let vendor of settings.vendors; let i = index">
+        {{vendor.name}} <div *ngIf="i < settings.vendors.length - 1">vs. </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="setting">
+    <div class="title">Metric</div>
+    <div class="conditions">
+      <div 
+        class="condition" 
+        *ngFor="let condition of settings.conditions" 
+        [ngClass]="{'activated': condition.isActivated, 'single': settings.conditions.length === 1}" (click)="updateCondition(condition)">
+        {{condition.name}} run
+      </div>
+    </div>
+  </div>
+
+  <div class="setting">
+    <div class="title">Dataset</div>
+    <div class="conditions">
+      <div 
+        class="condition" 
+        *ngFor="let size of settings.datasetSizes" 
+        [ngClass]="{'activated': size.isActivated, 'single': settings.datasetSizes.length === 1}" (click)="updateSize(size)">
+        {{size.name}}
+      </div>
+    </div>
+  </div>
+
+  <div class="setting">
+    <div class="title">Workload Type</div>
+    <div class="conditions">
+      <div 
+        class="condition" 
+        *ngFor="let workloadType of settings.workloadTypes" 
+        [ngClass]="{'activated': workloadType.isActivated, 'single': settings.workloadTypes.length === 1}" (click)="updateWorkloadType(workloadType)">
+        {{workloadType.name}}
+      </div>
+    </div>
+  </div>
+
+  <div class="setting">
+    <div class="title">Query Selection</div>
+    <div class="categories">
+      <div 
+        class="category" 
+        *ngFor="let category of settings.queryCategories" 
+        [ngClass]="{'activated': category.isActivated, 'single': settings.queryCategories.length === 1}">
+        <div class="category-main">
+          <div class="checkbox" [ngClass]="{'activated': category.isActivated}" (click)="updateCategory(category)">
+            <span *ngIf="category.isActivated" class="icon-ui-ok"></span>
+          </div>
+          <div class="category-main-name">
+            {{category.name}}
+          </div>
+          <div class="category-main-length">
+            {{category.queries.length}}
+          </div>
+          <div 
+            class="icon-ui-down-open category-main-caret" 
+            [ngClass]="{'expanded icon-ui-up-open': category.isExpanded, 'icon-ui-down-open': !category.isExpanded}"
+            (click)="updateCategory(category, category.isExpanded)">
+          </div>
+        </div>
+        <div class="category-queries" *ngIf="category.isExpanded">
+          <div class="category-queries-query" *ngFor="let query of category.queries">
+            <div class="checkbox" [ngClass]="{'activated': query.isActivated}" (click)="updateQuery(category, query)">
+              <span *ngIf="query.isActivated" class="icon-ui-ok"></span>
+            </div>
+              {{query.name}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

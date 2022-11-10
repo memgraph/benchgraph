@@ -1,0 +1,18 @@
+<div class="overview" *ngIf="currentTab$ | async as currentTab">
+
+  <div class="overview-tabs">
+    <div 
+      class="overview-tabs-tab" 
+      *ngFor="let tab of tabs" 
+      [ngClass]="{'is-activated': currentTab === tab, 'is-deactivated': currentTab !== tab}"
+      (click)="changeCurrentTab(tab)">
+      {{tab}}
+    </div>
+  </div>
+
+  <div [ngSwitch]="currentTab" class="switch-wrapper">
+    <app-aggregate *ngSwitchCase="ITab.AGGREGATE" [presentedBenchmarks]="presentedBenchmarks$ | async"></app-aggregate>
+    <app-global *ngSwitchCase="ITab.GLOBAL" [detailedQueries]="detailedQueries$ | async" [settings]="settings$ | async"></app-global>
+    <app-detailed *ngSwitchCase="ITab.DETAILED" [detailedQueries]="detailedQueries$ | async" [settings]="settings$ | async"></app-detailed>
+  </div>
+</div>

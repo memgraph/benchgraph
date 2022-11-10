@@ -1,0 +1,99 @@
+<div *ngIf="detailedQueries$ | async as detailedQueries">
+  <div class="result" *ngFor="let vendorKey of statVendorKeys">
+    <div class="header">
+      <div class="header-title" [ngSwitch]="vendorKey">
+        <div *ngSwitchCase="ResultType.MEMORY">
+          Peak Memory
+          <div class="header-title-unit">(MiB)</div>
+        </div>
+        <div *ngSwitchCase="ResultType.THROUGHPUT">
+          Throughput
+          <div class="header-title-unit">(Queries per second)</div>
+        </div>
+        <div *ngSwitchCase="ResultType.LATENCY">
+          <div>
+            Latency
+            <div class="header-title-unit">(Seconds)</div>
+          </div>
+        </div>
+      </div>
+      <div class="header-info" [ngSwitch]="vendorKey">
+        <div *ngSwitchCase="ResultType.MEMORY">
+          Consuming <div class="bold">less memory is better.</div>
+        </div>
+        <div *ngSwitchCase="ResultType.THROUGHPUT">
+          Higher throughput <div class="bold">is better.</div>
+        </div>
+        <div *ngSwitchCase="ResultType.LATENCY">
+          Lower Latency <div class="bold">is better.</div>
+        </div>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <th>
+          <div class="title">Queries included in test</div>
+        </th>
+        <th *ngFor="let vendor of (vendors$ | async)">
+          <div class="title vendor">
+            <div class="vendor-text">{{vendor}}</div>
+          </div>
+        </th>
+      </thead>
+      <tbody class="category" *ngFor="let detailedQuery of detailedQueries; let categoryIndex = index">
+        <div class="category-name" *ngIf="!shouldShowRealistic; else realisticCategory">{{getCategoryName(detailedQuery)}}</div>
+        <ng-template #realisticCategory>
+          <div class="category-name">Realistic Workload</div>
+        </ng-template>
+        <tr 
+          *ngFor="let query of detailedQuery.queries; let queryIndex = index" 
+          [id]="vendorKey + (detailedQuery.category || '') + queryIndex"
+          [ngClass]="{'highlighted': (anchorQuery$ | async) === vendorKey + (detailedQuery.category || '') + queryIndex}">
+          <td>
+            <div class="data query">
+              <div class="query-index">
+                <div class="query-index-number" *ngIf="!shouldShowRealistic; else realisticNumber">Q{{getQueryIndex(detailedQueries, categoryIndex, queryIndex)}}</div>
+                <ng-template #realisticNumber>
+                  <div class="query-index-number">W{{queryIndex + 1}}</div>
+                </ng-template>
+                <div class="query-index-anchor">
+                  <div class="query-index-anchor-hash" (click)="anchorQuery(vendorKey, detailedQuery, queryIndex)">#</div>
+                </div>
+              </div>
+              <div *ngIf="!shouldShowRealistic; else realisticName" class="query-name">{{query.queryName}}</div>
+              <ng-template #realisticName>
+                <div class="query-percentages" *ngIf="!isStatsByVendorIsolated(query.statsByVendor[0])" [title]="getQueryName(query)">
+                  <ng-container *ngFor="let percentage of query.statsByVendor[0].percentages | keyvalue; let last = last">
+                    <div class="query-percentages-item" *ngIf="percentage.value > 0 && percentage.key !== 'numOfQueries' && percentage.key !== 'queryPerc'">
+                      <div class="query-percentages-item-value"><div *ngIf="!shouldShowRealistic"> + </div>{{percentage.value}}%</div>
+                      <div class="query-percentages-item-name"> {{getPercentageName(percentage.key)}} <div *ngIf="!last"> /</div></div>
+                    </div>
+                  </ng-container>
+                </div>
+              </ng-template>
+            </div>
+          </td>
+          <td *ngFor="let statByVendor of query.statsByVendor">
+            <div *ngIf="isStatsByVendorIsolated(statByVendor)">
+              <div class="data stats" [ngStyle]="{'background-color': !statByVendor[vendorKey].isWeakest ? getBackgroundColor(statByVendor[vendorKey].relativeValue) : ''}">
+                <div class="relative">
+                  <div class="relative-value" *ngIf="!statByVendor[vendorKey].isWeakest">× {{statByVendor[vendorKey].relativeValue | number: '1.2-2'}}</div>
+                </div>
+                <div class="stats-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">{{(vendorKey === ResultType.MEMORY ? statByVendor[vendorKey].value / (1024*1024) : statByVendor[vendorKey].value) | number: '1.3-3'}}</div>
+              </div>
+            </div>
+            <div *ngIf="!isStatsByVendorIsolated(statByVendor) && vendorKey !== 'latency'">
+              <div class="data stats" [ngStyle]="{'background-color': !statByVendor[vendorKey].isWeakest ? getBackgroundColor(statByVendor[vendorKey].relativeValue) : ''}">
+                <div class="relative">
+                  <div class="relative-value" *ngIf="!statByVendor[vendorKey].isWeakest">× {{statByVendor[vendorKey].relativeValue | number: '1.2-2'}}</div>
+                </div>
+                <div class="stats-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">{{(vendorKey === ResultType.MEMORY ? statByVendor[vendorKey].value / (1024*1024) : statByVendor[vendorKey].value) | number: '1.3-3'}}</div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

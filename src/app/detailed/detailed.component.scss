@@ -1,0 +1,210 @@
+@import 'colors';
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  min-width: 650px;
+}
+
+td {
+  width: 25%;
+  padding: 0.5rem 0.5rem 0 0;
+}
+
+th {
+  padding: 0 0.5rem 0 0;
+  font-weight: 400;
+
+  .cell {
+    background: #E6E6E6;
+
+    &-title {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    &-unit {
+      font-size: 12px;
+      color: $brand-gray;
+    }
+  }
+}
+
+.query {
+
+  &:hover {
+    .header-hash {
+      display: initial;
+    }
+  }
+}
+
+.select-header {
+  width: 35%;
+  border-left: 1px solid #D9D9D9;
+
+  .selector {
+    display: flex;
+    justify-content: space-around;
+
+    .select {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .circle {
+        min-width: 1rem;
+        height: 1rem;
+        border-radius: 100%;
+
+        &.orange {
+          background-color: #FAAB6E;
+        }
+
+        &.black {
+          background-color: $brand-black;
+        }
+      }
+
+      select {
+        border: none;
+        font-weight: 600;
+        font-size: 16px;
+        margin: 0;
+      }
+    }
+  }
+}
+
+tbody, thead {
+  border: none;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: transparent;
+}
+
+tbody tr:nth-child(odd) td .cell {
+  background-color: #F9F9F9;
+}
+
+.cell {
+  padding: 0 0.5rem;
+  border-radius: 2px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &-data {
+    display: flex;
+    width: 100%;
+    align-items: center;
+
+    &-relative {
+      &-value {
+        border: 2px solid #BDE8D3;
+        border-radius: 4px;
+        background-color: #DCF3E8;
+        padding: 0 0.3rem;
+        color: #19AF66;
+        height: 1.25rem;
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+
+    &-value {
+      margin-left: auto;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+
+      &.weakest {
+        color: #D05E06;
+      }
+    }
+  }
+}
+
+.chart {
+  width: 100%;
+  position: relative;
+
+  &-orange {
+    background-color: #FAAB6E;
+    height: 2rem;
+    position: absolute;
+    left: 0;
+    top: -1rem;
+  }
+
+  &-black {
+    background-color: $brand-black;
+    height: 1rem;
+    position: absolute;
+    left: 0;
+    top: -0.5rem;
+  }
+}
+
+.header {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+
+  &.highlighted {
+    font-weight: 600;
+  }
+
+  &-box {
+    display: flex;
+    gap: 0.5rem;
+    background: #231F20;
+    border-radius: 2px;
+    color: white;
+    padding: 0.3rem 0.5rem;
+
+    &-number {
+      font-weight: 600;
+    }
+
+    &-percentages {
+      display: flex;
+      gap: 0.5rem;
+
+      &-item {
+        display: flex;
+        gap: 0.5rem;
+  
+        &-name {
+          color: $brand-gray;
+          display: flex;
+          gap: 0.3rem;
+        }
+
+        &-value {
+          display: flex;
+          gap: 0.5rem;
+        }
+      }
+    }
+  }
+
+  &-hash {
+    display: none;
+    cursor: pointer;
+    color: $brand-ash;
+
+    &:hover {
+      color: $brand-red;
+    }
+  }
+}

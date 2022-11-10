@@ -1,0 +1,37 @@
+<div *ngIf="aggregateResults$ | async as results" class="aggregate">
+  <div class="graph">
+    <div class="header">
+      <div class="title">Peak Memory</div>
+      <div class="unit">Mib</div>
+    </div>
+    <div class="results">
+      <div class="divider"></div>
+      <div *ngFor="let result of results" class="result">
+        <div class="name">{{result.vendor}}</div>
+        <div class="bar-wrapper">
+          <div class="bar" [ngStyle]="{'width': result.relativeMemoryToMax + '%', 'background-color': getBackgroundColor(result.vendor)}"></div>
+        </div>
+        <div class="relative">x{{result.relativeMemory | number}}</div>
+      </div>
+    </div>
+    <div class="description">Memory consumed impacts pricing, performance and storage, <span class="bolded">less is better.</span></div>
+  </div>
+
+  <div class="graph">
+    <div class="header">
+      <div class="title">Throughput</div>
+      <div class="unit">Queries per second</div>
+    </div>
+    <div class="results">
+      <div class="divider"></div>
+      <div *ngFor="let result of results" class="result">
+        <div class="name">{{result.vendor}}</div>
+        <div class="bar-wrapper">
+          <div class="bar" [ngStyle]="{'width': result.relativeThroughputToMax + '%', 'background-color': getBackgroundColor(result.vendor)}"></div>
+        </div>
+        <div class="relative">x{{result.relativeThroughput | number}}</div>
+      </div>
+    </div>
+    <div class="description">If you’re looking for speed of query execution, <span class="bolded">more is better.</span></div>
+  </div>
+</div>
