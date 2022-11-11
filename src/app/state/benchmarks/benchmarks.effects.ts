@@ -11,10 +11,10 @@ import {
   IBenchmarkSettingsVendor,
   IBenchmarkSettingsWorkloadType,
 } from '.';
-import MemgraphCold from '../../mocks/mock-results-memgraph-cold.json';
-import MemgraphHot from '../../mocks/mock-results-memgraph-hot.json';
-import Neo4jHot from '../../mocks/mock-results-neo4j-hot.json';
-import Neo4jCold from '../../mocks/mock-results-neo4j-cold.json';
+import MemgraphCold from '../../../../results/memgraph_cold.json';
+import MemgraphHot from '../../../../results/memgraph_hot.json';
+import Neo4jHot from '../../../../results/neo4j_hot.json';
+import Neo4jCold from '../../../../results/neo4j_cold.json';
 import {
   IBenchmark,
   isQueryIsolated,
@@ -87,7 +87,7 @@ const getConditions = (benchmarks: IBenchmark[]): IBenchmarkSettingsCondition[] 
 
 const getWorkloadTypes = (benchmarks: IBenchmark[]): IBenchmarkSettingsWorkloadType[] => {
   const workloadTypesArray = benchmarks
-    .map((benchmark) => benchmark.datasets.map((dataset) => dataset.workloads.map((workload) => workload.type)))
+    .map((benchmark) => benchmark.datasets.map((dataset) => dataset.workloads.map((workload) => workload.workloadType)))
     .flat(2);
   const returnWorkloadTypes: IBenchmarkSettingsWorkloadType[] = removeDuplicatesFromArray(workloadTypesArray).map(
     (name, i) => {

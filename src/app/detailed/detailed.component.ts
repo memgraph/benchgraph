@@ -9,8 +9,9 @@ import {
   IStatsByVendorIsolated,
   IStatsResultTypes,
   IStatsResultTypesIsolated,
-  percentagesNameByKey,
+  PERCENTAGES_NAME_BY_KEY,
   ResultType,
+  RESULT_TYPE_BY_KEY,
   STAT_VENDOR_KEYS,
   STAT_VENDOR_KEYS_WITHOUT_LATENCY,
 } from '../components/overview/overview.component';
@@ -43,6 +44,7 @@ export class DetailedComponent implements OnChanges, AfterContentInit {
 
   ResultType = ResultType;
   isStatsByVendorIsolated = isStatsByVendorIsolated;
+  resultTypeByKey = RESULT_TYPE_BY_KEY;
 
   orangeSelect = ResultType.MEMORY;
   blackSelect = ResultType.THROUGHPUT;
@@ -143,7 +145,7 @@ export class DetailedComponent implements OnChanges, AfterContentInit {
   }
 
   getPercentageName(percentageKey: keyof IPercentages) {
-    return percentagesNameByKey[percentageKey];
+    return PERCENTAGES_NAME_BY_KEY[percentageKey];
   }
 
   anchorQuery(queryName: string) {

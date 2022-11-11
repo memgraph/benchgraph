@@ -11,7 +11,7 @@ export interface IBenchmark {
 }
 
 export interface IWorkloadIsolated {
-  type: WorkloadType.ISOLATED;
+  workloadType: WorkloadType.ISOLATED;
   queries: IQueryIsolated[];
 }
 
@@ -22,7 +22,7 @@ export interface IQueryIsolated {
 }
 
 export function isWorkloadIsolated(workload: IWorkload): workload is IWorkloadIsolated {
-  return workload.type === WorkloadType.ISOLATED;
+  return workload.workloadType === WorkloadType.ISOLATED;
 }
 
 export function isQueryIsolated(query: IWorkloadQuery): query is IQueryIsolated {
@@ -30,7 +30,7 @@ export function isQueryIsolated(query: IWorkloadQuery): query is IQueryIsolated 
 }
 
 export interface IWorkloadMixed {
-  type: WorkloadType.MIXED;
+  workloadType: WorkloadType.MIXED;
   queries: IQueryMixed[];
   percentages: IPercentages;
 }
@@ -42,7 +42,7 @@ export interface IQueryMixed {
 }
 
 export function isWorkloadMixed(workload: IWorkload): workload is IWorkloadMixed {
-  return workload.type === WorkloadType.MIXED;
+  return workload.workloadType === WorkloadType.MIXED;
 }
 
 export function isQueryMixed(query: IWorkloadQuery): query is IQueryMixed {
@@ -50,13 +50,13 @@ export function isQueryMixed(query: IWorkloadQuery): query is IQueryMixed {
 }
 
 export interface IWorkloadRealistic {
-  type: WorkloadType.REALISTIC;
+  workloadType: WorkloadType.REALISTIC;
   percentages: IPercentages;
   stats: IStats;
 }
 
 export function isWorkloadRealistic(workload: IWorkload): workload is IWorkloadRealistic {
-  return workload.type === WorkloadType.REALISTIC;
+  return workload.workloadType === WorkloadType.REALISTIC;
 }
 
 export type IWorkload = IWorkloadIsolated | IWorkloadMixed | IWorkloadRealistic;

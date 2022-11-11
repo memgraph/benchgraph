@@ -1,0 +1,1033 @@
+{
+    "runConfig": {
+        "vendor": "Memgraph",
+        "condition": "cold"
+    },
+    "datasets": [
+        {
+            "name": "pokec",
+            "size": "small",
+            "workloads": [
+                {
+                    "workloadType": "isolated",
+                    "queries": [
+                        {
+                            "name": "aggregate",
+                            "category": "aggregate",
+                            "stats": {
+                                "executedQueries": 119,
+                                "duration": 1.0673746935,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 111.48849670567913,
+                                "database": {
+                                    "cpu": 14.65,
+                                    "memory": 196517888
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.081719122,
+                                    "max": 0.094388133,
+                                    "mean": 0.08300358231,
+                                    "p99": 0.09170864,
+                                    "p95": 0.083841693,
+                                    "p90": 0.083580833,
+                                    "p75": 0,
+                                    "p50": 0.082728759
+                                }
+                            }
+                        },
+                        {
+                            "name": "aggregate_count",
+                            "category": "aggregate",
+                            "stats": {
+                                "executedQueries": 198,
+                                "duration": 1.0919639595833333,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 181.32466576603127,
+                                "database": {
+                                    "cpu": 15.03,
+                                    "memory": 193163264
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.047994039,
+                                    "max": 0.061348131,
+                                    "mean": 0.04945484762,
+                                    "p99": 0.060840378,
+                                    "p95": 0.050720116,
+                                    "p90": 0.050039854,
+                                    "p75": 0,
+                                    "p50": 0.049109556
+                                }
+                            }
+                        },
+                        {
+                            "name": "aggregate_with_filter",
+                            "category": "aggregate",
+                            "stats": {
+                                "executedQueries": 103,
+                                "duration": 1.0458476895000002,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 98.4847038761852,
+                                "database": {
+                                    "cpu": 14.46,
+                                    "memory": 201826304
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.093404686,
+                                    "max": 0.10664773,
+                                    "mean": 0.09468161841,
+                                    "p99": 0.098584597,
+                                    "p95": 0.095885409,
+                                    "p90": 0.095467054,
+                                    "p75": 0,
+                                    "p50": 0.094401544
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_1",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 12692,
+                                "duration": 0.9697643214166667,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 13087.715973566721,
+                                "database": {
+                                    "cpu": 11.59,
+                                    "memory": 197963776
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000660916,
+                                    "max": 0.011512007,
+                                    "mean": 0.0010447836999999999,
+                                    "p99": 0.001698421,
+                                    "p95": 0.001548819,
+                                    "p90": 0.001325114,
+                                    "p75": 0,
+                                    "p50": 0.000868975
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_1_with_filter",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 12317,
+                                "duration": 0.9608578293333333,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 12818.753850968604,
+                                "database": {
+                                    "cpu": 11.67,
+                                    "memory": 192405504
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000533035,
+                                    "max": 0.011963885,
+                                    "mean": 0.00116154924,
+                                    "p99": 0.002432461,
+                                    "p95": 0.001780625,
+                                    "p90": 0.001529472,
+                                    "p75": 0,
+                                    "p50": 0.000941611
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_2",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 1487,
+                                "duration": 1.0659353656666666,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 1395.0189175588405,
+                                "database": {
+                                    "cpu": 13.21,
+                                    "memory": 206290944
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.00047325,
+                                    "max": 0.031522403,
+                                    "mean": 0.00697230121,
+                                    "p99": 0.027918829,
+                                    "p95": 0.01911055,
+                                    "p90": 0.015339704,
+                                    "p75": 0,
+                                    "p50": 0.004786141
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_2_with_filter",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 1431,
+                                "duration": 0.9498765149166667,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 1506.5116123284115,
+                                "database": {
+                                    "cpu": 12.32,
+                                    "memory": 211677184
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.00066783,
+                                    "max": 0.044482097,
+                                    "mean": 0.00735207894,
+                                    "p99": 0.031274673,
+                                    "p95": 0.018778032,
+                                    "p90": 0.015031771,
+                                    "p75": 0,
+                                    "p50": 0.005042811
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_3",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 57,
+                                "duration": 0.8251875488333332,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 69.07520609173969,
+                                "database": {
+                                    "cpu": 11.48,
+                                    "memory": 261382144
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000626205,
+                                    "max": 1.48758899,
+                                    "mean": 0.11879849158,
+                                    "p99": 1.089505379,
+                                    "p95": 0.352444784,
+                                    "p90": 0.253870593,
+                                    "p75": 0,
+                                    "p50": 0.062221368
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_3_with_filter",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 77,
+                                "duration": 0.8045018874166666,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 95.71139757950655,
+                                "database": {
+                                    "cpu": 11.37,
+                                    "memory": 214343680
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000812683,
+                                    "max": 0.617419857,
+                                    "mean": 0.09386071235,
+                                    "p99": 0.45284521,
+                                    "p95": 0.252734263,
+                                    "p90": 0.214521683,
+                                    "p75": 0,
+                                    "p50": 0.060091114
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_4",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 23,
+                                "duration": 3.081901080916667,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 7.462926095330413,
+                                "database": {
+                                    "cpu": 38.88,
+                                    "memory": 564678656
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000802276,
+                                    "max": 22.743521987,
+                                    "mean": 2.40721835869,
+                                    "p99": 12.908891233,
+                                    "p95": 9.438489442,
+                                    "p90": 5.744888316,
+                                    "p75": 0,
+                                    "p50": 1.265664027
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_4_with_filter",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 20,
+                                "duration": 2.831127896916667,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 7.064322322485557,
+                                "database": {
+                                    "cpu": 35.85,
+                                    "memory": 424574976
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000671671,
+                                    "max": 58.661120532,
+                                    "mean": 2.76166117503,
+                                    "p99": 12.428449765,
+                                    "p95": 8.140160545,
+                                    "p90": 6.856803488,
+                                    "p75": 0,
+                                    "p50": 1.292675357
+                                }
+                            }
+                        },
+                        {
+                            "name": "min_max_avg",
+                            "category": "aggregate",
+                            "stats": {
+                                "executedQueries": 103,
+                                "duration": 1.09577990025,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 93.99697875139046,
+                                "database": {
+                                    "cpu": 15.07,
+                                    "memory": 191774720
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.094927323,
+                                    "max": 0.121866409,
+                                    "mean": 0.09711083483,
+                                    "p99": 0.112450713,
+                                    "p95": 0.100509525,
+                                    "p90": 0.098947925,
+                                    "p75": 0,
+                                    "p50": 0.096275905
+                                }
+                            }
+                        },
+                        {
+                            "name": "neighbours_2",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 1124,
+                                "duration": 0.9403285129999999,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 1195.32693570465,
+                                "database": {
+                                    "cpu": 11.98,
+                                    "memory": 218255360
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000700656,
+                                    "max": 0.038933773,
+                                    "mean": 0.00932672733,
+                                    "p99": 0.028571226,
+                                    "p95": 0.023386706,
+                                    "p90": 0.020493636,
+                                    "p75": 0,
+                                    "p50": 0.007986377
+                                }
+                            }
+                        },
+                        {
+                            "name": "neighbours_2_with_data",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 554,
+                                "duration": 1.1332618482499999,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 488.85436393671523,
+                                "database": {
+                                    "cpu": 13.31,
+                                    "memory": 214544384
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000700726,
+                                    "max": 0.072803154,
+                                    "mean": 0.01665512699,
+                                    "p99": 0.072695737,
+                                    "p95": 0.0650673,
+                                    "p90": 0.034536234,
+                                    "p75": 0,
+                                    "p50": 0.009709382
+                                }
+                            }
+                        },
+                        {
+                            "name": "neighbours_2_with_data_and_filter",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 657,
+                                "duration": 1.0566284133333335,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 621.78907145547,
+                                "database": {
+                                    "cpu": 12.81,
+                                    "memory": 217407488
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000542534,
+                                    "max": 0.064564506,
+                                    "mean": 0.01526904995,
+                                    "p99": 0.053023375,
+                                    "p95": 0.038741916,
+                                    "p90": 0.03022446,
+                                    "p75": 0,
+                                    "p50": 0.012208195
+                                }
+                            }
+                        },
+                        {
+                            "name": "neighbours_2_with_filter",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 1357,
+                                "duration": 1.1134058901666666,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 1218.7828463857593,
+                                "database": {
+                                    "cpu": 13.97,
+                                    "memory": 205590528
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000523118,
+                                    "max": 0.057944032,
+                                    "mean": 0.00753849521,
+                                    "p99": 0.041315529,
+                                    "p95": 0.023410173,
+                                    "p90": 0.014923935,
+                                    "p75": 0,
+                                    "p50": 0.004753804
+                                }
+                            }
+                        },
+                        {
+                            "name": "pattern_cycle",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 7938,
+                                "duration": 0.9743263592500001,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 8147.167450247754,
+                                "database": {
+                                    "cpu": 11.38,
+                                    "memory": 207470592
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000686338,
+                                    "max": 0.012235852,
+                                    "mean": 0.00152959143,
+                                    "p99": 0.007545114,
+                                    "p95": 0.002894607,
+                                    "p90": 0.002093798,
+                                    "p75": 0,
+                                    "p50": 0.001217209
+                                }
+                            }
+                        },
+                        {
+                            "name": "pattern_long",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 14002,
+                                "duration": 0.9861216761666666,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 14199.059140885867,
+                                "database": {
+                                    "cpu": 11.77,
+                                    "memory": 222220288
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000706453,
+                                    "max": 0.013908081,
+                                    "mean": 0.00107525303,
+                                    "p99": 0.001676002,
+                                    "p95": 0.001128718,
+                                    "p90": 0.001053289,
+                                    "p75": 0,
+                                    "p50": 0.000924011
+                                }
+                            }
+                        },
+                        {
+                            "name": "pattern_short",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 16141,
+                                "duration": 0.9927903544166665,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 16258.21597499702,
+                                "database": {
+                                    "cpu": 11.27,
+                                    "memory": 198979584
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000657843,
+                                    "max": 0.011583177,
+                                    "mean": 0.00095179452,
+                                    "p99": 0.00164101,
+                                    "p95": 0.001034083,
+                                    "p90": 0.000969269,
+                                    "p75": 0,
+                                    "p50": 0.000815267
+                                }
+                            }
+                        },
+                        {
+                            "name": "single_edge_write",
+                            "category": "write",
+                            "stats": {
+                                "executedQueries": 13537,
+                                "duration": 0.9939553913333333,
+                                "numWorkers": 12,
+                                "retries": 18,
+                                "throughput": 13619.323480745854,
+                                "database": {
+                                    "cpu": 11.81,
+                                    "memory": 214224896
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000795572,
+                                    "max": 0.013528211,
+                                    "mean": 0.00111109249,
+                                    "p99": 0.0018006,
+                                    "p95": 0.001128928,
+                                    "p90": 0.001093588,
+                                    "p75": 0,
+                                    "p50": 0.000950621
+                                }
+                            }
+                        },
+                        {
+                            "name": "single_vertex_property_update",
+                            "category": "update",
+                            "stats": {
+                                "executedQueries": 215,
+                                "duration": 1.1206615414999999,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 191.85096662835738,
+                                "database": {
+                                    "cpu": 15.26,
+                                    "memory": 196042752
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.044248689,
+                                    "max": 0.056897308,
+                                    "mean": 0.04530916506,
+                                    "p99": 0.053104042,
+                                    "p95": 0.046127931,
+                                    "p90": 0.045739819,
+                                    "p75": 0,
+                                    "p50": 0.045036508
+                                }
+                            }
+                        },
+                        {
+                            "name": "single_vertex_read",
+                            "category": "read",
+                            "stats": {
+                                "executedQueries": 17149,
+                                "duration": 1.0118041186666669,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 16948.932786119287,
+                                "database": {
+                                    "cpu": 11.15,
+                                    "memory": 185901056
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000478978,
+                                    "max": 0.009568232,
+                                    "mean": 0.0007456611,
+                                    "p99": 0.001674116,
+                                    "p95": 0.000790543,
+                                    "p90": 0.000705057,
+                                    "p75": 0,
+                                    "p50": 0.00062369
+                                }
+                            }
+                        },
+                        {
+                            "name": "single_vertex_write",
+                            "category": "write",
+                            "stats": {
+                                "executedQueries": 16357,
+                                "duration": 0.98596240975,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 16589.881965325098,
+                                "database": {
+                                    "cpu": 11.16,
+                                    "memory": 204673024
+                                },
+                                "queryStatistics": {
+                                    "iterations": 100,
+                                    "min": 0.000660636,
+                                    "max": 0.009771752,
+                                    "mean": 0.00092785963,
+                                    "p99": 0.001619499,
+                                    "p95": 0.001553568,
+                                    "p90": 0.000917656,
+                                    "p75": 0,
+                                    "p50": 0.000799482
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "workloadType": "mixed",
+                    "queries": [
+                        {
+                            "name": "aggregate",
+                            "category": "aggregate",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.6095561994166666,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 164.05378223648296,
+                                "database": {
+                                    "cpu": 9.24,
+                                    "memory": 205160448
+                                }
+                            }
+                        },
+                        {
+                            "name": "aggregate_count",
+                            "category": "aggregate",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.4083527584166668,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 244.8863095421141,
+                                "database": {
+                                    "cpu": 6.87,
+                                    "memory": 187076608
+                                }
+                            }
+                        },
+                        {
+                            "name": "aggregate_with_filter",
+                            "category": "aggregate",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.7817943566666666,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 127.91087470414801,
+                                "database": {
+                                    "cpu": 11.43,
+                                    "memory": 201306112
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_1",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.03159117991666666,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 3165.4404888892,
+                                "database": {
+                                    "cpu": 2.33,
+                                    "memory": 174084096
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_1_with_filter",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.030830204083333337,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 3243.572430779319,
+                                "database": {
+                                    "cpu": 2.32,
+                                    "memory": 185712640
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_2",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.0742385145,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 1347.0097115157118,
+                                "database": {
+                                    "cpu": 2.78,
+                                    "memory": 194854912
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_2_with_filter",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.07667135966666666,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 1304.2679878739075,
+                                "database": {
+                                    "cpu": 2.82,
+                                    "memory": 182857728
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_3",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.642157595,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 155.7250132656299,
+                                "database": {
+                                    "cpu": 9.46,
+                                    "memory": 242528256
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_3_with_filter",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 1.2077213258333332,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 82.8005582587519,
+                                "database": {
+                                    "cpu": 16.39,
+                                    "memory": 252506112
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_4",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 10.814227841333333,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 9.247077227075565,
+                                "database": {
+                                    "cpu": 131.62,
+                                    "memory": 1008082944
+                                }
+                            }
+                        },
+                        {
+                            "name": "expansion_4_with_filter",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 21.54046603883333,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 4.6424250905119315,
+                                "database": {
+                                    "cpu": 260.41,
+                                    "memory": 923041792
+                                }
+                            }
+                        },
+                        {
+                            "name": "min_max_avg",
+                            "category": "aggregate",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.7907717046666666,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 126.45874834653186,
+                                "database": {
+                                    "cpu": 11.41,
+                                    "memory": 190906368
+                                }
+                            }
+                        },
+                        {
+                            "name": "neighbours_2",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.09463903183333332,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 1056.6464815078389,
+                                "database": {
+                                    "cpu": 2.97,
+                                    "memory": 197664768
+                                }
+                            }
+                        },
+                        {
+                            "name": "neighbours_2_with_data",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.15862812758333333,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 630.4052220969842,
+                                "database": {
+                                    "cpu": 3.59,
+                                    "memory": 194203648
+                                }
+                            }
+                        },
+                        {
+                            "name": "neighbours_2_with_data_and_filter",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.15197861083333333,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 657.9873276356274,
+                                "database": {
+                                    "cpu": 3.56,
+                                    "memory": 198545408
+                                }
+                            }
+                        },
+                        {
+                            "name": "neighbours_2_with_filter",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.09185929816666667,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 1088.6214242412684,
+                                "database": {
+                                    "cpu": 2.91,
+                                    "memory": 189628416
+                                }
+                            }
+                        },
+                        {
+                            "name": "pattern_cycle",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.03211753383333333,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 3113.564089911989,
+                                "database": {
+                                    "cpu": 2.32,
+                                    "memory": 188145664
+                                }
+                            }
+                        },
+                        {
+                            "name": "pattern_long",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.031164788416666672,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 3208.7495240789385,
+                                "database": {
+                                    "cpu": 2.38,
+                                    "memory": 177246208
+                                }
+                            }
+                        },
+                        {
+                            "name": "pattern_short",
+                            "category": "analytical",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.030784650083333333,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 3248.372150708302,
+                                "database": {
+                                    "cpu": 2.28,
+                                    "memory": 179703808
+                                }
+                            }
+                        },
+                        {
+                            "name": "single_vertex_property_update",
+                            "category": "update",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.4232788094166666,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 236.25090076636022,
+                                "database": {
+                                    "cpu": 7.13,
+                                    "memory": 184102912
+                                }
+                            }
+                        },
+                        {
+                            "name": "single_vertex_read",
+                            "category": "read",
+                            "stats": {
+                                "executedQueries": 100,
+                                "duration": 0.02556943366666667,
+                                "numWorkers": 12,
+                                "retries": 0,
+                                "throughput": 3910.919627850967,
+                                "database": {
+                                    "cpu": 2.2,
+                                    "memory": 192086016
+                                }
+                            }
+                        }
+                    ],
+                    "percentages": {
+                        "numOfQueries": 100,
+                        "writePerc": 30,
+                        "readPerc": 0,
+                        "updatePerc": 0,
+                        "analyticalPerc": 0,
+                        "queryPerc": 70
+                    }
+                },
+                {
+                    "workloadType": "realistic",
+                    "percentages": {
+                        "numOfQueries": 100,
+                        "writePerc": 30,
+                        "readPerc": 40,
+                        "updatePerc": 10,
+                        "analyticalPerc": 20,
+                        "queryPerc": 0
+                    },
+                    "stats": {
+                        "executedQueries": 100,
+                        "duration": 0.10491816124999999,
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 953.1238329817756,
+                        "database": {
+                            "cpu": 3.14,
+                            "memory": 194437120
+                        }
+                    }
+                },
+                {
+                    "workloadType": "realistic",
+                    "percentages": {
+                        "numOfQueries": 100,
+                        "writePerc": 30,
+                        "readPerc": 70,
+                        "updatePerc": 0,
+                        "analyticalPerc": 0,
+                        "queryPerc": 0
+                    },
+                    "stats": {
+                        "executedQueries": 100,
+                        "duration": 0.02494362433333333,
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 4009.040493219958,
+                        "database": {
+                            "cpu": 2.21,
+                            "memory": 179871744
+                        }
+                    }
+                },
+                {
+                    "workloadType": "realistic",
+                    "percentages": {
+                        "numOfQueries": 100,
+                        "writePerc": 50,
+                        "readPerc": 50,
+                        "updatePerc": 0,
+                        "analyticalPerc": 0,
+                        "queryPerc": 0
+                    },
+                    "stats": {
+                        "executedQueries": 100,
+                        "duration": 0.026060650749999994,
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 3837.2027221921935,
+                        "database": {
+                            "cpu": 2.17,
+                            "memory": 189718528
+                        }
+                    }
+                },
+                {
+                    "workloadType": "realistic",
+                    "percentages": {
+                        "numOfQueries": 100,
+                        "writePerc": 70,
+                        "readPerc": 30,
+                        "updatePerc": 0,
+                        "analyticalPerc": 0,
+                        "queryPerc": 0
+                    },
+                    "stats": {
+                        "executedQueries": 100,
+                        "duration": 0.02736505683333333,
+                        "numWorkers": 12,
+                        "retries": 0,
+                        "throughput": 3654.295352246086,
+                        "database": {
+                            "cpu": 2.19,
+                            "memory": 187883520
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

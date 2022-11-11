@@ -8,7 +8,7 @@ import {
   isStatsByVendorIsolated,
   IStatsResultTypes,
   IStatsResultTypesIsolated,
-  percentagesNameByKey,
+  PERCENTAGES_NAME_BY_KEY,
   ResultType,
   STAT_VENDOR_KEYS,
   STAT_VENDOR_KEYS_WITHOUT_LATENCY,
@@ -166,6 +166,6 @@ export class GlobalComponent implements AfterContentInit, OnChanges {
   }
 
   getPercentageName(percentageKey: keyof IPercentages) {
-    return percentagesNameByKey[percentageKey];
+    return PERCENTAGES_NAME_BY_KEY[percentageKey];
   }
 }

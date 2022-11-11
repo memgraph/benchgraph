@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { map } from 'rxjs';
+import { WorkloadType } from 'src/app/models/benchmark.model';
 import { AppState } from 'src/app/state';
 import {
   BenchmarkActions,
@@ -18,6 +20,14 @@ import {
 })
 export class SelectorComponent {
   settings$ = this.store.select(BenchmarkSelectors.selectSettings);
+  isRealisticActivated$ = this.settings$.pipe(
+    map(
+      (settings) =>
+        !!settings?.workloadTypes.find(
+          (workloadType) => workloadType.isActivated && workloadType.name === WorkloadType.REALISTIC,
+        ),
+    ),
+  );
 
   constructor(private readonly store: Store<AppState>) {}
 

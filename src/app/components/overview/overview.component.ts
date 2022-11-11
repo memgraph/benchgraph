@@ -48,6 +48,12 @@ export enum ResultType {
   LATENCY = 'latency',
 }
 
+export const RESULT_TYPE_BY_KEY: Record<keyof IStatsResultTypesIsolated, string> = {
+  [ResultType.LATENCY]: 'Latency',
+  [ResultType.MEMORY]: 'Peak Memory',
+  [ResultType.THROUGHPUT]: 'Throughput',
+};
+
 export const STAT_VENDOR_KEYS: (keyof IStatsResultTypesIsolated)[] = [
   ResultType.MEMORY,
   ResultType.THROUGHPUT,
@@ -103,7 +109,7 @@ export interface IQueriesByCategory {
   queries: IQuery[];
 }
 
-export const percentagesNameByKey: Record<keyof IPercentages, string> = {
+export const PERCENTAGES_NAME_BY_KEY: Record<keyof IPercentages, string> = {
   analyticalPerc: 'Analytical',
   queryPerc: 'Query',
   updatePerc: 'Update',
@@ -187,7 +193,7 @@ export class OverviewComponent implements AfterContentInit {
             );
             const filteredDatasetByQueries = filteredDatasetsBySize.map((dataset) => {
               const filteredWorkloadsByType = dataset.workloads.filter((workload) =>
-                activatedWorkloadTypes?.includes(workload.type),
+                activatedWorkloadTypes?.includes(workload.workloadType),
               );
               const filteredWorkloads = filteredWorkloadsByType.map((workload) => {
                 if (isWorkloadRealistic(workload)) {

@@ -48,7 +48,7 @@
     </div>
   </div>
 
-  <div class="setting">
+  <div class="setting" *ngIf="!(isRealisticActivated$ | async)">
     <div class="title">Query Selection</div>
     <div class="categories">
       <div 
