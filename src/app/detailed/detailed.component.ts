@@ -118,30 +118,32 @@ export class DetailedComponent implements OnChanges, AfterContentInit {
     }
   }
 
-  getOrangeWidth(statByVendor: IStatsByVendorIsolated | IStatsByVendor) {
-    let value = 1;
-    if (isStatsByVendorIsolated(statByVendor)) {
-      value = statByVendor[this.orangeSelect].value;
-    } else if (this.orangeSelect !== ResultType.LATENCY) {
-      value = statByVendor[this.orangeSelect].value;
-    }
-    if (this.settings) {
-      return (value / this.settings.maxTimes[this.orangeSelect]) * 100;
-    }
-    return 0;
+  getChartWidth(
+    statByVendor: IStatsByVendorIsolated | IStatsByVendor,
+    statsByVendor: (IStatsByVendorIsolated | IStatsByVendor)[],
+    resultType: ResultType,
+  ) {
+    const value = this.getValueByResultType(statByVendor, resultType);
+    const totalValue = this.getTotalStatValue(statsByVendor, resultType);
+    return (value / totalValue) * 100;
   }
 
-  getBlackWidth(statByVendor: IStatsByVendorIsolated | IStatsByVendor) {
-    let value = 1;
+  getValueByResultType(statByVendor: IStatsByVendorIsolated | IStatsByVendor, resultType: ResultType) {
     if (isStatsByVendorIsolated(statByVendor)) {
-      value = statByVendor[this.blackSelect].value;
-    } else if (this.blackSelect !== ResultType.LATENCY) {
-      value = statByVendor[this.blackSelect].value;
+      return statByVendor[resultType].value;
     }
-    if (this.settings) {
-      return (value / this.settings.maxTimes[this.blackSelect]) * 100;
+    if (resultType !== ResultType.LATENCY) {
+      return statByVendor[resultType].value;
     }
-    return 0;
+    return 1;
+  }
+
+  getTotalStatValue(statsByVendor: (IStatsByVendorIsolated | IStatsByVendor)[], resultType: ResultType) {
+    let total = 0;
+    statsByVendor.forEach((statByVendor) => {
+      total += this.getValueByResultType(statByVendor, resultType);
+    });
+    return total;
   }
 
   getPercentageName(percentageKey: keyof IPercentages) {

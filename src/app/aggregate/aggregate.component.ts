@@ -80,7 +80,7 @@ export class AggregateComponent {
         relativeMemory: result.vendor === bestMemoryVendor.vendor ? 1 : result.memory / bestMemoryVendor.memory,
         relativeMemoryToMax: settings?.maxTimes.memory ? (result.memory / settings?.maxTimes.memory) * 100 : 100,
         relativeThroughput:
-          result.vendor === bestThroughputVendor.vendor ? 1 : result.throughput / bestThroughputVendor.throughput,
+          result.vendor === bestThroughputVendor.vendor ? 1 : bestThroughputVendor.throughput / result.throughput,
         relativeThroughputToMax: settings?.maxTimes.throughput
           ? (result.throughput / settings?.maxTimes.throughput) * 100
           : 100,

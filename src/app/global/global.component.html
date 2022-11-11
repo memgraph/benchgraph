@@ -1,38 +1,38 @@
-<div *ngIf="detailedQueries$ | async as detailedQueries">
+<div class="results" *ngIf="detailedQueries$ | async as detailedQueries">
   <div class="result" *ngFor="let vendorKey of statVendorKeys">
     <div class="header">
       <div class="header-title" [ngSwitch]="vendorKey">
-        <div *ngSwitchCase="ResultType.MEMORY">
+        <div class="header-title-inner" *ngSwitchCase="ResultType.MEMORY">
           Peak Memory
-          <div class="header-title-unit">(MiB)</div>
+          <div class="header-title-inner-unit">(MiB)</div>
         </div>
-        <div *ngSwitchCase="ResultType.THROUGHPUT">
+        <div class="header-title-inner" *ngSwitchCase="ResultType.THROUGHPUT">
           Throughput
-          <div class="header-title-unit">(Queries per second)</div>
+          <div class="header-title-inner-unit">(Queries per second)</div>
         </div>
-        <div *ngSwitchCase="ResultType.LATENCY">
+        <div class="header-title-inner" *ngSwitchCase="ResultType.LATENCY">
           <div>
             Latency
-            <div class="header-title-unit">(Seconds)</div>
+            <div class="header-title-inner-unit">(Milliseconds)</div>
           </div>
         </div>
       </div>
       <div class="header-info" [ngSwitch]="vendorKey">
-        <div *ngSwitchCase="ResultType.MEMORY">
+        <ng-container *ngSwitchCase="ResultType.MEMORY">
           Consuming <div class="bold">less memory is better.</div>
-        </div>
-        <div *ngSwitchCase="ResultType.THROUGHPUT">
-          Higher throughput <div class="bold">is better.</div>
-        </div>
-        <div *ngSwitchCase="ResultType.LATENCY">
-          Lower Latency <div class="bold">is better.</div>
-        </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="ResultType.THROUGHPUT">
+          <div class="bold">Higher throughput, better performance.</div>
+        </ng-container>
+        <ng-container *ngSwitchCase="ResultType.LATENCY">
+          <div class="bold">Lower latency is better.</div>
+        </ng-container>
       </div>
     </div>
 
     <table>
       <thead>
-        <th>
+        <th class="wider">
           <div class="title">Queries included in test</div>
         </th>
         <th *ngFor="let vendor of (vendors$ | async)">
@@ -80,7 +80,7 @@
                 <div class="relative">
                   <div class="relative-value" *ngIf="!statByVendor[vendorKey].isWeakest">× {{statByVendor[vendorKey].relativeValue | number: '1.2-2'}}</div>
                 </div>
-                <div class="stats-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">{{(vendorKey === ResultType.MEMORY ? statByVendor[vendorKey].value / (1024*1024) : statByVendor[vendorKey].value) | number: '1.3-3'}}</div>
+                <div class="stats-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">{{(vendorKey === ResultType.MEMORY ? statByVendor[vendorKey].value / (1024*1024) : statByVendor[vendorKey].value) | number: '1.0-0'}}</div>
               </div>
             </div>
             <div *ngIf="!isStatsByVendorIsolated(statByVendor) && vendorKey !== 'latency'">
@@ -88,7 +88,7 @@
                 <div class="relative">
                   <div class="relative-value" *ngIf="!statByVendor[vendorKey].isWeakest">× {{statByVendor[vendorKey].relativeValue | number: '1.2-2'}}</div>
                 </div>
-                <div class="stats-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">{{(vendorKey === ResultType.MEMORY ? statByVendor[vendorKey].value / (1024*1024) : statByVendor[vendorKey].value) | number: '1.3-3'}}</div>
+                <div class="stats-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">{{(vendorKey === ResultType.MEMORY ? statByVendor[vendorKey].value / (1024*1024) : statByVendor[vendorKey].value) | number: '1.0-0'}}</div>
               </div>
             </div>
           </td>

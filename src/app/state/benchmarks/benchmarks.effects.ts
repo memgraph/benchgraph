@@ -166,7 +166,7 @@ const getMaxTimes = (benchmarks: IBenchmark[]): IBenchmarkSettingsMaxTimes => {
             const queryThroughput = query.stats.throughput;
             let queryLatency = 0;
             if (isQueryIsolated(query)) {
-              queryLatency = query.stats.queryStatistics.mean * 1000;
+              queryLatency = query.stats.queryStatistics.p99 * 1000;
             }
             if (queryMemory > maxMemory) {
               maxMemory = queryMemory;

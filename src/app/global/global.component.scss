@@ -47,6 +47,21 @@ th {
       text-align: end;
     }
   }
+
+  &.wider {
+    width: 40%;
+  }
+}
+
+
+.results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .result {
+    width: 50rem;
+  }
 }
 
 .header {
@@ -64,12 +79,22 @@ th {
     gap: 1rem;
     font-weight: 600;
     font-size: 24px;
-    align-items: flex-end;
-  
-    &-unit {
-      font-weight: 400;
-      font-size: 16px;
-      color: #857F87;
+    align-items: center;
+    width: calc(40% - 0.5rem);
+
+    &-inner {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+
+      &-unit {
+        font-weight: 400;
+        font-size: 16px;
+        color: #857F87;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
     }
   }
   &-info {
@@ -86,7 +111,7 @@ th {
 
   td {
     height: 2rem;
-    padding: 0 1rem 0.2rem 0;
+    padding: 0.1rem 1rem 0.1rem 0;
   }
 
   tr:hover {
@@ -96,9 +121,19 @@ th {
   } 
 
   .highlighted {
-    .query-name, .query-percentages {
-      color: $brand-black;
-      font-weight: 600;
+    border: 1px solid #FB6E00;
+    border-radius: 2px;
+
+    .query {
+      color: $brand-orange;
+
+      &-name {
+        color: $brand-orange;
+      }
+    }
+
+    .query-index-anchor-hash {
+      display: initial;
     }
   }
 
@@ -125,7 +160,7 @@ th {
           display: none;
 
           &:hover {
-            color: $brand-red;
+            color: $brand-orange;
             cursor: pointer;
           }
         }
@@ -167,7 +202,7 @@ th {
     display: flex;
     
     .relative {
-      width: 30%;
+      width: 40%;
       display: flex;
       justify-content: flex-end;
       min-width: 3.5rem;
@@ -183,11 +218,16 @@ th {
         display: flex;
         align-items: center;
         font-weight: 600;
+        font-size: 0.875rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
       }
     }
     &-value {
       margin-left: auto;
       margin-right: 20%;
+      font-size: 1.125rem;
 
       &.weakest {
         color: #D05E06;

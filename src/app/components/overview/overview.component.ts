@@ -55,12 +55,12 @@ export const RESULT_TYPE_BY_KEY: Record<keyof IStatsResultTypesIsolated, string>
 };
 
 export const STAT_VENDOR_KEYS: (keyof IStatsResultTypesIsolated)[] = [
-  ResultType.MEMORY,
   ResultType.THROUGHPUT,
+  ResultType.MEMORY,
   ResultType.LATENCY,
 ];
 
-export const STAT_VENDOR_KEYS_WITHOUT_LATENCY: (keyof IStatsResultTypes)[] = [ResultType.MEMORY, ResultType.THROUGHPUT];
+export const STAT_VENDOR_KEYS_WITHOUT_LATENCY: (keyof IStatsResultTypes)[] = [ResultType.THROUGHPUT, ResultType.MEMORY];
 
 export type IStatsByVendor = {
   vendor: RunConfigVendor;
@@ -257,7 +257,7 @@ export class OverviewComponent implements AfterContentInit {
                   vendor: benchmark.runConfig.vendor,
                   memory: { value: query.stats.database.memory, isWeakest: true, relativeValue: 1 },
                   throughput: { value: query.stats.throughput, isWeakest: true, relativeValue: 1 },
-                  latency: { value: query.stats.queryStatistics.mean * 1000, isWeakest: true, relativeValue: 1 },
+                  latency: { value: query.stats.queryStatistics.p99 * 1000, isWeakest: true, relativeValue: 1 },
                   queryName: query.name,
                   category: query.category,
                 }));

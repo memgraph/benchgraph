@@ -43,7 +43,14 @@ th {
 
 .select-header {
   width: 35%;
-  border-left: 1px solid #D9D9D9;
+  position: relative;
+  
+  .divider {
+    width: 1px;
+    top: 0;
+    background-color: #D9D9D9;
+    position: absolute;
+  }
 }
 
 .selector {
@@ -170,7 +177,13 @@ tbody tr:nth-child(odd) td .cell {
   margin-bottom: 1rem;
 
   &.highlighted {
-    font-weight: 600;
+    .header-box {
+      background-color: $brand-orange;
+    }
+    .header-hash {
+      display: initial;
+      color: $brand-orange;
+    }
   }
 
   &-box {
@@ -213,7 +226,7 @@ tbody tr:nth-child(odd) td .cell {
     color: $brand-ash;
 
     &:hover {
-      color: $brand-red;
+      color: $brand-orange;
     }
   }
 }
