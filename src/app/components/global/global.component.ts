@@ -69,6 +69,7 @@ export class GlobalComponent implements AfterContentInit, OnChanges {
   resultTypeByKey = RESULT_TYPE_BY_KEY;
 
   shouldShowRealistic = true;
+  shouldShowIsolated = true;
   activatedResultType = this.statVendorKeys[0];
 
   constructor(private router: Router, private route: ActivatedRoute) {}
@@ -83,7 +84,9 @@ export class GlobalComponent implements AfterContentInit, OnChanges {
         (workloadType) => workloadType.isActivated === true && workloadType.name === WorkloadType.REALISTIC,
       );
       this.statVendorKeys = STAT_VENDOR_KEYS_WITHOUT_LATENCY;
+      this.shouldShowIsolated = false;
       if (isIsolatedActivated) {
+        this.shouldShowIsolated = true;
         this.statVendorKeys = STAT_VENDOR_KEYS;
       }
       this.shouldShowRealistic = false;

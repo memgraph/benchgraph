@@ -1,5 +1,5 @@
 <div class="results" *ngIf="detailedQueries$ | async as detailedQueries">
-  <div class="navigation">
+  <div class="navigation" [ngClass]="{'adjust-for-isolated': shouldShowIsolated}">
     <div 
       *ngFor="let vendorKey of statVendorKeys.slice().reverse()"
        class="navigation-item"
