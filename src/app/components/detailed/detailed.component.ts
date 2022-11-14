@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, map } from 'rxjs';
 import {
+  getBackgroundColor,
   IQueriesByCategory,
   isStatsByVendorIsolated,
   IStatsByVendor,
@@ -14,11 +15,11 @@ import {
   RESULT_TYPE_BY_KEY,
   STAT_VENDOR_KEYS,
   STAT_VENDOR_KEYS_WITHOUT_LATENCY,
-} from '../components/overview/overview.component';
-import { IPercentages, WorkloadType } from '../models/benchmark.model';
-import { filterNullish } from '../services/filter-nullish';
-import { AppState } from '../state';
-import { IBenchmarkSettings } from '../state/benchmarks';
+} from '../overview/overview.component';
+import { IPercentages, WorkloadType } from '../../models/benchmark.model';
+import { filterNullish } from '../../services/filter-nullish';
+import { AppState } from '../../state';
+import { IBenchmarkSettings } from '../../state/benchmarks';
 
 @Component({
   selector: 'app-detailed',
@@ -44,6 +45,7 @@ export class DetailedComponent implements OnChanges, AfterContentInit {
 
   ResultType = ResultType;
   isStatsByVendorIsolated = isStatsByVendorIsolated;
+  getBackgroundColor = getBackgroundColor;
   resultTypeByKey = RESULT_TYPE_BY_KEY;
 
   orangeSelect = ResultType.MEMORY;
@@ -79,6 +81,14 @@ export class DetailedComponent implements OnChanges, AfterContentInit {
   ngAfterContentInit(): void {
     const anchorQuery = this.route.snapshot.queryParamMap.get('anchor');
     if (anchorQuery) {
+      const queryParams: Params = {
+        anchor: null,
+      };
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge',
+      });
       this.anchorQuery_.next(anchorQuery);
       setTimeout(() => {
         const anchoredElement = document.getElementById(anchorQuery);
@@ -88,14 +98,19 @@ export class DetailedComponent implements OnChanges, AfterContentInit {
     }
   }
 
-  getBackgroundColor(relativeValue: number) {
-    if (relativeValue < 5) {
-      return '#EDF9F3';
-    }
-    if (relativeValue < 10) {
-      return '#E7F3ED';
-    }
-    return '#D5EDE1';
+  anchorQuery(queryName: string) {
+    const queryParams: Params = {
+      anchor: queryName,
+    };
+    this.anchorQuery_.next(queryName);
+    const anchoredElement = document.getElementById(queryName);
+    anchoredElement?.scrollIntoView();
+    this.unhighlightQuery();
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: queryParams,
+      queryParamsHandling: 'merge',
+    });
   }
 
   orangeChange(event: Event) {
@@ -148,21 +163,6 @@ export class DetailedComponent implements OnChanges, AfterContentInit {
 
   getPercentageName(percentageKey: keyof IPercentages) {
     return PERCENTAGES_NAME_BY_KEY[percentageKey];
-  }
-
-  anchorQuery(queryName: string) {
-    const queryParams: Params = {
-      anchor: queryName,
-    };
-    this.anchorQuery_.next(queryName);
-    const anchoredElement = document.getElementById(queryName);
-    anchoredElement?.scrollIntoView();
-    this.unhighlightQuery();
-    this.router.navigate([], {
-      relativeTo: this.route,
-      queryParams: queryParams,
-      queryParamsHandling: 'merge',
-    });
   }
 
   unhighlightQuery() {

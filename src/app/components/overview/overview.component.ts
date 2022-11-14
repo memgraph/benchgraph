@@ -48,10 +48,15 @@ export enum ResultType {
   LATENCY = 'latency',
 }
 
-export const RESULT_TYPE_BY_KEY: Record<keyof IStatsResultTypesIsolated, string> = {
-  [ResultType.LATENCY]: 'Latency',
-  [ResultType.MEMORY]: 'Peak Memory',
-  [ResultType.THROUGHPUT]: 'Throughput',
+export interface ResultTypeWithUnit {
+  name: string;
+  unit: string;
+}
+
+export const RESULT_TYPE_BY_KEY: Record<keyof IStatsResultTypesIsolated, ResultTypeWithUnit> = {
+  [ResultType.LATENCY]: { name: 'Latency', unit: 'millisec' },
+  [ResultType.MEMORY]: { name: 'Peak Memory', unit: 'MiB' },
+  [ResultType.THROUGHPUT]: { name: 'Throughput', unit: 'Q/s' },
 };
 
 export const STAT_VENDOR_KEYS: (keyof IStatsResultTypesIsolated)[] = [
@@ -126,6 +131,9 @@ export const PERCENTAGES_NAME_BY_KEY: Record<keyof IPercentages, string> = {
 export class OverviewComponent implements AfterContentInit {
   currentTab_ = new BehaviorSubject<ITab>(ITab.AGGREGATE);
   currentTab$ = this.currentTab_.asObservable();
+
+  onScroll_ = new BehaviorSubject<Event | undefined>(undefined);
+  onScroll$ = this.onScroll_.asObservable();
 
   tabs = [ITab.AGGREGATE, ITab.GLOBAL, ITab.DETAILED];
 
@@ -365,6 +373,10 @@ export class OverviewComponent implements AfterContentInit {
     });
     this.currentTab_.next(newTab);
   }
+
+  onScroll(event: Event) {
+    this.onScroll_.next(event);
+  }
 }
 
 const mergeWorkload = (
@@ -410,4 +422,23 @@ export const generateNameByPercentages = (percentages: IPercentages, delimiter =
     generatedName += ` ${delimiter} ${percentages.writePerc}% Write`;
   }
   return generatedName;
+};
+
+export const getBackgroundColor = (relativeValue: number): string => {
+  if (relativeValue < 5) {
+    return '#EDF9F3';
+  }
+  if (relativeValue < 10) {
+    return '#DAF2E6';
+  }
+  if (relativeValue < 20) {
+    return '#CBF0DE';
+  }
+  if (relativeValue < 50) {
+    return '#B5E5CE';
+  }
+  if (relativeValue < 80) {
+    return '#9FDFC0';
+  }
+  return '#6DCA9E';
 };

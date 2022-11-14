@@ -11,10 +11,10 @@ import { StoreModule } from '@ngrx/store';
 import { reducers } from './state';
 import { EffectsModule } from '@ngrx/effects';
 import { BenchmarksEffects } from './state/benchmarks/benchmarks.effects';
-import { AggregateComponent } from './aggregate/aggregate.component';
-import { GlobalComponent } from './global/global.component';
-import { DetailedComponent } from './detailed/detailed.component';
-import { BaseComponent } from './base/base.component';
+import { AggregateComponent } from './components/aggregate/aggregate.component';
+import { GlobalComponent } from './components/global/global.component';
+import { DetailedComponent } from './components/detailed/detailed.component';
+import { BaseComponent } from './components/base/base.component';
 
 @NgModule({
   declarations: [

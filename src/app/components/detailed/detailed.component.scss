@@ -102,7 +102,7 @@ tbody tr:nth-child(odd) {
   background-color: transparent;
 }
 
-tbody tr:nth-child(odd) td .cell {
+tbody tr:nth-child(odd) td .cell, tbody tr:nth-child(odd) td .chart {
   background-color: #F9F9F9;
 }
 
@@ -152,13 +152,13 @@ tbody tr:nth-child(odd) td .cell {
 .chart {
   width: 100%;
   position: relative;
+  height: 2rem;
 
   &-orange {
     background-color: #FAAB6E;
     height: 2rem;
     position: absolute;
     left: 0;
-    top: -1rem;
   }
 
   &-black {
@@ -166,7 +166,7 @@ tbody tr:nth-child(odd) td .cell {
     height: 1rem;
     position: absolute;
     left: 0;
-    top: -0.5rem;
+    top: 0.5rem;
   }
 }
 

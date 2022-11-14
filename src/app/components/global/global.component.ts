@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BehaviorSubject, map } from 'rxjs';
 import {
   generateNameByPercentages,
+  getBackgroundColor,
   IQueriesByCategory,
   IQuery,
   isStatsByVendorIsolated,
@@ -10,13 +11,14 @@ import {
   IStatsResultTypesIsolated,
   PERCENTAGES_NAME_BY_KEY,
   ResultType,
+  RESULT_TYPE_BY_KEY,
   STAT_VENDOR_KEYS,
   STAT_VENDOR_KEYS_WITHOUT_LATENCY,
-} from '../components/overview/overview.component';
-import { IPercentages, QueryCategory, WorkloadType } from '../models/benchmark.model';
-import { filterNullish } from '../services/filter-nullish';
-import { removeDuplicatesFromArray } from '../services/remove-duplicates';
-import { IBenchmarkSettings } from '../state/benchmarks';
+} from '../overview/overview.component';
+import { IPercentages, QueryCategory, WorkloadType } from '../../models/benchmark.model';
+import { filterNullish } from '../../services/filter-nullish';
+import { removeDuplicatesFromArray } from '../../services/remove-duplicates';
+import { IBenchmarkSettings } from '../../state/benchmarks';
 
 const categoryNameByCategory: Record<QueryCategory, string> = {
   [QueryCategory.AGGREGATE]: 'Aggregate Queries',
@@ -40,6 +42,12 @@ export class GlobalComponent implements AfterContentInit, OnChanges {
 
   @Input() settings: IBenchmarkSettings | null | undefined;
 
+  private onScroll_ = new BehaviorSubject<Event | undefined | null>(undefined);
+  onScroll$ = this.onScroll_.pipe(filterNullish());
+  @Input() set onScroll(value: Event | null | undefined) {
+    this.onScroll_.next(value);
+  }
+
   vendors$ = this.detailedQueries$.pipe(
     map((detailedQueries) =>
       removeDuplicatesFromArray(
@@ -57,13 +65,16 @@ export class GlobalComponent implements AfterContentInit, OnChanges {
 
   ResultType = ResultType;
   isStatsByVendorIsolated = isStatsByVendorIsolated;
+  getBackgroundColor = getBackgroundColor;
+  resultTypeByKey = RESULT_TYPE_BY_KEY;
 
   shouldShowRealistic = true;
+  activatedResultType = this.statVendorKeys[0];
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   ngOnChanges(changes: SimpleChanges) {
-    const settingsChange: IBenchmarkSettings | null | undefined = changes['settings'].currentValue;
+    const settingsChange: IBenchmarkSettings | null | undefined = changes['settings']?.currentValue;
     if (settingsChange) {
       const isIsolatedActivated = settingsChange.workloadTypes.find(
         (workloadType) => workloadType.isActivated === true && workloadType.name === WorkloadType.ISOLATED,
@@ -79,12 +90,21 @@ export class GlobalComponent implements AfterContentInit, OnChanges {
       if (isRealisticActivated) {
         this.shouldShowRealistic = true;
       }
+      this.activatedResultType = this.statVendorKeys[0];
     }
   }
 
   ngAfterContentInit(): void {
     const anchorQuery = this.route.snapshot.queryParamMap.get('anchor');
     if (anchorQuery) {
+      const queryParams: Params = {
+        anchor: null,
+      };
+      this.router.navigate([], {
+        relativeTo: this.route,
+        queryParams: queryParams,
+        queryParamsHandling: 'merge',
+      });
       this.anchorQuery_.next(anchorQuery);
       setTimeout(() => {
         const anchoredElement = document.getElementById(anchorQuery);
@@ -92,6 +112,25 @@ export class GlobalComponent implements AfterContentInit, OnChanges {
       }, 100);
       this.unhighlightQuery();
     }
+    this.listenForNavigationChanges();
+  }
+
+  listenForNavigationChanges() {
+    this.onScroll$.subscribe((onScroll) => {
+      if (onScroll) {
+        this.statVendorKeys.forEach((vendor) => {
+          const element = document.getElementById(vendor);
+          const position = element?.getBoundingClientRect();
+
+          if (position) {
+            // checking whether fully visible
+            if (position.top >= 0 && position.bottom <= window.innerHeight && this.activatedResultType !== vendor) {
+              this.activatedResultType = vendor;
+            }
+          }
+        });
+      }
+    });
   }
 
   unhighlightQuery() {
@@ -110,16 +149,6 @@ export class GlobalComponent implements AfterContentInit, OnChanges {
       returnIndex += detailedQueries[i].queries.length;
     }
     return returnIndex + 1;
-  }
-
-  getBackgroundColor(relativeValue: number) {
-    if (relativeValue < 5) {
-      return '#EDF9F3';
-    }
-    if (relativeValue < 10) {
-      return '#E7F3ED';
-    }
-    return '#D5EDE1';
   }
 
   getCategoryName(detailedQuery: IQueriesByCategory) {
@@ -167,5 +196,11 @@ export class GlobalComponent implements AfterContentInit, OnChanges {
 
   getPercentageName(percentageKey: keyof IPercentages) {
     return PERCENTAGES_NAME_BY_KEY[percentageKey];
+  }
+
+  changeActivatedResultType(resultType: keyof IStatsResultTypesIsolated) {
+    this.activatedResultType = resultType;
+    const activatedElement = document.getElementById(resultType);
+    activatedElement?.scrollIntoView();
   }
 }

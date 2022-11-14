@@ -1,0 +1,114 @@
+<div class="selector">
+  <div class="select">
+    <div class="circle orange"></div>
+    <select (change)="orangeChange($event)">
+      <option *ngFor="let vendorKey of statVendorKeys" [value]="vendorKey" [selected]="vendorKey === orangeSelect">{{resultTypeByKey[vendorKey].name}}</option>
+    </select>
+  </div>
+  <div class="select">
+    <div class="circle black"></div>
+    <select (ngModel)="blackSelect" (change)="blackChange($event)">
+      <option *ngFor="let vendorKey of statVendorKeys" [value]="vendorKey" [selected]="vendorKey === blackSelect">{{resultTypeByKey[vendorKey].name}}</option>
+    </select>
+  </div>
+</div>
+<div *ngFor="let query of (detailedQueries$ | async); let i = index" class="query">
+  <div class="header" [id]="query.queryName" [ngClass]="{'highlighted': (anchorQuery$ | async) === query.queryName}">
+    <div class="header-box">
+      <ng-container *ngIf="!shouldShowRealistic">
+        <div class="header-box-number">Q{{i+1}}</div>
+        <div class="header-box-name">{{query.queryName}}</div>
+      </ng-container>
+      <ng-container *ngIf="shouldShowRealistic">
+        <div class="header-box-number">W{{i+1}}</div>
+      </ng-container>
+      <div class="header-box-percentages" *ngIf="!isStatsByVendorIsolated(query.statsByVendor[0])">
+        <ng-container *ngFor="let percentage of query.statsByVendor[0].percentages | keyvalue; let last = last">
+          <div class="header-box-percentages-item" *ngIf="percentage.value > 0 && percentage.key !== 'numOfQueries' && percentage.key !== 'queryPerc'">
+            <div class="header-box-percentages-item-value"><div *ngIf="!shouldShowRealistic"> + </div>{{percentage.value}}%</div>
+            <div class="header-box-percentages-item-name"> {{getPercentageName(percentage.key)}} <div *ngIf="!last"> /</div></div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="header-hash" (click)="anchorQuery(query.queryName)">#</div>
+  </div>
+
+  <table>
+    <thead>
+      <th>
+        <div class="cell">
+          <div class="cell-title">
+            Engine under testing
+          </div>
+        </div>
+      </th>
+      <th *ngFor="let vendorKey of statVendorKeys">
+        <div class="cell">
+          <div class="cell-title">
+            {{resultTypeByKey[vendorKey].name}}
+          </div>
+          <div class="cell-unit">
+            {{resultTypeByKey[vendorKey].unit}}
+          </div>
+        </div>
+      </th>
+      <th class="select-header">
+        <div class="divider" [ngStyle]="{'height': 2 + 2 * statVendorKeys.length + 'rem'}"></div>
+      </th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let statByVendor of query.statsByVendor">
+
+        <td>
+          <div class="cell">
+            <div class="cell-engine">
+              {{statByVendor.vendor}}
+            </div>
+          </div>
+        </td>
+
+        <ng-container *ngFor="let vendorKey of statVendorKeys">
+          <td *ngIf="isStatsByVendorIsolated(statByVendor)">
+            <div class="cell" [ngStyle]="{'background-color': !statByVendor[vendorKey].isWeakest ? getBackgroundColor(statByVendor[vendorKey].relativeValue) : ''}">
+              <div class="cell-data">
+                <div class="cell-data-relative" *ngIf="!statByVendor[vendorKey].isWeakest">
+                  <div class="cell-data-relative-value">
+                    × {{statByVendor[vendorKey].relativeValue | number: '1.2-2'}}
+                  </div>
+                </div>
+                <div class="cell-data-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">
+                  {{(vendorKey === ResultType.MEMORY ? statByVendor[vendorKey].value / (1024*1024) : statByVendor[vendorKey].value) | number: '1.0-0'}}
+                </div>
+              </div>
+            </div>
+          </td>
+
+          <td *ngIf="vendorKey !== ResultType.LATENCY && !isStatsByVendorIsolated(statByVendor)">
+            <div class="cell" [ngStyle]="{'background-color': !statByVendor[vendorKey].isWeakest ? getBackgroundColor(statByVendor[vendorKey].relativeValue) : ''}">
+              <div class="cell-data">
+                <div class="cell-data-relative" *ngIf="!statByVendor[vendorKey].isWeakest">
+                  <div class="cell-data-relative-value">
+                    × {{statByVendor[vendorKey].relativeValue | number: '1.2-2'}}
+                  </div>
+                </div>
+                <div class="cell-data-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">
+                  {{(vendorKey === ResultType.MEMORY ? statByVendor[vendorKey].value / (1024*1024) : statByVendor[vendorKey].value) | number: '1.0-0'}}
+                </div>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <td>
+          <div class="chart">
+            <div class="chart-orange" [ngStyle]="{'width': getChartWidth(statByVendor, query.statsByVendor, orangeSelect) + '%'}"></div>
+            <div class="chart-black" [ngStyle]="{'width': getChartWidth(statByVendor, query.statsByVendor, blackSelect) + '%'}"></div>
+          </div>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+
+</div>

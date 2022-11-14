@@ -1,7 +1,16 @@
 <div class="results" *ngIf="detailedQueries$ | async as detailedQueries">
+  <div class="navigation">
+    <div 
+      *ngFor="let vendorKey of statVendorKeys.slice().reverse()"
+       class="navigation-item"
+       [ngClass]="{'activated': vendorKey === activatedResultType}"
+       (click)="changeActivatedResultType(vendorKey)">
+      {{resultTypeByKey[vendorKey].name}}
+    </div>
+  </div>
   <div class="result" *ngFor="let vendorKey of statVendorKeys">
     <div class="header">
-      <div class="header-title" [ngSwitch]="vendorKey">
+      <div class="header-title" [ngSwitch]="vendorKey" [id]="vendorKey">
         <div class="header-title-inner" *ngSwitchCase="ResultType.MEMORY">
           Peak Memory
           <div class="header-title-inner-unit">(MiB)</div>

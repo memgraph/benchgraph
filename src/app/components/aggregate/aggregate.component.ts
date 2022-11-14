@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { BehaviorSubject, map, withLatestFrom } from 'rxjs';
-import { IBenchmark, isWorkloadRealistic, RunConfigVendor } from '../models/benchmark.model';
-import { filterNullish } from '../services/filter-nullish';
+import { IBenchmark, isWorkloadRealistic, RunConfigVendor } from '../../models/benchmark.model';
+import { filterNullish } from '../../services/filter-nullish';
 import _ from 'lodash';
-import { AppState } from '../state';
+import { AppState } from '../../state';
 import { Store } from '@ngrx/store';
-import { BenchmarkSelectors } from '../state/benchmarks';
+import { BenchmarkSelectors } from '../../state/benchmarks';
 
 export interface IAggregateResults {
   vendor: RunConfigVendor;
@@ -65,9 +65,11 @@ export class AggregateComponent {
       const peakResultPerVendor: IAggregateResults[] = groupedResultsObject.map((vendor) => {
         const throughputArray = vendor.map((result) => result.throughput);
         const throughputAverage = throughputArray.reduce((a, b) => a + b, 0) / throughputArray.length;
+        const memoryArray = vendor.map((result) => result.memory);
+        const memoryAverage = memoryArray.reduce((a, b) => a + b, 0) / memoryArray.length;
         return {
           vendor: vendor[0].vendor,
-          memory: Math.min(...vendor.map((result) => result.memory)),
+          memory: memoryAverage,
           throughput: throughputAverage,
         };
       });

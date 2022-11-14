@@ -58,9 +58,30 @@ th {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 
   .result {
     width: 50rem;
+  }
+}
+
+.navigation {
+  display: flex;
+  gap: 1.5rem;
+  transform: rotate(-90deg);
+  position: sticky;
+  margin-right: auto;
+  top: 13rem;
+  margin-left: -9.5rem;
+
+  &-item {
+    cursor: pointer;
+    padding: 0 0.5rem;
+    border-radius: 2px;
+
+    &.activated {
+      background: #FEE8D6;
+    }
   }
 }
 
@@ -233,5 +254,12 @@ th {
         color: #D05E06;
       }
     }
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .results .result {
+    width: 46rem;
+    padding-left: 2rem;
   }
 }

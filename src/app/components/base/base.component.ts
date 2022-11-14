@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { takeUntil, withLatestFrom } from 'rxjs';
-import { DatasetSize, RunConfigCondition, WorkloadType } from '../models/benchmark.model';
-import { Unsubscribe } from '../services/unsubscribe';
-import { AppState } from '../state';
+import { DatasetSize, RunConfigCondition, WorkloadType } from '../../models/benchmark.model';
+import { Unsubscribe } from '../../services/unsubscribe';
+import { AppState } from '../../state';
 import {
   BenchmarkActions,
   BenchmarkSelectors,
@@ -13,7 +13,7 @@ import {
   IBenchmarkSettingsQueryCategoryQuery,
   IBenchmarkSettingsSize,
   IBenchmarkSettingsWorkloadType,
-} from '../state/benchmarks';
+} from '../../state/benchmarks';
 
 export interface IParamCategory {
   index: number;

@@ -10,9 +10,9 @@
     </div>
   </div>
 
-  <div [ngSwitch]="currentTab" class="switch-wrapper">
+  <div [ngSwitch]="currentTab" class="switch-wrapper" (scroll)="onScroll($event)">
     <app-aggregate *ngSwitchCase="ITab.AGGREGATE" [presentedBenchmarks]="presentedBenchmarks$ | async"></app-aggregate>
-    <app-global *ngSwitchCase="ITab.GLOBAL" [detailedQueries]="detailedQueries$ | async" [settings]="settings$ | async"></app-global>
+    <app-global *ngSwitchCase="ITab.GLOBAL" [detailedQueries]="detailedQueries$ | async" [settings]="settings$ | async" [onScroll]="onScroll$ | async"></app-global>
     <app-detailed *ngSwitchCase="ITab.DETAILED" [detailedQueries]="detailedQueries$ | async" [settings]="settings$ | async"></app-detailed>
   </div>
 </div>

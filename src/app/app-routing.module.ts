@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BaseComponent } from './base/base.component';
+import { BaseComponent } from './components/base/base.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/base', pathMatch: 'full' },
