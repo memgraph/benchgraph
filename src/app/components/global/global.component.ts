@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, takeUntil } from 'rxjs';
 import {
   generateNameByPercentages,
   getBackgroundColor,
@@ -19,6 +19,7 @@ import { IPercentages, QueryCategory, WorkloadType } from '../../models/benchmar
 import { filterNullish } from '../../services/filter-nullish';
 import { removeDuplicatesFromArray } from '../../services/remove-duplicates';
 import { IBenchmarkSettings } from '../../state/benchmarks';
+import { Unsubscribe } from 'src/app/services/unsubscribe';
 
 const categoryNameByCategory: Record<QueryCategory, string> = {
   [QueryCategory.AGGREGATE]: 'Aggregate Queries',
@@ -33,7 +34,7 @@ const categoryNameByCategory: Record<QueryCategory, string> = {
   templateUrl: './global.component.html',
   styleUrls: ['./global.component.scss'],
 })
-export class GlobalComponent implements AfterContentInit, OnChanges {
+export class GlobalComponent extends Unsubscribe implements AfterContentInit, OnChanges {
   private detailedQueries_ = new BehaviorSubject<IQueriesByCategory[] | undefined | null>(undefined);
   detailedQueries$ = this.detailedQueries_.pipe(filterNullish());
   @Input() set detailedQueries(value: IQueriesByCategory[] | null | undefined) {
@@ -72,7 +73,9 @@ export class GlobalComponent implements AfterContentInit, OnChanges {
   shouldShowIsolated = true;
   activatedResultType = this.statVendorKeys[0];
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  constructor(private router: Router, private route: ActivatedRoute) {
+    super();
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     const settingsChange: IBenchmarkSettings | null | undefined = changes['settings']?.currentValue;
@@ -119,15 +122,15 @@ export class GlobalComponent implements AfterContentInit, OnChanges {
   }
 
   listenForNavigationChanges() {
-    this.onScroll$.subscribe((onScroll) => {
+    this.onScroll$.pipe(takeUntil(this.unsubscribe$)).subscribe((onScroll) => {
       if (onScroll) {
         this.statVendorKeys.forEach((vendor) => {
           const element = document.getElementById(vendor);
           const position = element?.getBoundingClientRect();
 
           if (position) {
-            // checking whether fully visible
-            if (position.top >= 0 && position.bottom <= window.innerHeight && this.activatedResultType !== vendor) {
+            // checking for partial visibility
+            if (position.top < window.innerHeight && position.bottom >= 0) {
               this.activatedResultType = vendor;
             }
           }

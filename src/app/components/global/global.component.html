@@ -8,9 +8,9 @@
       {{resultTypeByKey[vendorKey].name}}
     </div>
   </div>
-  <div class="result" *ngFor="let vendorKey of statVendorKeys">
+  <div class="result" *ngFor="let vendorKey of statVendorKeys" [id]="vendorKey">
     <div class="header">
-      <div class="header-title" [ngSwitch]="vendorKey" [id]="vendorKey">
+      <div class="header-title" [ngSwitch]="vendorKey">
         <div class="header-title-inner" *ngSwitchCase="ResultType.MEMORY">
           Peak Memory
           <div class="header-title-inner-unit">(MiB)</div>
