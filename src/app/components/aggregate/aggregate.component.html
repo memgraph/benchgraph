@@ -2,7 +2,7 @@
   <div class="graph">
     <div class="header">
       <div class="title">Peak Memory</div>
-      <div class="unit">Mib</div>
+      <div class="unit">Mib (less is better)</div>
     </div>
     <div class="results">
       <div class="divider"></div>
@@ -11,7 +11,10 @@
         <div class="bar-wrapper">
           <div class="bar" [ngStyle]="{'width': result.relativeMemoryToMax + '%', 'background-color': getBackgroundColor(result.vendor)}"></div>
         </div>
-        <div class="relative">x{{result.relativeMemory | number}}</div>
+        <div class="relative" *ngIf="shouldShowDecimal(results, 'relativeMemory'); else withoutDecimals">x{{result.relativeMemory | number}}</div>
+        <ng-template #withoutDecimals>
+          <div class="relative">x{{result.relativeMemory | number: '1.0-0'}}</div>
+        </ng-template>
       </div>
     </div>
     <div class="description">Memory consumed impacts pricing, performance and storage, <span class="bolded">less is better.</span></div>
@@ -20,7 +23,7 @@
   <div class="graph">
     <div class="header">
       <div class="title">Throughput</div>
-      <div class="unit">Queries per second</div>
+      <div class="unit">Queries per second (more is better)</div>
     </div>
     <div class="results">
       <div class="divider"></div>
@@ -29,7 +32,10 @@
         <div class="bar-wrapper">
           <div class="bar" [ngStyle]="{'width': result.relativeThroughputToMax + '%', 'background-color': getBackgroundColor(result.vendor)}"></div>
         </div>
-        <div class="relative">x{{result.relativeThroughput | number}}</div>
+        <div class="relative" *ngIf="shouldShowDecimal(results, 'relativeThroughput'); else withoutDecimals">x{{result.relativeThroughput | number}}</div>
+        <ng-template #withoutDecimals>
+          <div class="relative">x{{result.relativeThroughput | number: '1.0-0'}}</div>
+        </ng-template>
       </div>
     </div>
     <div class="description">If you’re looking for speed of query execution, <span class="bolded">more is better.</span></div>

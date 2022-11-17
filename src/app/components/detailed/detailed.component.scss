@@ -90,6 +90,8 @@ th {
       font-weight: 600;
       font-size: 16px;
       margin: 0;
+      background-image: url('/assets/img/down.svg');
+      border-bottom: 1px dashed $brand-gray;
     }
   }
 }

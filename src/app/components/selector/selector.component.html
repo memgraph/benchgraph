@@ -13,7 +13,19 @@
   </div>
 
   <div class="setting">
-    <div class="title">Metric</div>
+    <div class="title">Hardware Alias</div>
+    <div class="conditions">
+      <div 
+        class="condition"
+        *ngFor="let hardwareAlias of settings.hardwareAliases" 
+        [ngClass]="{'activated': hardwareAlias.isActivated, 'single': settings.hardwareAliases.length === 1}" (click)="updateHardwareAlias(hardwareAlias)">
+        {{hardwareAlias.name}}
+      </div>
+    </div>
+  </div>
+
+  <div class="setting">
+    <div class="title">Engine Condition</div>
     <div class="conditions">
       <div 
         class="condition" 

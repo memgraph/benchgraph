@@ -7,6 +7,7 @@ import {
   BenchmarkActions,
   BenchmarkSelectors,
   IBenchmarkSettingsCondition,
+  IBenchmarkSettingsHardwareAlias,
   IBenchmarkSettingsQueryCategory,
   IBenchmarkSettingsQueryCategoryQuery,
   IBenchmarkSettingsSize,
@@ -33,6 +34,12 @@ export class SelectorComponent {
 
   updateCondition(condition: IBenchmarkSettingsCondition) {
     this.store.dispatch(BenchmarkActions.updateCondition({ condition: { ...condition, isActivated: true } }));
+  }
+
+  updateHardwareAlias(hardwareAlias: IBenchmarkSettingsHardwareAlias) {
+    this.store.dispatch(
+      BenchmarkActions.updateHardwareAlias({ hardwareAlias: { ...hardwareAlias, isActivated: true } }),
+    );
   }
 
   updateWorkloadType(workloadType: IBenchmarkSettingsWorkloadType) {

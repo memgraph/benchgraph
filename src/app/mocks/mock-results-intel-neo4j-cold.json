@@ -1,7 +1,8 @@
 {
   "runConfig": {
-    "vendor": "Memgraph",
-    "condition": "hot"
+    "vendor": "Neo4j",
+    "condition": "cold",
+    "hardwareAlias": "intel"
   },
   "datasets": [
       {
@@ -41,10 +42,10 @@
                         },
                         "numWorkers": 12,
                         "retries": 0,
-                        "throughput": 118.08496441014388,
+                        "throughput": 418.08496441014388,
                         "database": {
                             "cpu": 91.41,
-                            "memory": 192720896
+                            "memory": 482720896
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -88,10 +89,10 @@
                         },
                         "numWorkers": 12,
                         "retries": 0,
-                        "throughput": 100.80477807004138,
+                        "throughput": 200.80477807004138,
                         "database": {
                             "cpu": 90.75,
-                            "memory": 199090176
+                            "memory": 489090176
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -135,10 +136,10 @@
                         },
                         "numWorkers": 12,
                         "retries": 0,
-                        "throughput": 184.70244300210757,
+                        "throughput": 484.70244300210757,
                         "database": {
                             "cpu": 15.92,
-                            "memory": 190365696
+                            "memory": 480365696
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -182,10 +183,10 @@
                         },
                         "numWorkers": 12,
                         "retries": 0,
-                        "throughput": 11334.636866628052,
+                        "throughput": 41334.636866628052,
                         "database": {
                             "cpu": 4.12,
-                            "memory": 192663552
+                            "memory": 482663552
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -229,10 +230,10 @@
                         },
                         "numWorkers": 12,
                         "retries": 0,
-                        "throughput": 11111.561525075238,
+                        "throughput": 41111.561525075238,
                         "database": {
                             "cpu": 4.32,
-                            "memory": 182185984
+                            "memory": 482185984
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -276,10 +277,10 @@
                         },
                         "numWorkers": 12,
                         "retries": 0,
-                        "throughput": 1397.970866508011,
+                        "throughput": 4397.970866508011,
                         "database": {
                             "cpu": 5.94,
-                            "memory": 213151744
+                            "memory": 513151744
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -323,10 +324,10 @@
                         },
                         "numWorkers": 12,
                         "retries": 0,
-                        "throughput": 1424.183457865607,
+                        "throughput": 4424.183457865607,
                         "database": {
                             "cpu": 4.64,
-                            "memory": 200273920
+                            "memory": 500273920
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -373,7 +374,7 @@
                         "throughput": 95.93602555873323,
                         "database": {
                             "cpu": 27.57,
-                            "memory": 200744960
+                            "memory": 500744960
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -420,7 +421,7 @@
                         "throughput": 7745.143296683959,
                         "database": {
                             "cpu": 4.72,
-                            "memory": 198782976
+                            "memory": 488782976
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -464,10 +465,10 @@
                         },
                         "numWorkers": 12,
                         "retries": 0,
-                        "throughput": 12084.36355581663,
+                        "throughput": 42084.36355581663,
                         "database": {
                             "cpu": 4.21,
-                            "memory": 214306816
+                            "memory": 514306816
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -511,10 +512,10 @@
                         },
                         "numWorkers": 12,
                         "retries": 0,
-                        "throughput": 14206.527624478396,
+                        "throughput": 44206.527624478396,
                         "database": {
                             "cpu": 3.89,
-                            "memory": 188162048
+                            "memory": 488162048
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -561,7 +562,7 @@
                         "throughput": 8317.220932918726,
                         "database": {
                             "cpu": 2.72,
-                            "memory": 194416640
+                            "memory": 484416640
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -605,10 +606,10 @@
                         },
                         "numWorkers": 12,
                         "retries": 0,
-                        "throughput": 187.41641313966127,
+                        "throughput": 487.41641313966127,
                         "database": {
                             "cpu": 9.91,
-                            "memory": 191623168
+                            "memory": 481623168
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -652,10 +653,10 @@
                         },
                         "numWorkers": 12,
                         "retries": 0,
-                        "throughput": 16413.11164701352,
+                        "throughput": 46413.11164701352,
                         "database": {
                             "cpu": 3.84,
-                            "memory": 180891648
+                            "memory": 480891648
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -699,10 +700,10 @@
                         },
                         "numWorkers": 12,
                         "retries": 0,
-                        "throughput": 13453.405522947272,
+                        "throughput": 43453.405522947272,
                         "database": {
                             "cpu": 2.85,
-                            "memory": 180977664
+                            "memory": 480977664
                         },
                         "queryStatistics": {
                             "iterations": 100,
@@ -759,10 +760,10 @@
                       },
                       "numWorkers": 12,
                       "retries": 0,
-                      "throughput": 148.08496441014388,
+                      "throughput": 448.08496441014388,
                       "database": {
                           "cpu": 91.41,
-                          "memory": 192720896
+                          "memory": 482720896
                       }
                     }
                 },
@@ -796,10 +797,10 @@
                       },
                       "numWorkers": 12,
                       "retries": 0,
-                      "throughput": 100.80477807004138,
+                      "throughput": 200.80477807004138,
                       "database": {
                           "cpu": 90.75,
-                          "memory": 199090176
+                          "memory": 489090176
                       }
                     }
                 },
@@ -833,10 +834,10 @@
                       },
                       "numWorkers": 12,
                       "retries": 0,
-                      "throughput": 204.70244300210757,
+                      "throughput": 404.70244300210757,
                       "database": {
                           "cpu": 15.92,
-                          "memory": 190365696
+                          "memory": 480365696
                       }
                     }
                 },
@@ -870,10 +871,10 @@
                       },
                       "numWorkers": 12,
                       "retries": 0,
-                      "throughput": 14334.636866628052,
+                      "throughput": 44334.636866628052,
                       "database": {
                           "cpu": 4.12,
-                          "memory": 192663552
+                          "memory": 482663552
                       }
                     }
                 },
@@ -907,10 +908,10 @@
                       },
                       "numWorkers": 12,
                       "retries": 0,
-                      "throughput": 14111.561525075238,
+                      "throughput": 44111.561525075238,
                       "database": {
                           "cpu": 4.32,
-                          "memory": 182185984
+                          "memory": 482185984
                       }
                     }
                 },
@@ -944,10 +945,10 @@
                       },
                       "numWorkers": 12,
                       "retries": 0,
-                      "throughput": 1697.970866508011,
+                      "throughput": 4697.970866508011,
                       "database": {
                           "cpu": 5.94,
-                          "memory": 213151744
+                          "memory": 513151744
                       }
                     }
                 },
@@ -981,10 +982,10 @@
                       },
                       "numWorkers": 12,
                       "retries": 0,
-                      "throughput": 1424.183457865607,
+                      "throughput": 4424.183457865607,
                       "database": {
                           "cpu": 4.64,
-                          "memory": 200273920
+                          "memory": 500273920
                       }
                   }
                 },
@@ -1021,7 +1022,7 @@
                       "throughput": 95.93602555873323,
                       "database": {
                           "cpu": 27.57,
-                          "memory": 200744960
+                          "memory": 500744960
                       }
                   }
                 },
@@ -1058,7 +1059,7 @@
                       "throughput": 7745.143296683959,
                       "database": {
                           "cpu": 4.72,
-                          "memory": 198782976
+                          "memory": 488782976
                       }
                   }
                 },
@@ -1092,10 +1093,10 @@
                       },
                       "numWorkers": 12,
                       "retries": 0,
-                      "throughput": 15084.36355581663,
+                      "throughput": 45084.36355581663,
                       "database": {
                           "cpu": 4.21,
-                          "memory": 214306816
+                          "memory": 514306816
                       }
                   }
                 },
@@ -1129,10 +1130,10 @@
                       },
                       "numWorkers": 12,
                       "retries": 0,
-                      "throughput": 14206.527624478396,
+                      "throughput": 44206.527624478396,
                       "database": {
                           "cpu": 3.89,
-                          "memory": 188162048
+                          "memory": 488162048
                       }
                   }
                 },
@@ -1169,7 +1170,7 @@
                       "throughput": 8317.220932918726,
                       "database": {
                           "cpu": 2.72,
-                          "memory": 194416640
+                          "memory": 484416640
                       }
                   }
                 },
@@ -1203,10 +1204,10 @@
                       },
                       "numWorkers": 12,
                       "retries": 0,
-                      "throughput": 207.41641313966127,
+                      "throughput": 407.41641313966127,
                       "database": {
                           "cpu": 9.91,
-                          "memory": 191623168
+                          "memory": 481623168
                       }
                   }
                 },
@@ -1240,10 +1241,10 @@
                       },
                       "numWorkers": 12,
                       "retries": 0,
-                      "throughput": 16413.11164701352,
+                      "throughput": 46413.11164701352,
                       "database": {
                           "cpu": 3.84,
-                          "memory": 180891648
+                          "memory": 480891648
                       }
                   }
                 },
@@ -1277,10 +1278,10 @@
                       },
                       "numWorkers": 12,
                       "retries": 0,
-                      "throughput": 16453.405522947272,
+                      "throughput": 46453.405522947272,
                       "database": {
                           "cpu": 2.85,
-                          "memory": 180977664
+                          "memory": 480977664
                       }
                   }
                 }

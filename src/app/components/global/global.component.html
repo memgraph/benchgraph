@@ -41,7 +41,7 @@
 
     <table>
       <thead>
-        <th class="wider">
+        <th class="wider" [ngClass]="{'realistic': shouldShowRealistic}">
           <div class="title">Queries included in test</div>
         </th>
         <th *ngFor="let vendor of (vendors$ | async)">

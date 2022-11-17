@@ -2,6 +2,7 @@ export interface IBenchmark {
   runConfig: {
     vendor: RunConfigVendor;
     condition: RunConfigCondition;
+    hardwareAlias: HardwareAlias;
   };
   datasets: {
     name: string;
@@ -107,6 +108,11 @@ export enum RunConfigVendor {
 export enum RunConfigCondition {
   HOT = 'hot',
   COLD = 'cold',
+}
+
+export enum HardwareAlias {
+  RYZEN = 'ryzen',
+  INTEL = 'intel',
 }
 
 export enum DatasetSize {

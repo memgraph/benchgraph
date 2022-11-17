@@ -75,6 +75,12 @@ export class DetailedComponent implements OnChanges, AfterContentInit {
       if (isRealisticActivated) {
         this.shouldShowRealistic = true;
       }
+      if (
+        !this.shouldShowLatency &&
+        (this.orangeSelect === ResultType.LATENCY || this.blackSelect === ResultType.LATENCY)
+      ) {
+        this.reinitializeSelectedResultTypes();
+      }
     }
   }
 
@@ -111,6 +117,11 @@ export class DetailedComponent implements OnChanges, AfterContentInit {
       queryParams: queryParams,
       queryParamsHandling: 'merge',
     });
+  }
+
+  reinitializeSelectedResultTypes() {
+    this.blackSelect = this.statVendorKeys[0] as ResultType;
+    this.orangeSelect = this.statVendorKeys[1] as ResultType;
   }
 
   orangeChange(event: Event) {

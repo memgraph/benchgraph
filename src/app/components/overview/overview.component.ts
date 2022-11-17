@@ -145,6 +145,14 @@ export class OverviewComponent implements AfterContentInit {
     ),
   );
 
+  activatedHardwareAliases$ = this.settings$.pipe(
+    map((settings) =>
+      settings?.hardwareAliases
+        .filter((hardwareAlias) => hardwareAlias.isActivated)
+        .map((hardwareAlias) => hardwareAlias.name),
+    ),
+  );
+
   activatedVendors$ = this.settings$.pipe(
     map((settings) => settings?.vendors.filter((vendor) => vendor.isActivated).map((vendor) => vendor.name)),
   );
@@ -179,6 +187,7 @@ export class OverviewComponent implements AfterContentInit {
     this.activatedDatasetSizes$,
     this.activatedQueryCategories$,
     this.activatedWorkloadTypes$,
+    this.activatedHardwareAliases$,
   ]).pipe(
     map(
       ([
@@ -188,12 +197,14 @@ export class OverviewComponent implements AfterContentInit {
         activatedSizes,
         activatedQueryCategories,
         activatedWorkloadTypes,
+        activatedHardwareAliases,
       ]) =>
         benchmarks
           ?.filter(
             (benchmark) =>
               activatedConditions?.includes(benchmark.runConfig.condition) &&
-              activatedVendors?.includes(benchmark.runConfig.vendor),
+              activatedVendors?.includes(benchmark.runConfig.vendor) &&
+              activatedHardwareAliases?.includes(benchmark.runConfig.hardwareAlias),
           )
           .map((benchmark) => {
             const filteredDatasetsBySize = benchmark.datasets.filter((dataset) =>

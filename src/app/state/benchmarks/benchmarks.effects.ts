@@ -5,20 +5,25 @@ import { tap } from 'rxjs';
 import {
   BenchmarkActions,
   IBenchmarkSettingsCondition,
+  IBenchmarkSettingsHardwareAlias,
   IBenchmarkSettingsMaxTimes,
   IBenchmarkSettingsQueryCategory,
   IBenchmarkSettingsSize,
   IBenchmarkSettingsVendor,
   IBenchmarkSettingsWorkloadType,
 } from '.';
-import MemgraphCold from '../../../../results/memgraph_cold.json';
-import MemgraphHot from '../../../../results/memgraph_hot.json';
-import Neo4jHot from '../../../../results/neo4j_hot.json';
-import Neo4jCold from '../../../../results/neo4j_cold.json';
-// import MemgraphCold from '../../mocks/mock-results-memgraph-cold.json';
-// import MemgraphHot from '../../mocks/mock-results-memgraph-hot.json';
-// import Neo4jHot from '../../mocks/mock-results-neo4j-cold.json';
-// import Neo4jCold from '../../mocks/mock-results-neo4j-hot.json';
+// import MemgraphCold from '../../../../results/memgraph_cold.json';
+// import MemgraphHot from '../../../../results/memgraph_hot.json';
+// import Neo4jHot from '../../../../results/neo4j_hot.json';
+// import Neo4jCold from '../../../../results/neo4j_cold.json';
+import IntelMemgraphCold from '../../mocks/mock-results-intel-memgraph-cold.json';
+import IntelMemgraphHot from '../../mocks/mock-results-intel-memgraph-hot.json';
+import IntelNeo4jHot from '../../mocks/mock-results-intel-neo4j-cold.json';
+import IntelNeo4jCold from '../../mocks/mock-results-intel-neo4j-hot.json';
+import RyzenMemgraphCold from '../../mocks/mock-results-ryzen-memgraph-cold.json';
+import RyzenMemgraphHot from '../../mocks/mock-results-ryzen-memgraph-hot.json';
+import RyzenNeo4jHot from '../../mocks/mock-results-ryzen-neo4j-cold.json';
+import RyzenNeo4jCold from '../../mocks/mock-results-ryzen-neo4j-hot.json';
 import {
   IBenchmark,
   isQueryIsolated,
@@ -38,16 +43,21 @@ export class BenchmarksEffects {
         ofType(BenchmarkActions.getBenchmarks),
         tap((_) => {
           const benchmarks: IBenchmark[] = [
-            MemgraphCold as IBenchmark,
-            MemgraphHot as IBenchmark,
-            Neo4jHot as IBenchmark,
-            Neo4jCold as IBenchmark,
+            IntelMemgraphCold as IBenchmark,
+            IntelMemgraphHot as IBenchmark,
+            IntelNeo4jHot as IBenchmark,
+            IntelNeo4jCold as IBenchmark,
+            RyzenMemgraphCold as IBenchmark,
+            RyzenMemgraphHot as IBenchmark,
+            RyzenNeo4jHot as IBenchmark,
+            RyzenNeo4jCold as IBenchmark,
           ];
           this.store.dispatch(
             BenchmarkActions.setBenchmarks({
               benchmarks,
             }),
           );
+          const hardwareAliases: IBenchmarkSettingsHardwareAlias[] = getHardwareAliases(benchmarks);
           const vendors: IBenchmarkSettingsVendor[] = getVendors(benchmarks);
           const conditions: IBenchmarkSettingsCondition[] = getConditions(benchmarks);
           const workloadTypes: IBenchmarkSettingsWorkloadType[] = getWorkloadTypes(benchmarks);
@@ -56,7 +66,15 @@ export class BenchmarksEffects {
           const maxTimes: IBenchmarkSettingsMaxTimes = getMaxTimes(benchmarks);
           this.store.dispatch(
             BenchmarkActions.setSettings({
-              settings: { vendors, conditions, datasetSizes, queryCategories, maxTimes, workloadTypes },
+              settings: {
+                hardwareAliases,
+                vendors,
+                conditions,
+                datasetSizes,
+                queryCategories,
+                maxTimes,
+                workloadTypes,
+              },
             }),
           );
         }),
@@ -67,9 +85,7 @@ export class BenchmarksEffects {
 
 const getVendors = (benchmarks: IBenchmark[]): IBenchmarkSettingsVendor[] => {
   const vendorsArray = benchmarks.map((benchmark) => benchmark.runConfig.vendor);
-  const vendorsSet = new Set(vendorsArray);
-  const backToArray = [...vendorsSet];
-  const returnVendors: IBenchmarkSettingsVendor[] = backToArray.map((name) => {
+  const returnVendors: IBenchmarkSettingsVendor[] = removeDuplicatesFromArray(vendorsArray).map((name) => {
     return {
       name,
       isActivated: true,
@@ -86,6 +102,19 @@ const getConditions = (benchmarks: IBenchmark[]): IBenchmarkSettingsCondition[] 
       isActivated: i === 0 ? true : false,
     };
   });
+  return returnBenchmarks;
+};
+
+const getHardwareAliases = (benchmarks: IBenchmark[]): IBenchmarkSettingsHardwareAlias[] => {
+  const benchmarksArray = benchmarks.map((benchmark) => benchmark.runConfig.hardwareAlias);
+  const returnBenchmarks: IBenchmarkSettingsHardwareAlias[] = removeDuplicatesFromArray(benchmarksArray).map(
+    (name, i) => {
+      return {
+        name,
+        isActivated: i === 0 ? true : false,
+      };
+    },
+  );
   return returnBenchmarks;
 };
 

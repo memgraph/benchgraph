@@ -3,6 +3,7 @@ import { IBenchmark } from 'src/app/models/benchmark.model';
 import {
   IBenchmarkSettings,
   IBenchmarkSettingsCondition,
+  IBenchmarkSettingsHardwareAlias,
   IBenchmarkSettingsQueryCategory,
   IBenchmarkSettingsQueryCategoryQuery,
   IBenchmarkSettingsSize,
@@ -16,6 +17,10 @@ export const setSettings = createAction('[Benchmarks] Set Settings', props<{ set
 export const updateCondition = createAction(
   '[Benchmarks] Update Condition',
   props<{ condition: IBenchmarkSettingsCondition }>(),
+);
+export const updateHardwareAlias = createAction(
+  '[Benchmarks] Update Hardware Alias',
+  props<{ hardwareAlias: IBenchmarkSettingsHardwareAlias }>(),
 );
 export const updateWorkloadType = createAction(
   '[Benchmarks] Update Workload Type',
