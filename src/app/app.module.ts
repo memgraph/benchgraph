@@ -15,6 +15,7 @@ import { AggregateComponent } from './components/aggregate/aggregate.component';
 import { GlobalComponent } from './components/global/global.component';
 import { DetailedComponent } from './components/detailed/detailed.component';
 import { BaseComponent } from './components/base/base.component';
+import { TooltipIconComponent } from './components/tooltip-icon/tooltip-icon.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { BaseComponent } from './components/base/base.component';
     GlobalComponent,
     DetailedComponent,
     BaseComponent,
+    TooltipIconComponent,
   ],
   imports: [
     BrowserModule,

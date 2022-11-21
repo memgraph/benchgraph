@@ -26,12 +26,20 @@ import RyzenNeo4jHot from '../../mocks/mock-results-ryzen-neo4j-cold.json';
 import RyzenNeo4jCold from '../../mocks/mock-results-ryzen-neo4j-hot.json';
 import {
   IBenchmark,
+  IQueryStatistics,
   isQueryIsolated,
   isWorkloadRealistic,
   IWorkloadIsolated,
   IWorkloadMixed,
 } from 'src/app/models/benchmark.model';
 import { removeDuplicatesFromArray } from 'src/app/services/remove-duplicates';
+import {
+  TOOLTIP_OF_CONDITION,
+  TOOLTIP_OF_DATASET_SIZE,
+  TOOLTIP_OF_WORKLOAD_TYPE,
+} from 'src/app/components/overview/overview.component';
+
+export const LATENCY_PERCENTILE: keyof IQueryStatistics = 'p99';
 
 @Injectable()
 export class BenchmarksEffects {
@@ -100,6 +108,7 @@ const getConditions = (benchmarks: IBenchmark[]): IBenchmarkSettingsCondition[] 
     return {
       name,
       isActivated: i === 0 ? true : false,
+      tooltip: TOOLTIP_OF_CONDITION[name],
     };
   });
   return returnBenchmarks;
@@ -127,6 +136,7 @@ const getWorkloadTypes = (benchmarks: IBenchmark[]): IBenchmarkSettingsWorkloadT
       return {
         name,
         isActivated: i === 0 ? true : false,
+        tooltip: TOOLTIP_OF_WORKLOAD_TYPE[name],
       };
     },
   );
@@ -139,6 +149,7 @@ const getDatasetSizes = (benchmarks: IBenchmark[]): IBenchmarkSettingsSize[] => 
     return {
       name,
       isActivated: i === 0 ? true : false,
+      tooltip: TOOLTIP_OF_DATASET_SIZE[name],
     };
   });
   return returnDatasetSizes;
@@ -199,7 +210,7 @@ const getMaxTimes = (benchmarks: IBenchmark[]): IBenchmarkSettingsMaxTimes => {
             const queryThroughput = query.stats.throughput;
             let queryLatency = 0;
             if (isQueryIsolated(query)) {
-              queryLatency = query.stats.queryStatistics.p99 * 1000;
+              queryLatency = query.stats.queryStatistics[LATENCY_PERCENTILE] * 1000;
             }
             if (queryMemory > maxMemory) {
               maxMemory = queryMemory;

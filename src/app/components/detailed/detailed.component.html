@@ -45,7 +45,7 @@
       </th>
       <th *ngFor="let vendorKey of statVendorKeys">
         <div class="cell">
-          <div class="cell-title">
+          <div class="cell-title" [title]="tooltipOfResultType[vendorKey]">
             {{resultTypeByKey[vendorKey].name}}
           </div>
           <div class="cell-unit">

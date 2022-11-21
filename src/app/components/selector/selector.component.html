@@ -18,7 +18,8 @@
       <div 
         class="condition"
         *ngFor="let hardwareAlias of settings.hardwareAliases" 
-        [ngClass]="{'activated': hardwareAlias.isActivated, 'single': settings.hardwareAliases.length === 1}" (click)="updateHardwareAlias(hardwareAlias)">
+        [ngClass]="{'activated': hardwareAlias.isActivated, 'single': settings.hardwareAliases.length === 1}" 
+        (click)="updateHardwareAlias(hardwareAlias)">
         {{hardwareAlias.name}}
       </div>
     </div>
@@ -30,7 +31,9 @@
       <div 
         class="condition" 
         *ngFor="let condition of settings.conditions" 
-        [ngClass]="{'activated': condition.isActivated, 'single': settings.conditions.length === 1}" (click)="updateCondition(condition)">
+        [ngClass]="{'activated': condition.isActivated, 'single': settings.conditions.length === 1, 'has-tooltip': !!condition.tooltip}" 
+        (click)="updateCondition(condition)"
+        [attr.title]="condition.tooltip ? condition.tooltip : null">
         {{condition.name}} run
       </div>
     </div>
@@ -42,7 +45,9 @@
       <div 
         class="condition" 
         *ngFor="let size of settings.datasetSizes" 
-        [ngClass]="{'activated': size.isActivated, 'single': settings.datasetSizes.length === 1}" (click)="updateSize(size)">
+        [ngClass]="{'activated': size.isActivated, 'single': settings.datasetSizes.length === 1, 'has-tooltip': !!size.tooltip}" 
+        (click)="updateSize(size)"
+        [attr.title]="size.tooltip ? size.tooltip : null">
         {{size.name}}
       </div>
     </div>
@@ -54,7 +59,9 @@
       <div 
         class="condition" 
         *ngFor="let workloadType of settings.workloadTypes" 
-        [ngClass]="{'activated': workloadType.isActivated, 'single': settings.workloadTypes.length === 1}" (click)="updateWorkloadType(workloadType)">
+        [ngClass]="{'activated': workloadType.isActivated, 'single': settings.workloadTypes.length === 1, 'has-tooltip': !!workloadType.tooltip}" 
+        (click)="updateWorkloadType(workloadType)"
+        [attr.title]="workloadType.tooltip ? workloadType.tooltip : null">
         {{workloadType.name}}
       </div>
     </div>

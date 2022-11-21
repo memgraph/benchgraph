@@ -1,7 +1,10 @@
 <div *ngIf="aggregateResults$ | async as results" class="aggregate">
   <div class="graph">
     <div class="header">
-      <div class="title">Peak Memory</div>
+      <div class="title">
+        Peak Memory 
+        <app-tooltip-icon title="Average of all peak memories per vendor"></app-tooltip-icon>
+      </div>
       <div class="unit">Mib (less is better)</div>
     </div>
     <div class="results">
@@ -22,7 +25,10 @@
 
   <div class="graph">
     <div class="header">
-      <div class="title">Throughput</div>
+      <div class="title">
+        Throughput
+        <app-tooltip-icon title="Average of all throughput per vendor"></app-tooltip-icon>
+      </div>
       <div class="unit">Queries per second (more is better)</div>
     </div>
     <div class="results">

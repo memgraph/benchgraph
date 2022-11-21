@@ -54,12 +54,13 @@
         background: #F9E3D1;
         border-radius: 2px;
         font-weight: 600;
-        pointer-events: none;
         cursor: initial;
       }
 
-      &.single {
-        pointer-events: none;
+      &.has-tooltip {
+        &:hover {
+          font-weight: 600;
+        }
       }
     }
   }

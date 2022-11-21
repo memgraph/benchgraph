@@ -14,16 +14,17 @@
         <div class="header-title-inner" *ngSwitchCase="ResultType.MEMORY">
           Peak Memory
           <div class="header-title-inner-unit">(MiB)</div>
+          <app-tooltip-icon [title]="tooltipOfResultType[ResultType.MEMORY]"></app-tooltip-icon>
         </div>
         <div class="header-title-inner" *ngSwitchCase="ResultType.THROUGHPUT">
           Throughput
           <div class="header-title-inner-unit">(Queries per second)</div>
+          <app-tooltip-icon [title]="tooltipOfResultType[ResultType.THROUGHPUT]"></app-tooltip-icon>
         </div>
         <div class="header-title-inner" *ngSwitchCase="ResultType.LATENCY">
-          <div>
-            Latency
+            Latency, {{latencyPercentile}}
             <div class="header-title-inner-unit">(Milliseconds)</div>
-          </div>
+            <app-tooltip-icon [title]="tooltipOfResultType[ResultType.LATENCY]"></app-tooltip-icon>
         </div>
       </div>
       <div class="header-info" [ngSwitch]="vendorKey">

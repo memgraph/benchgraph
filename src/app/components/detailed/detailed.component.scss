@@ -116,6 +116,13 @@ tbody tr:nth-child(odd) td .cell, tbody tr:nth-child(odd) td .chart {
   align-items: center;
   justify-content: space-between;
 
+  &-title {
+    user-select: none;
+    &:hover {
+      font-weight: 600;
+    }
+  }
+
   &-data {
     display: flex;
     width: 100%;

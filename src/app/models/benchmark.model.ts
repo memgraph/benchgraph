@@ -20,7 +20,6 @@ export interface IQueryIsolated {
   name: string;
   category: QueryCategory;
   stats: IStatsWithQuery;
-  isFailed: boolean;
 }
 
 export function isWorkloadIsolated(workload: IWorkload): workload is IWorkloadIsolated {
@@ -41,7 +40,6 @@ export interface IQueryMixed {
   name: string;
   category: QueryCategory;
   stats: IStats;
-  isFailed: boolean;
 }
 
 export function isWorkloadMixed(workload: IWorkload): workload is IWorkloadMixed {

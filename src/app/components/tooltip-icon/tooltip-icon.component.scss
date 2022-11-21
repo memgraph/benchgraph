@@ -1,0 +1,10 @@
+@import 'colors';
+
+.icon-ui-info-circled {
+  color: $brand-ash;
+  font-size: 0.8rem;
+
+  &:hover {
+    color: $brand-black;
+  }
+}

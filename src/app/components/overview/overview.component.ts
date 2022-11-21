@@ -2,6 +2,7 @@ import { AfterContentInit, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import {
+  DatasetSize,
   IBenchmark,
   IPercentages,
   IQueryIsolated,
@@ -15,13 +16,16 @@ import {
   IWorkloadIsolated,
   IWorkloadMixed,
   QueryCategory,
+  RunConfigCondition,
   RunConfigVendor,
+  WorkloadType,
 } from 'src/app/models/benchmark.model';
 import { AppState } from 'src/app/state';
 import { BenchmarkSelectors } from 'src/app/state/benchmarks';
 import _ from 'lodash';
 import { filterNullish } from 'src/app/services/filter-nullish';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { LATENCY_PERCENTILE } from 'src/app/state/benchmarks/benchmarks.effects';
 
 export enum ITab {
   AGGREGATE = 'Aggregate Results',
@@ -121,6 +125,29 @@ export const PERCENTAGES_NAME_BY_KEY: Record<keyof IPercentages, string> = {
   readPerc: 'Read',
   writePerc: 'Write',
   numOfQueries: 'Number of Queries',
+};
+
+export const TOOLTIP_OF_CONDITION: Record<RunConfigCondition, string> = {
+  [RunConfigCondition.COLD]: 'The system has no pre-warmed caches before the test execution',
+  [RunConfigCondition.HOT]: 'The system has pre-warmed caches before the test execution',
+};
+
+export const TOOLTIP_OF_DATASET_SIZE: Record<DatasetSize, string> = {
+  [DatasetSize.SMALL]: '10k vertices, 121k edges',
+  [DatasetSize.MEDIUM]: '100k vertices, 1.76M edges',
+  [DatasetSize.LARGE]: '1.63M vertices, 30M edges',
+};
+
+export const TOOLTIP_OF_WORKLOAD_TYPE: Record<WorkloadType, string> = {
+  [WorkloadType.ISOLATED]: 'Concurrent execution of a single isolated query',
+  [WorkloadType.MIXED]: 'Concurrent execution of single query with a defined percentage of write queries',
+  [WorkloadType.REALISTIC]: 'Concurrent execution of different queries',
+};
+
+export const TOOLTIP_OF_RESULT_TYPE: Record<ResultType, string> = {
+  [ResultType.LATENCY]: 'Isolated single thread query latency, p99',
+  [ResultType.MEMORY]: 'Peak process memory during database run',
+  [ResultType.THROUGHPUT]: 'Queries per second accross concurrent threads',
 };
 
 @Component({
@@ -276,7 +303,11 @@ export class OverviewComponent implements AfterContentInit {
                   vendor: benchmark.runConfig.vendor,
                   memory: { value: query.stats.database.memory, isWeakest: true, relativeValue: 1 },
                   throughput: { value: query.stats.throughput, isWeakest: true, relativeValue: 1 },
-                  latency: { value: query.stats.queryStatistics.p99 * 1000, isWeakest: true, relativeValue: 1 },
+                  latency: {
+                    value: query.stats.queryStatistics[LATENCY_PERCENTILE] * 1000,
+                    isWeakest: true,
+                    relativeValue: 1,
+                  },
                   queryName: query.name,
                   category: query.category,
                 }));
