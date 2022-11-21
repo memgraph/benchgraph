@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { UtilService } from 'src/app/services/util.service';
 
 export enum SidenavSize {
   OPENED = 'Opened',
@@ -37,13 +36,11 @@ export class SidenavComponent {
     },
   ];
 
-  constructor(private readonly utilService: UtilService) {}
-
   changeSidenavSize(sidenavSize: SidenavSize) {
     this.sidenavSize_.next(sidenavSize);
   }
 
   openLink(url: string) {
-    this.utilService.openLinkInExternal(url);
+    // Analytics calls will come here
   }
 }

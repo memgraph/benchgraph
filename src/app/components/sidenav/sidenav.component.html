@@ -12,14 +12,14 @@
   <div *ngIf="sidenavSize === SidenavSize.COLLAPSED"  class="vertical-title">Graph DB Benchmarking</div>
   <div *ngIf="sidenavSize === SidenavSize.OPENED" class="opened">
     <div class="title">Graph DB Benchmarking</div>
-    <div *ngFor="let githubLink of sidenavGitHubLinks" class="github" (click)="openLink(githubLink.url)">
+    <a *ngFor="let githubLink of sidenavGitHubLinks" class="github" (click)="openLink(githubLink.url)" [href]="githubLink.url" target="_blank">
         <div class="github-title">{{githubLink.title}}</div>
         <img src="assets/img/github.svg">
-    </div>
+    </a>
     <div class="subtitle">Want to find out more about graph databases?</div>
-    <div *ngFor="let docsLink of sidenavDocsLinks" class="docs" (click)="openLink(docsLink.url)">
+    <a *ngFor="let docsLink of sidenavDocsLinks" class="docs" (click)="openLink(docsLink.url)" [href]="docsLink.url" target="_blank">
         <div class="docs-title">{{docsLink.title}}</div>
         <span class="icon-ui-right"></span>
-    </div>
+    </a>
   </div>
 </div>
