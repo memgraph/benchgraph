@@ -75,7 +75,7 @@
         *ngFor="let category of settings.queryCategories" 
         [ngClass]="{'activated': category.isActivated, 'single': settings.queryCategories.length === 1}">
         <div class="category-main">
-          <div class="checkbox" [ngClass]="{'activated': category.isActivated}" (click)="updateCategory(category)">
+          <div class="checkbox" [ngClass]="{'activated': category.isActivated}" (click)="updateCategory(category, settings.queryCategories)">
             <span *ngIf="category.isActivated" class="icon-ui-ok"></span>
           </div>
           <div class="category-main-name">
@@ -87,12 +87,12 @@
           <div 
             class="icon-ui-down-open category-main-caret" 
             [ngClass]="{'expanded icon-ui-up-open': category.isExpanded, 'icon-ui-down-open': !category.isExpanded}"
-            (click)="updateCategory(category, category.isExpanded)">
+            (click)="updateCategory(category, settings.queryCategories, category.isExpanded)">
           </div>
         </div>
         <div class="category-queries" *ngIf="category.isExpanded">
           <div class="category-queries-query" *ngFor="let query of category.queries">
-            <div class="checkbox" [ngClass]="{'activated': query.isActivated}" (click)="updateQuery(category, query)">
+            <div class="checkbox" [ngClass]="{'activated': query.isActivated}" (click)="updateQuery(category, query, settings.queryCategories)">
               <span *ngIf="query.isActivated" class="icon-ui-ok"></span>
             </div>
               {{query.name}}

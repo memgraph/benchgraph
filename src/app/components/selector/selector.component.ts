@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { WorkloadType } from 'src/app/models/benchmark.model';
+import { UiMessageType, UiService } from 'src/app/services/ui.service';
 import { AppState } from 'src/app/state';
 import {
   BenchmarkActions,
@@ -34,7 +35,7 @@ export class SelectorComponent {
     map((settings) => !!settings?.hardwareAliases.find((hardwareAlias) => !!hardwareAlias.name)),
   );
 
-  constructor(private readonly store: Store<AppState>) {}
+  constructor(private readonly store: Store<AppState>, private uiService: UiService) {}
 
   updateCondition(condition: IBenchmarkSettingsCondition) {
     this.store.dispatch(BenchmarkActions.updateCondition({ condition: { ...condition, isActivated: true } }));
@@ -54,15 +55,53 @@ export class SelectorComponent {
     this.store.dispatch(BenchmarkActions.updateDatasetSizes({ size: { ...size, isActivated: true } }));
   }
 
-  updateCategory(category: IBenchmarkSettingsQueryCategory, isExpanded?: boolean) {
+  updateCategory(
+    category: IBenchmarkSettingsQueryCategory,
+    categories: IBenchmarkSettingsQueryCategory[],
+    isExpanded?: boolean,
+  ) {
+    if (category.isActivated && !isOneOtherCategoryActivated(categories, category) && isExpanded === undefined) {
+      this.uiService.addMessage({ message: 'Atleast one query must be activated', type: UiMessageType.Warning });
+      return;
+    }
     this.store.dispatch(
       BenchmarkActions.updateCategory({ category: { ...category, isActivated: !category.isActivated }, isExpanded }),
     );
   }
 
-  updateQuery(category: IBenchmarkSettingsQueryCategory, query: IBenchmarkSettingsQueryCategoryQuery) {
+  updateQuery(
+    category: IBenchmarkSettingsQueryCategory,
+    query: IBenchmarkSettingsQueryCategoryQuery,
+    categories: IBenchmarkSettingsQueryCategory[],
+  ) {
+    if (category.isActivated && !isOneOtherQueryActivated(categories, query)) {
+      this.uiService.addMessage({ message: 'Atleast one query must be activated', type: UiMessageType.Warning });
+      return;
+    }
     this.store.dispatch(
       BenchmarkActions.updateQuery({ category, query: { ...query, isActivated: !query.isActivated } }),
     );
   }
 }
+
+export const isOneOtherCategoryActivated = (
+  categories: IBenchmarkSettingsQueryCategory[],
+  currentCategory: IBenchmarkSettingsQueryCategory,
+): boolean => {
+  return !!categories.find(
+    (category) =>
+      category.name !== currentCategory.name &&
+      category.isActivated &&
+      category.queries.some((query) => query.isActivated),
+  );
+};
+
+export const isOneOtherQueryActivated = (
+  categories: IBenchmarkSettingsQueryCategory[],
+  currentQuery: IBenchmarkSettingsQueryCategoryQuery,
+): boolean => {
+  return !!categories.find(
+    (category) =>
+      category.isActivated && category.queries.some((query) => query.name !== currentQuery.name && query.isActivated),
+  );
+};

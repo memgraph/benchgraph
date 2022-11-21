@@ -63,6 +63,9 @@ export class AggregateComponent {
           ),
         )
         .flat(3);
+      if (allResultsByVendor.length < 1) {
+        return;
+      }
       const groupedResults = _.groupBy(allResultsByVendor, 'vendor');
       const groupedResultsObject = Object.values(groupedResults);
       const peakResultPerVendor: IAggregateResultsAbsolute[] = groupedResultsObject.map((vendor) => {
