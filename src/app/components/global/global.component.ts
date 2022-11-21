@@ -23,6 +23,7 @@ import { IBenchmarkSettings } from '../../state/benchmarks';
 import { Unsubscribe } from 'src/app/services/unsubscribe';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { LATENCY_PERCENTILE } from 'src/app/state/benchmarks/benchmarks.effects';
+import { UiMessageType, UiService } from 'src/app/services/ui.service';
 
 const categoryNameByCategory: Record<QueryCategory, string> = {
   [QueryCategory.AGGREGATE]: 'Aggregate Queries',
@@ -79,7 +80,12 @@ export class GlobalComponent extends Unsubscribe implements AfterContentInit, On
   latencyPercentile = LATENCY_PERCENTILE;
   tooltipOfResultType = TOOLTIP_OF_RESULT_TYPE;
 
-  constructor(private router: Router, private route: ActivatedRoute, private clipboard: Clipboard) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private clipboard: Clipboard,
+    private uiService: UiService,
+  ) {
     super();
   }
 
@@ -205,6 +211,7 @@ export class GlobalComponent extends Unsubscribe implements AfterContentInit, On
       queryParamsHandling: 'merge',
     });
     this.clipboard.copy(window.location.href);
+    this.uiService.addMessage({ message: 'URL copied', type: UiMessageType.Success });
   }
 
   getPercentageName(percentageKey: keyof IPercentages) {

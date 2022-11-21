@@ -68,7 +68,7 @@
                   <div class="query-index-number">W{{queryIndex + 1}}</div>
                 </ng-template>
                 <div class="query-index-anchor">
-                  <div class="query-index-anchor-hash" (click)="anchorQuery(vendorKey, detailedQuery, queryIndex)">#</div>
+                  <div class="query-index-anchor-hash" (click)="anchorQuery(vendorKey, detailedQuery, queryIndex)" title="Anchor & Copy URL">#</div>
                 </div>
               </div>
               <div *ngIf="!shouldShowRealistic; else realisticName" class="query-name">{{query.queryName}}</div>

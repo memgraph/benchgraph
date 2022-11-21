@@ -20,6 +20,7 @@ import { IPercentages, WorkloadType } from '../../models/benchmark.model';
 import { filterNullish } from '../../services/filter-nullish';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { IBenchmarkSettings } from '../../state/benchmarks';
+import { UiMessageType, UiService } from 'src/app/services/ui.service';
 
 @Component({
   selector: 'app-detailed',
@@ -55,7 +56,12 @@ export class DetailedComponent implements OnChanges, AfterContentInit {
   anchorQuery_ = new BehaviorSubject<string | null>('');
   anchorQuery$ = this.anchorQuery_.asObservable();
 
-  constructor(private router: Router, private route: ActivatedRoute, private clipboard: Clipboard) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private clipboard: Clipboard,
+    private uiService: UiService,
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     const settingsChange: IBenchmarkSettings | null | undefined = changes['settings'].currentValue;
@@ -119,6 +125,7 @@ export class DetailedComponent implements OnChanges, AfterContentInit {
       queryParamsHandling: 'merge',
     });
     this.clipboard.copy(window.location.href);
+    this.uiService.addMessage({ message: 'URL copied', type: UiMessageType.Success });
   }
 
   reinitializeSelectedResultTypes() {

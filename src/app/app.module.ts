@@ -16,6 +16,8 @@ import { GlobalComponent } from './components/global/global.component';
 import { DetailedComponent } from './components/detailed/detailed.component';
 import { BaseComponent } from './components/base/base.component';
 import { TooltipIconComponent } from './components/tooltip-icon/tooltip-icon.component';
+import { UiService } from './services/ui.service';
+import { UiMessagesComponent } from './components/ui-messages/ui-messages.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { TooltipIconComponent } from './components/tooltip-icon/tooltip-icon.com
     DetailedComponent,
     BaseComponent,
     TooltipIconComponent,
+    UiMessagesComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import { TooltipIconComponent } from './components/tooltip-icon/tooltip-icon.com
     StoreModule.forRoot(reducers, {}),
     EffectsModule.forRoot([BenchmarksEffects]),
   ],
-  providers: [UtilService],
+  providers: [UtilService, UiService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

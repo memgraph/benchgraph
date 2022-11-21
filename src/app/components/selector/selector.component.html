@@ -12,7 +12,7 @@
     </div>
   </div>
 
-  <div class="setting">
+  <div class="setting" *ngIf="shouldShowHardwareAlias$ | async">
     <div class="title">Hardware Alias</div>
     <div class="conditions">
       <div 

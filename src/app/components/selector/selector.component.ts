@@ -30,6 +30,10 @@ export class SelectorComponent {
     ),
   );
 
+  shouldShowHardwareAlias$ = this.settings$.pipe(
+    map((settings) => !!settings?.hardwareAliases.find((hardwareAlias) => !!hardwareAlias.name)),
+  );
+
   constructor(private readonly store: Store<AppState>) {}
 
   updateCondition(condition: IBenchmarkSettingsCondition) {
