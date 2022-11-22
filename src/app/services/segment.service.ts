@@ -14,7 +14,7 @@ export class SegmentService implements AnalyticsService {
     try {
       this.segment.track({
         event,
-        properties: { benchgraph: { properties } },
+        properties,
       });
     } catch (error) {
       console.error(`Segment.track failed with error: ${error}`);
