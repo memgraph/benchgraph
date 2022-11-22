@@ -46,6 +46,5 @@ export class SidenavComponent {
 
   openLink(url: string) {
     this.segmentService.trackEvent('Link Clicked', { linkUrl: url });
-    this.utilService.openLinkInExternal(url);
   }
 }
