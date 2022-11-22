@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { SegmentService } from 'src/app/services/segment.service';
+import { UtilService } from 'src/app/services/util.service';
 
 export enum SidenavSize {
   OPENED = 'Opened',
@@ -36,11 +38,14 @@ export class SidenavComponent {
     },
   ];
 
+  constructor(private readonly utilService: UtilService, private segmentService: SegmentService) {}
+
   changeSidenavSize(sidenavSize: SidenavSize) {
     this.sidenavSize_.next(sidenavSize);
   }
 
   openLink(url: string) {
-    // Analytics calls will come here
+    this.segmentService.trackEvent('Link Clicked', { linkUrl: url });
+    this.utilService.openLinkInExternal(url);
   }
 }

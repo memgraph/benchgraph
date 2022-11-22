@@ -6,8 +6,9 @@ import _ from 'lodash';
 import { AppState } from '../../state';
 import { Store } from '@ngrx/store';
 import { BenchmarkSelectors } from '../../state/benchmarks';
+import { arrayHasDuplicates } from 'src/app/services/remove-duplicates';
 
-export interface IAggregateResults {
+export interface IAggregateResultsAbsolute {
   vendor: RunConfigVendor;
   memory: number;
   throughput: number;
@@ -18,7 +19,9 @@ export type IAggregateResultsRelative = {
   relativeMemoryToMax: number;
   relativeThroughput: number;
   relativeThroughputToMax: number;
-} & IAggregateResults;
+};
+
+export type IAggregateResults = IAggregateResultsAbsolute & IAggregateResultsRelative;
 
 const backgroundColorByVendor: Record<RunConfigVendor, string> = {
   [RunConfigVendor.MEMGRAPH]: '#FDAE70',
@@ -40,7 +43,7 @@ export class AggregateComponent {
   aggregateResults$ = this.presentedBenchmarks$.pipe(
     withLatestFrom(this.store.select(BenchmarkSelectors.selectSettings)),
     map(([benchmarks, settings]) => {
-      const allResultsByVendor: IAggregateResults[] = benchmarks
+      const allResultsByVendor: IAggregateResultsAbsolute[] = benchmarks
         .map((benchmark) =>
           benchmark.datasets.map((datasets) =>
             datasets.workloads.map((workload) => {
@@ -60,9 +63,12 @@ export class AggregateComponent {
           ),
         )
         .flat(3);
+      if (allResultsByVendor.length < 1) {
+        return;
+      }
       const groupedResults = _.groupBy(allResultsByVendor, 'vendor');
       const groupedResultsObject = Object.values(groupedResults);
-      const peakResultPerVendor: IAggregateResults[] = groupedResultsObject.map((vendor) => {
+      const peakResultPerVendor: IAggregateResultsAbsolute[] = groupedResultsObject.map((vendor) => {
         const throughputArray = vendor.map((result) => result.throughput);
         const throughputAverage = throughputArray.reduce((a, b) => a + b, 0) / throughputArray.length;
         const memoryArray = vendor.map((result) => result.memory);
@@ -74,15 +80,15 @@ export class AggregateComponent {
         };
       });
       const bestMemoryVendor = peakResultPerVendor.reduce((prev, curr) => (prev.memory < curr.memory ? prev : curr));
-      const bestThroughputVendor = peakResultPerVendor.reduce((prev, curr) =>
-        prev.throughput > curr.throughput ? prev : curr,
+      const worstThroughputVendor = peakResultPerVendor.reduce((prev, curr) =>
+        prev.throughput < curr.throughput ? prev : curr,
       );
-      const peakMemoryPerVendorWithRelativeTimes: IAggregateResultsRelative[] = peakResultPerVendor.map((result) => ({
+      const peakMemoryPerVendorWithRelativeTimes: IAggregateResults[] = peakResultPerVendor.map((result) => ({
         ...result,
         relativeMemory: result.vendor === bestMemoryVendor.vendor ? 1 : result.memory / bestMemoryVendor.memory,
         relativeMemoryToMax: settings?.maxTimes.memory ? (result.memory / settings?.maxTimes.memory) * 100 : 100,
         relativeThroughput:
-          result.vendor === bestThroughputVendor.vendor ? 1 : bestThroughputVendor.throughput / result.throughput,
+          result.vendor === worstThroughputVendor.vendor ? 1 : result.throughput / worstThroughputVendor.throughput,
         relativeThroughputToMax: settings?.maxTimes.throughput
           ? (result.throughput / settings?.maxTimes.throughput) * 100
           : 100,
@@ -92,6 +98,11 @@ export class AggregateComponent {
   );
 
   constructor(private readonly store: Store<AppState>) {}
+
+  shouldShowDecimal(results: IAggregateResults[], resultsKey: keyof IAggregateResultsRelative) {
+    const mappedResults = results.map((result) => Math.floor(result[resultsKey]));
+    return arrayHasDuplicates(mappedResults);
+  }
 
   getBackgroundColor(vendor: RunConfigVendor) {
     return backgroundColorByVendor[vendor];

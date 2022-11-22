@@ -14,12 +14,16 @@ import {
   RESULT_TYPE_BY_KEY,
   STAT_VENDOR_KEYS,
   STAT_VENDOR_KEYS_WITHOUT_LATENCY,
+  TOOLTIP_OF_RESULT_TYPE,
 } from '../overview/overview.component';
 import { IPercentages, QueryCategory, WorkloadType } from '../../models/benchmark.model';
 import { filterNullish } from '../../services/filter-nullish';
 import { removeDuplicatesFromArray } from '../../services/remove-duplicates';
 import { IBenchmarkSettings } from '../../state/benchmarks';
 import { Unsubscribe } from 'src/app/services/unsubscribe';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { LATENCY_PERCENTILE } from 'src/app/state/benchmarks/benchmarks.effects';
+import { UiMessageType, UiService } from 'src/app/services/ui.service';
 
 const categoryNameByCategory: Record<QueryCategory, string> = {
   [QueryCategory.AGGREGATE]: 'Aggregate Queries',
@@ -73,7 +77,15 @@ export class GlobalComponent extends Unsubscribe implements AfterContentInit, On
   shouldShowIsolated = true;
   activatedResultType = this.statVendorKeys[0];
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  latencyPercentile = LATENCY_PERCENTILE;
+  tooltipOfResultType = TOOLTIP_OF_RESULT_TYPE;
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private clipboard: Clipboard,
+    private uiService: UiService,
+  ) {
     super();
   }
 
@@ -198,6 +210,8 @@ export class GlobalComponent extends Unsubscribe implements AfterContentInit, On
       queryParams: queryParams,
       queryParamsHandling: 'merge',
     });
+    this.clipboard.copy(window.location.href);
+    this.uiService.addMessage({ message: 'URL copied', type: UiMessageType.Success });
   }
 
   getPercentageName(percentageKey: keyof IPercentages) {

@@ -1,0 +1,5 @@
+<div 
+  *ngIf="messages$ | async as message" class="callout callout-fixed top-level" 
+  [ngClass]="{'success': message.type === types.Success, 'alert': message.type === types.Error}">
+  {{message.message}}
+</div>

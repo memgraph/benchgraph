@@ -90,6 +90,8 @@ th {
       font-weight: 600;
       font-size: 16px;
       margin: 0;
+      background-image: url('/assets/img/down.svg');
+      border-bottom: 1px dashed $brand-gray;
     }
   }
 }
@@ -113,6 +115,13 @@ tbody tr:nth-child(odd) td .cell, tbody tr:nth-child(odd) td .chart {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  &-title {
+    user-select: none;
+    &:hover {
+      font-weight: 600;
+    }
+  }
 
   &-data {
     display: flex;

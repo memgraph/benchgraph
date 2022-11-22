@@ -3,6 +3,7 @@ import * as BenchmarkSelectors from './benchmarks.selectors';
 import { EntityState } from '../state-entity';
 import {
   DatasetSize,
+  HardwareAlias,
   IBenchmark,
   QueryCategory,
   RunConfigCondition,
@@ -14,30 +15,34 @@ export { BenchmarkActions, BenchmarkSelectors };
 
 export type BenchmarkEntity = EntityState<any>;
 
-export interface IBenchmarkSettingsVendor {
+export interface IBenchmarkSetting {
+  isActivated: boolean;
+  tooltip?: string;
+}
+
+export type IBenchmarkSettingsHardwareAlias = {
+  name: HardwareAlias;
+} & IBenchmarkSetting;
+
+export type IBenchmarkSettingsVendor = {
   name: RunConfigVendor;
-  isActivated: boolean;
-}
+} & IBenchmarkSetting;
 
-export interface IBenchmarkSettingsCondition {
+export type IBenchmarkSettingsCondition = {
   name: RunConfigCondition;
-  isActivated: boolean;
-}
+} & IBenchmarkSetting;
 
-export interface IBenchmarkSettingsWorkloadType {
+export type IBenchmarkSettingsWorkloadType = {
   name: WorkloadType;
-  isActivated: boolean;
-}
+} & IBenchmarkSetting;
 
-export interface IBenchmarkSettingsSize {
+export type IBenchmarkSettingsSize = {
   name: DatasetSize;
-  isActivated: boolean;
-}
+} & IBenchmarkSetting;
 
-export interface IBenchmarkSettingsQueryCategoryQuery {
+export type IBenchmarkSettingsQueryCategoryQuery = {
   name: string;
-  isActivated: boolean;
-}
+} & IBenchmarkSetting;
 
 export interface IBenchmarkSettingsQueryCategory {
   name: QueryCategory;
@@ -53,6 +58,7 @@ export interface IBenchmarkSettingsMaxTimes {
 }
 
 export interface IBenchmarkSettings {
+  hardwareAliases: IBenchmarkSettingsHardwareAlias[];
   vendors: IBenchmarkSettingsVendor[];
   conditions: IBenchmarkSettingsCondition[];
   workloadTypes: IBenchmarkSettingsWorkloadType[];

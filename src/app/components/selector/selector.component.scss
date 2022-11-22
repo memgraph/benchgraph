@@ -13,7 +13,7 @@
 }
 
 .header {
-  margin-top: 4.5rem;
+  margin-top: 1.5rem;
   margin-bottom: 1rem;
   font-size: 1.25rem;
   font-weight: 600;
@@ -23,6 +23,7 @@
 .description {
   color: $brand-gray;
   font-family: 'Roboto';
+  font-size: 0.875rem;
 }
 
 .setting {
@@ -53,12 +54,13 @@
         background: #F9E3D1;
         border-radius: 2px;
         font-weight: 600;
-        pointer-events: none;
         cursor: initial;
       }
 
-      &.single {
-        pointer-events: none;
+      &.has-tooltip {
+        &:hover {
+          font-weight: 600;
+        }
       }
     }
   }

@@ -17,7 +17,7 @@
         <img src="assets/img/github.svg">
     </a>
     <div class="subtitle">Want to find out more about graph databases?</div>
-    <a *ngFor="let docsLink of sidenavDocsLinks" class="docs" (click)="openLink(docsLink.url)" [href]="docsLink.url" target="_blank">
+    <a *ngFor="let docsLink of sidenavDocsLinks" class="docs" [href]="docsLink.url" target="_blank">
         <div class="docs-title">{{docsLink.title}}</div>
         <span class="icon-ui-right"></span>
     </a>

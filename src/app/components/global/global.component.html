@@ -14,16 +14,17 @@
         <div class="header-title-inner" *ngSwitchCase="ResultType.MEMORY">
           Peak Memory
           <div class="header-title-inner-unit">(MiB)</div>
+          <app-tooltip-icon [title]="tooltipOfResultType[ResultType.MEMORY]"></app-tooltip-icon>
         </div>
         <div class="header-title-inner" *ngSwitchCase="ResultType.THROUGHPUT">
           Throughput
           <div class="header-title-inner-unit">(Queries per second)</div>
+          <app-tooltip-icon [title]="tooltipOfResultType[ResultType.THROUGHPUT]"></app-tooltip-icon>
         </div>
         <div class="header-title-inner" *ngSwitchCase="ResultType.LATENCY">
-          <div>
-            Latency
+            Latency, {{latencyPercentile}}
             <div class="header-title-inner-unit">(Milliseconds)</div>
-          </div>
+            <app-tooltip-icon [title]="tooltipOfResultType[ResultType.LATENCY]"></app-tooltip-icon>
         </div>
       </div>
       <div class="header-info" [ngSwitch]="vendorKey">
@@ -41,7 +42,7 @@
 
     <table>
       <thead>
-        <th class="wider">
+        <th class="wider" [ngClass]="{'realistic': shouldShowRealistic}">
           <div class="title">Queries included in test</div>
         </th>
         <th *ngFor="let vendor of (vendors$ | async)">
@@ -67,7 +68,7 @@
                   <div class="query-index-number">W{{queryIndex + 1}}</div>
                 </ng-template>
                 <div class="query-index-anchor">
-                  <div class="query-index-anchor-hash" (click)="anchorQuery(vendorKey, detailedQuery, queryIndex)">#</div>
+                  <div class="query-index-anchor-hash" (click)="anchorQuery(vendorKey, detailedQuery, queryIndex)" title="Anchor & Copy URL">#</div>
                 </div>
               </div>
               <div *ngIf="!shouldShowRealistic; else realisticName" class="query-name">{{query.queryName}}</div>

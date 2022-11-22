@@ -2,6 +2,7 @@ export interface IBenchmark {
   runConfig: {
     vendor: RunConfigVendor;
     condition: RunConfigCondition;
+    hardwareAlias: HardwareAlias;
   };
   datasets: {
     name: string;
@@ -19,7 +20,6 @@ export interface IQueryIsolated {
   name: string;
   category: QueryCategory;
   stats: IStatsWithQuery;
-  isFailed: boolean;
 }
 
 export function isWorkloadIsolated(workload: IWorkload): workload is IWorkloadIsolated {
@@ -40,7 +40,6 @@ export interface IQueryMixed {
   name: string;
   category: QueryCategory;
   stats: IStats;
-  isFailed: boolean;
 }
 
 export function isWorkloadMixed(workload: IWorkload): workload is IWorkloadMixed {
@@ -107,6 +106,11 @@ export enum RunConfigVendor {
 export enum RunConfigCondition {
   HOT = 'hot',
   COLD = 'cold',
+}
+
+export enum HardwareAlias {
+  RYZEN = 'ryzen',
+  INTEL = 'intel',
 }
 
 export enum DatasetSize {

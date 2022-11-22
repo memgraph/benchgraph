@@ -8,9 +8,8 @@ describe('GlobalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GlobalComponent ]
-    })
-    .compileComponents();
+      declarations: [GlobalComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(GlobalComponent);
     component = fixture.componentInstance;

@@ -45,6 +45,30 @@ const _benchmarksReducer = createReducer(
     };
   }),
 
+  on(BenchmarkActions.updateHardwareAlias, (state, { hardwareAlias }) => {
+    if (!state.settings) {
+      return state;
+    }
+    return {
+      ...state,
+      settings: {
+        ...state.settings,
+        hardwareAliases: state.settings.hardwareAliases.map((stateHardwareAliase) => {
+          if (hardwareAlias.name === stateHardwareAliase.name) {
+            return {
+              ...stateHardwareAliase,
+              isActivated: hardwareAlias.isActivated,
+            };
+          }
+          return {
+            ...stateHardwareAliase,
+            isActivated: !hardwareAlias.isActivated,
+          };
+        }),
+      },
+    };
+  }),
+
   on(BenchmarkActions.updateWorkloadType, (state, { workloadType }) => {
     if (!state.settings) {
       return state;

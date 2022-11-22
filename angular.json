@@ -8,6 +8,9 @@
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
+        },
+        "@schematics/angular:application": {
+          "strict": true
         }
       },
       "root": "",
@@ -24,9 +27,11 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "baseHref":"/benchgraph",
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/sitemap.xml",
               {
                 "glob": "**/*",
                 "input": "./node_modules/memgraph-ui/src/assets/",
@@ -73,7 +78,13 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true
+              "namedChunks": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/app/services/segment.service.ts",
+                  "with": "src/app/services/segment.service.mock.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -106,7 +117,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/sitemap.xml"
             ],
             "styles": [
               "src/styling/styles.scss"
