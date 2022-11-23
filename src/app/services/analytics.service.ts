@@ -3,12 +3,6 @@ export interface BenchgraphTrackingProperties {
 }
 
 export abstract class AnalyticsService {
-  segment: any;
-
-  constructor() {
-    this.segment = (window as any).analytics;
-  }
-
   /**
    * Track a custom event.
    * @param event Event action. Should be of format "Noun Verb" where the verb is usually in past tense.

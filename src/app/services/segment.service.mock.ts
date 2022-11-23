@@ -4,8 +4,6 @@ import { AnalyticsService } from './analytics.service';
 
 @Injectable({ providedIn: 'root' })
 export class SegmentService implements AnalyticsService {
-  segment: any;
-
   constructor() {
     console.log('Using MOCK Segment service!');
   }
