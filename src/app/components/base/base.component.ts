@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { takeUntil, withLatestFrom } from 'rxjs';
+import { BehaviorSubject, takeUntil, withLatestFrom } from 'rxjs';
 import { DatasetSize, RunConfigCondition, WorkloadType } from '../../models/benchmark.model';
 import { Unsubscribe } from '../../services/unsubscribe';
 import { AppState } from '../../state';
@@ -26,6 +26,9 @@ export interface IParamCategory {
   styleUrls: ['./base.component.scss'],
 })
 export class BaseComponent extends Unsubscribe implements OnInit {
+  isCollapsed_ = new BehaviorSubject<boolean>(false);
+  isCollapsed$ = this.isCollapsed_.asObservable();
+
   constructor(private route: ActivatedRoute, private router: Router, private store: Store<AppState>) {
     super();
   }
@@ -136,5 +139,9 @@ export class BaseComponent extends Unsubscribe implements OnInit {
         }),
       );
     });
+  }
+
+  collapseClicked(isCollapsed: boolean) {
+    this.isCollapsed_.next(isCollapsed);
   }
 }

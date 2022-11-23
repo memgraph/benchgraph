@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { WorkloadType } from 'src/app/models/benchmark.model';
@@ -21,6 +21,9 @@ import {
   styleUrls: ['./selector.component.scss'],
 })
 export class SelectorComponent {
+  @Output() collapseClicked = new EventEmitter<boolean>();
+  @Input() isCollapsed: boolean | null = false;
+
   settings$ = this.store.select(BenchmarkSelectors.selectSettings);
   isRealisticActivated$ = this.settings$.pipe(
     map(
@@ -81,6 +84,10 @@ export class SelectorComponent {
     this.store.dispatch(
       BenchmarkActions.updateQuery({ category, query: { ...query, isActivated: !query.isActivated } }),
     );
+  }
+
+  collapse(isCollapsed: boolean) {
+    this.collapseClicked.next(isCollapsed);
   }
 }
 

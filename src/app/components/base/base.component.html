@@ -1,3 +1,7 @@
 <app-sidenav class="sidenav"></app-sidenav>
-<app-selector class="selector"></app-selector>
+<app-selector class="selector" 
+  [ngClass]="{'collapsed': isCollapsed$ | async}" 
+  (collapseClicked)="collapseClicked($event)"
+  [isCollapsed]="isCollapsed$ | async">
+</app-selector>
 <app-overview class="overview"></app-overview>

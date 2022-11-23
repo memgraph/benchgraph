@@ -7,4 +7,17 @@
   .overview {
     flex: 1 0;
   }
+
+  .selector {
+    width: 22.5rem;
+    min-width: 14.5rem;
+
+    &.collapsed {
+      width: 3rem;
+      min-width: 0rem;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+    }
+  }
 }

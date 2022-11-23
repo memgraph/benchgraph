@@ -1,8 +1,6 @@
 @import 'colors';
 
 :host {
-  width: 22.5rem;
-  min-width: 14.5rem;
   background-color: $brand-light;
   height: 100%;
   border-right: 1px solid $brand-ash;
@@ -10,6 +8,19 @@
   font-family: 'Roboto';
   color: $brand-black;
   overflow-y: auto;
+  position: relative;
+}
+
+.collapse {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  cursor: pointer;
+}
+
+.expand {
+  margin-top: 2rem;
+  cursor: pointer;
 }
 
 .header {
