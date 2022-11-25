@@ -162,7 +162,7 @@ const getDatasetSizes = (benchmarks: IBenchmark[]): IBenchmarkSettingsSize[] => 
 };
 
 // This one is not very optimized
-const getQueryCategories = (benchmarks: IBenchmark[]): IBenchmarkSettingsQueryCategory[] => {
+export const getQueryCategories = (benchmarks: IBenchmark[]): IBenchmarkSettingsQueryCategory[] => {
   const queriesArray = benchmarks
     .map((benchmark) =>
       benchmark.datasets

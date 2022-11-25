@@ -8,11 +8,18 @@
     <div class="setting">
       <div class="title">Engines under testing</div>
       <div class="vendors">
-        <div class="vendor" *ngFor="let vendor of settings.vendors; let i = index">
-          {{vendor.name}} <div *ngIf="i < settings.vendors.length - 1">vs. </div>
+        <div class="vendor" *ngFor="let vendor of settings.vendors; let i = index" [title]="tooltipByVendor[vendor.name]">
+          {{vendor.name}}
         </div>
-        <div class="construction">🚧</div>
       </div>
+      <a 
+        class="contribute" 
+        (click)="openLink(contributeLink)" 
+        [href]="contributeLink" 
+        target="_blank">
+        <div class="text">Want to contribute?</div>
+        <span class="icon-ui-right"></span>
+      </a>
     </div>
 
     <div class="setting" *ngIf="shouldShowHardwareAlias$ | async">
@@ -68,6 +75,7 @@
           {{workloadType.name}}
         </div>
       </div>
+      <div class="disclaimer">All workloads executed with 12 concurrent clients.</div>
     </div>
 
     <div class="setting" *ngIf="!(isRealisticActivated$ | async)">

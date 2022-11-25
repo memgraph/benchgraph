@@ -1,5 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
+import { IBenchmark } from 'src/app/models/benchmark.model';
 import { BenchmarkActions, BenchmarkState } from '.';
+import { getQueryCategories } from './benchmarks.effects';
 
 const initialState: BenchmarkState = {
   benchmarks: null,
@@ -73,6 +75,13 @@ const _benchmarksReducer = createReducer(
     if (!state.settings) {
       return state;
     }
+    const benchmarkByWorkloadType = state.benchmarks?.map((benchmark) => ({
+      ...benchmark,
+      datasets: benchmark.datasets.map((dataset) => ({
+        ...dataset,
+        workloads: dataset.workloads.filter((workload) => workload.workloadType === workloadType.name),
+      })),
+    })) as IBenchmark[] | undefined;
     return {
       ...state,
       settings: {
@@ -89,6 +98,9 @@ const _benchmarksReducer = createReducer(
             isActivated: !workloadType.isActivated,
           };
         }),
+        queryCategories: benchmarkByWorkloadType
+          ? getQueryCategories(benchmarkByWorkloadType)
+          : state.settings.queryCategories,
       },
     };
   }),

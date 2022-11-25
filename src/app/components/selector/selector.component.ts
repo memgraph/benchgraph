@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
-import { WorkloadType } from 'src/app/models/benchmark.model';
+import { RunConfigVendor, WorkloadType } from 'src/app/models/benchmark.model';
+import { SegmentService } from 'src/app/services/segment.service';
 import { UiMessageType, UiService } from 'src/app/services/ui.service';
 import { AppState } from 'src/app/state';
 import {
@@ -38,7 +39,18 @@ export class SelectorComponent {
     map((settings) => !!settings?.hardwareAliases.find((hardwareAlias) => !!hardwareAlias.name)),
   );
 
-  constructor(private readonly store: Store<AppState>, private uiService: UiService) {}
+  contributeLink = 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench';
+
+  tooltipByVendor: Record<RunConfigVendor, string> = {
+    [RunConfigVendor.MEMGRAPH]: 'Memgraph 2.4',
+    [RunConfigVendor.NEO4J]: 'Neo4j Community Edition v5.1',
+  };
+
+  constructor(
+    private readonly store: Store<AppState>,
+    private uiService: UiService,
+    private segmentService: SegmentService,
+  ) {}
 
   updateCondition(condition: IBenchmarkSettingsCondition) {
     this.store.dispatch(BenchmarkActions.updateCondition({ condition: { ...condition, isActivated: true } }));
@@ -88,6 +100,10 @@ export class SelectorComponent {
 
   collapse(isCollapsed: boolean) {
     this.collapseClicked.next(isCollapsed);
+  }
+
+  openLink(url: string) {
+    this.segmentService.trackEvent('Link Clicked', { linkUrl: url });
   }
 }
 

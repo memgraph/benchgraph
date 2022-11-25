@@ -46,14 +46,40 @@
     margin-bottom: 1rem;
   }
 
-  .vendors, .vendor {
+  .vendors {
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
   }
 
-  .construction {
-    margin-left: auto;
-    margin-right: 2rem;
+  .vendor {
+    background: $brand-silver;
+    border-radius: 2px;
+    padding: 0 0.5rem;
+  }
+
+  .contribute {
+    display: flex;
+    margin-top: 1rem;
+    gap: 0.5rem;
+    cursor: pointer;
+    width: fit-content;
+
+    .text {
+      color: $brand-gray;
+      font-size: 0.875;
+      transition: all 0.2s linear;
+      border-bottom: 1px solid transparent;
+    }
+
+    .icon-ui-right {
+      color: #D05E06;
+    }
+
+    &:hover {
+      .text {
+        border-bottom: 1px solid $brand-gray;
+      }
+    }
   }
 
   .conditions {
@@ -79,6 +105,12 @@
         }
       }
     }
+  }
+
+  .disclaimer {
+    color: #857F87;
+    font-size: 14px;
+    margin-top: 0.5rem;
   }
 
   .categories {
