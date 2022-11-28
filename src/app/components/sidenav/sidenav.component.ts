@@ -25,10 +25,24 @@ export class SidenavComponent {
   SidenavSize = SidenavSize;
 
   sidenavGitHubLinks: ISidenavLink[] = [
-    { title: 'Methodology', url: 'https://github.com/memgraph' },
-    { title: 'Reproduce & Validate Results', url: 'https://github.com/memgraph' },
-    { title: 'Contribute', url: 'https://github.com/memgraph' },
-    { title: 'Report Mistakes', url: 'https://github.com/memgraph' },
+    {
+      title: 'Methodology',
+      url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#mgbench-benchmark-for-graph-databases',
+    },
+    {
+      title: 'Reproduce & Validate Results',
+      url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#reproducibility-and-validation',
+    },
+    {
+      title: 'Query List',
+      url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#query-list',
+    },
+    { title: 'Raw Benchmark Results', url: 'https://github.com/memgraph/benchgraph/tree/main/results' },
+    {
+      title: 'Contribute',
+      url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#database-compatibility',
+    },
+    { title: 'Report Mistakes', url: 'https://github.com/memgraph/memgraph/issues' },
   ];
 
   sidenavDocsLinks: ISidenavLink[] = [

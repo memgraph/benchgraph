@@ -39,7 +39,7 @@ export class SelectorComponent {
     map((settings) => !!settings?.hardwareAliases.find((hardwareAlias) => !!hardwareAlias.name)),
   );
 
-  contributeLink = 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench';
+  contributeLink = 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#database-compatibility';
 
   tooltipByVendor: Record<RunConfigVendor, string> = {
     [RunConfigVendor.MEMGRAPH]: 'Memgraph 2.4',

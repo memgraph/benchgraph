@@ -77,8 +77,14 @@
                     × {{statByVendor[vendorKey].relativeValue | number: '1.2-2'}}
                   </div>
                 </div>
-                <div class="cell-data-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">
-                  {{(vendorKey === ResultType.MEMORY ? statByVendor[vendorKey].value / (1024*1024) : statByVendor[vendorKey].value) | number: '1.0-0'}}
+                <div *ngIf="vendorKey === ResultType.MEMORY" class="cell-data-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">
+                  {{statByVendor[vendorKey].value / (1024*1024) | number: '1.0-0'}}
+                </div>
+                <div *ngIf="vendorKey === ResultType.THROUGHPUT" class="cell-data-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">
+                  {{statByVendor[vendorKey].value | number: '1.0-0'}}
+                </div>
+                <div *ngIf="vendorKey === ResultType.LATENCY" class="cell-data-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">
+                  {{statByVendor[vendorKey].value | number: '1.2-2'}}
                 </div>
               </div>
             </div>
