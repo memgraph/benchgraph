@@ -9,9 +9,9 @@
     class="size-button" 
     src="assets/img/hamburger.svg" 
     (click)="changeSidenavSize(SidenavSize.OPENED)">
-  <div *ngIf="sidenavSize === SidenavSize.COLLAPSED"  class="vertical-title">Graph DB Benchmarking</div>
+  <div *ngIf="sidenavSize === SidenavSize.COLLAPSED"  class="vertical-title">Graph Database Performance Benchmark</div>
   <div *ngIf="sidenavSize === SidenavSize.OPENED" class="opened">
-    <div class="title">Graph DB Benchmarking</div>
+    <div class="title">Graph Database Performance Benchmark</div>
     <a *ngFor="let githubLink of sidenavGitHubLinks" class="github" (click)="openLink(githubLink.url)" [href]="githubLink.url" target="_blank">
         <div class="github-title">{{githubLink.title}}</div>
         <img src="assets/img/github.svg">

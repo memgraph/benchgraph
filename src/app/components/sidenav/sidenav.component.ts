@@ -27,7 +27,7 @@ export class SidenavComponent {
   sidenavGitHubLinks: ISidenavLink[] = [
     {
       title: 'Methodology',
-      url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#mgbench-benchmark-for-graph-databases',
+      url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#fire-mgbench-benchmark-for-graph-databases',
     },
     {
       title: 'Reproduce & Validate Results',
@@ -40,7 +40,7 @@ export class SidenavComponent {
     { title: 'Raw Benchmark Results', url: 'https://github.com/memgraph/benchgraph/tree/main/results' },
     {
       title: 'Contribute',
-      url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#database-compatibility',
+      url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#raised_hands-contributions',
     },
     { title: 'Report Mistakes', url: 'https://github.com/memgraph/memgraph/issues' },
   ];
