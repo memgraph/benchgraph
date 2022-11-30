@@ -47,8 +47,8 @@ export class SidenavComponent {
 
   sidenavDocsLinks: ISidenavLink[] = [
     {
-      title: 'Read Graph Database vs Relational Database',
-      url: 'https://memgraph.com/blog/graph-database-vs-relational-database',
+      title: 'Memgraph vs. Neo4j: A Performance Comparison',
+      url: 'http://memgraph.com/blog/memgraph-vs-neo4j-performance-benchmark-comparison',
     },
   ];
 
