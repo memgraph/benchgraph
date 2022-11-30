@@ -83,16 +83,23 @@ export class AggregateComponent {
       const worstThroughputVendor = peakResultPerVendor.reduce((prev, curr) =>
         prev.throughput < curr.throughput ? prev : curr,
       );
-      const peakMemoryPerVendorWithRelativeTimes: IAggregateResults[] = peakResultPerVendor.map((result) => ({
-        ...result,
-        relativeMemory: result.vendor === bestMemoryVendor.vendor ? 1 : result.memory / bestMemoryVendor.memory,
-        relativeMemoryToMax: settings?.maxTimes.memory ? (result.memory / settings?.maxTimes.memory) * 100 : 100,
-        relativeThroughput:
-          result.vendor === worstThroughputVendor.vendor ? 1 : result.throughput / worstThroughputVendor.throughput,
-        relativeThroughputToMax: settings?.maxTimes.throughput
-          ? (result.throughput / settings?.maxTimes.throughput) * 100
-          : 100,
-      }));
+      const peakMemoryPerVendorWithRelativeTimes: IAggregateResults[] = peakResultPerVendor.map((result) => {
+        let relativeThroughputToMax = 100;
+        if (settings?.maxTimes.throughput) {
+          relativeThroughputToMax = (result.throughput / settings?.maxTimes.throughput) * 100;
+        }
+        if (relativeThroughputToMax < 0.15) {
+          relativeThroughputToMax = 0.15;
+        }
+        return {
+          ...result,
+          relativeMemory: result.vendor === bestMemoryVendor.vendor ? 1 : result.memory / bestMemoryVendor.memory,
+          relativeMemoryToMax: settings?.maxTimes.memory ? (result.memory / settings?.maxTimes.memory) * 100 : 100,
+          relativeThroughput:
+            result.vendor === worstThroughputVendor.vendor ? 1 : result.throughput / worstThroughputVendor.throughput,
+          relativeThroughputToMax,
+        };
+      });
       return peakMemoryPerVendorWithRelativeTimes;
     }),
   );
