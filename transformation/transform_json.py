@@ -419,18 +419,18 @@ class TranslateJson:
             condition=StrToEnum(RunConfigCondition, value["condition"]),
             vendor=StrToEnum(RunConfigVendor, value["vendor"]),
         )
-        workloadType: WorkloadType = StrToEnum(WorkloadType, value["workload"])
+        workloadType: WorkloadType = StrToEnum(WorkloadType, value["benchmark_mode"])
 
         percentages: Percentages = Percentages(
-            numOfQueries=value["workload_config"][0],
-            writePerc=value["workload_config"][1],
-            readPerc=value["workload_config"][2],
-            updatePerc=value["workload_config"][3],
-            analyticalPerc=value["workload_config"][4],
+            numOfQueries=value["benchmark_mode_config"][0],
+            writePerc=value["benchmark_mode_config"][1],
+            readPerc=value["benchmark_mode_config"][2],
+            updatePerc=value["benchmark_mode_config"][3],
+            analyticalPerc=value["benchmark_mode_config"][4],
         ) if workloadType in [WorkloadType.REALISTIC, WorkloadType.MIXED] else None
 
         if workloadType == WorkloadType.MIXED:
-            percentages.queryPerc = value["workload_config"][5]
+            percentages.queryPerc = value["benchmark_mode_config"][5]
 
         return runConfig, workloadType, percentages
 

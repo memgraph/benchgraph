@@ -2,18 +2,20 @@ from transformation.transform_json import TranslateJson
 from pathlib import Path
 import json
 
+dataset = "pokec"
+size = "small"
+
 working_directory = Path().absolute()
 configs = {
-    "memgraph_cold" : sorted(working_directory.glob("memgraph_cold" + "_*.json")),
-    "memgraph_hot" : sorted(working_directory.glob("memgraph_hot" + "_*.json")),
-    "neo4j_cold" : sorted(working_directory.glob("neo4j_cold" + "_*.json")), 
-    "neo4j_hot" : sorted(working_directory.glob("neo4j_hot" + "_*.json"))
-
+    "memgraph_cold" : sorted(working_directory.glob("memgraph"+ "_" + dataset + "_" + size + "_" + "cold" + "_*.json")),
+    "memgraph_hot" : sorted(working_directory.glob("memgraph"+ "_" + dataset + "_" + size + "_" + "hot" + "_*.json")),
+    "neo4j_cold" : sorted(working_directory.glob("neo4j"+ "_" + dataset + "_" + size + "_" + "cold" + "_*.json")), 
+    "neo4j_hot" : sorted(working_directory.glob("neo4j"+ "_" + dataset + "_" + size + "_" + "cold" + "_*.json")),
 }
-mem_cold = sorted(working_directory.glob("memgraph_cold" + "_*.json"))
-mem_hot = sorted(working_directory.glob("memgraph_hot" + "_*.json"))
-neo4j_cold = sorted(working_directory.glob("neo4j_cold" + "_*.json"))
-neo4j_hot = sorted(working_directory.glob("neo4j_hot" + "_*.json"))
+mem_cold = sorted(working_directory.glob("memgraph"+ "_" + dataset + "_" + size + "_" + "cold" + "_*.json"))
+mem_hot = sorted(working_directory.glob("memgraph"+ "_" + dataset + "_" + size + "_" + "hot" + "_*.json"))
+neo4j_cold = sorted(working_directory.glob("neo4j"+ "_" + dataset + "_" + size + "_" + "cold" + "_*.json"))
+neo4j_hot = sorted(working_directory.glob("neo4j"+ "_" + dataset + "_" + size + "_" + "cold" + "_*.json"))
 
 for vendor, files in configs.items():
     data = {}
