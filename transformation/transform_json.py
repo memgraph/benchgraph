@@ -27,6 +27,7 @@ class RunConfigCondition(Enum):
     NONE = "None"
     HOT = "hot"
     COLD = "cold"
+    VULCANIC = "vulcanic"
 
 
 class DatasetSize(Enum):
@@ -34,6 +35,10 @@ class DatasetSize(Enum):
     SMALL = "small"
     MEDIUM = "medium"
     LARGE = "large"
+    SF01 = "sf0.1"
+    SF1 = "sf1"
+    SF3 = "sf3"
+    SF10 = "sf10"
 
 
 class QueryCategory(Enum):
@@ -334,14 +339,17 @@ class RunConfig:
         self,
         vendor: RunConfigVendor = RunConfigVendor.NONE,
         condition: RunConfigCondition = RunConfigCondition.NONE,
+        platform = None
     ) -> None:
         self.vendor = vendor
         self.condition = condition
+        self.platform = platform
 
     def to_dict(self):
         return {
             "vendor": self.vendor.value,
             "condition": self.condition.value,
+            "platform": self.platform
         }
 
 
@@ -418,6 +426,7 @@ class TranslateJson:
         runConfig = RunConfig(
             condition=StrToEnum(RunConfigCondition, value["condition"]),
             vendor=StrToEnum(RunConfigVendor, value["vendor"]),
+            platform=value["platform"]
         )
         workloadType: WorkloadType = StrToEnum(WorkloadType, value["benchmark_mode"])
 
@@ -568,7 +577,7 @@ class TranslateJson:
 
         result = StatsWithQuery(
             queryStatistics=TranslateJson._get_stats_query_statistics(
-                stats["query_statistics"]
+                stats["latency_stats"]
             )
         ) if withQuery else Stats()
 
