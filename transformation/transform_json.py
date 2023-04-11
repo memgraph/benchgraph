@@ -339,17 +339,20 @@ class RunConfig:
         self,
         vendor: RunConfigVendor = RunConfigVendor.NONE,
         condition: RunConfigCondition = RunConfigCondition.NONE,
-        platform = None
+        platform = None,
+        numberWorkers: int = 0,
     ) -> None:
         self.vendor = vendor
         self.condition = condition
         self.platform = platform
+        self.numberWorkers = numberWorkers
 
     def to_dict(self):
         return {
             "vendor": self.vendor.value,
             "condition": self.condition.value,
-            "platform": self.platform
+            "platform": self.platform,
+            "numberWorkers": self.numberWorkers,
         }
 
 
@@ -426,7 +429,8 @@ class TranslateJson:
         runConfig = RunConfig(
             condition=StrToEnum(RunConfigCondition, value["condition"]),
             vendor=StrToEnum(RunConfigVendor, value["vendor"]),
-            platform=value["platform"]
+            platform=value["platform"],
+            numberWorkers=value["num_workers_for_benchmark"],
         )
         workloadType: WorkloadType = StrToEnum(WorkloadType, value["benchmark_mode"])
 
