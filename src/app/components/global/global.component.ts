@@ -159,7 +159,7 @@ export class GlobalComponent extends Unsubscribe implements AfterContentInit, On
 
   getQueryIndex(detailedQueries: IQueriesByCategory[], categoryIndex: number, queryIndex: number) {
     let returnIndex = 0;
-    for (let i = 0; i < detailedQueries.length - 1; i++) {
+    for (let i = 0; i < detailedQueries.length; i++) {
       if (i === categoryIndex) {
         returnIndex += queryIndex;
         break;

@@ -3,7 +3,9 @@ import { IBenchmark } from 'src/app/models/benchmark.model';
 import {
   IBenchmarkSettings,
   IBenchmarkSettingsCondition,
-  IBenchmarkSettingsHardwareAlias,
+  IBenchmarkSettingsDatasetName,
+  IBenchmarkSettingsNumberOfWorkers,
+  IBenchmarkSettingsPlatform,
   IBenchmarkSettingsQueryCategory,
   IBenchmarkSettingsQueryCategoryQuery,
   IBenchmarkSettingsSize,
@@ -18,15 +20,25 @@ export const updateCondition = createAction(
   '[Benchmarks] Update Condition',
   props<{ condition: IBenchmarkSettingsCondition }>(),
 );
-export const updateHardwareAlias = createAction(
-  '[Benchmarks] Update Hardware Alias',
-  props<{ hardwareAlias: IBenchmarkSettingsHardwareAlias }>(),
+export const updatePlatform = createAction(
+  '[Benchmarks] Update Platform',
+  props<{ platform: IBenchmarkSettingsPlatform }>(),
 );
 export const updateWorkloadType = createAction(
   '[Benchmarks] Update Workload Type',
   props<{ workloadType: IBenchmarkSettingsWorkloadType }>(),
 );
 export const updateVendor = createAction('[Benchmarks] Update Vendor', props<{ vendor: IBenchmarkSettingsVendor }>());
+
+export const updateNumberOfWorkers = createAction(
+  '[Benchmarks] Update Number of Workers',
+  props<{ numberOfWorkers: IBenchmarkSettingsNumberOfWorkers }>(),
+);
+
+export const updateDatasetNames = createAction(
+  '[Benchmarks] Update Dataset Name',
+  props<{ datasetNameSetting: IBenchmarkSettingsDatasetName }>(),
+);
 
 export const updateDatasetSizes = createAction('[Benchmarks] Update Size', props<{ size: IBenchmarkSettingsSize }>());
 

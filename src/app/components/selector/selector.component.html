@@ -22,15 +22,15 @@
       </a>
     </div>
 
-    <div class="setting" *ngIf="shouldShowHardwareAlias$ | async">
-      <div class="title">Hardware Alias</div>
+    <div class="setting" *ngIf="shouldShowPlatform$ | async">
+      <div class="title">Platform</div>
       <div class="conditions">
         <div 
           class="condition"
-          *ngFor="let hardwareAlias of settings.hardwareAliases" 
-          [ngClass]="{'activated': hardwareAlias.isActivated, 'single': settings.hardwareAliases.length === 1}" 
-          (click)="updateHardwareAlias(hardwareAlias)">
-          {{hardwareAlias.name}}
+          *ngFor="let platform of settings.platforms" 
+          [ngClass]="{'activated': platform.isActivated, 'single': settings.platforms.length === 1}" 
+          (click)="updatePlatform(platform)">
+          {{platform.name}}
         </div>
       </div>
     </div>
@@ -50,11 +50,39 @@
     </div>
 
     <div class="setting">
-      <div class="title">Dataset</div>
+      <div class="title">Number of Workers</div>
       <div class="conditions">
         <div 
           class="condition" 
-          *ngFor="let size of settings.datasetSizes" 
+          *ngFor="let worker of settings.numberOfWorkers" 
+          [ngClass]="{'activated': worker.isActivated, 'single': settings.conditions.length === 1, 'has-tooltip': !!worker.tooltip}" 
+          (click)="updateWorker(worker)"
+          [attr.title]="worker.tooltip ? worker.tooltip : null">
+          {{worker.size}}
+        </div>
+      </div>
+    </div>
+
+    <div class="setting">
+      <div class="title">Dataset Name</div>
+      <div class="conditions">
+        <div 
+          class="condition" 
+          *ngFor="let datasetNamesSetting of settings.datasetNames" 
+          [ngClass]="{'activated': datasetNamesSetting.isActivated, 'single': settings.datasetNames.length === 1, 'has-tooltip': !!datasetNamesSetting.tooltip}" 
+          (click)="updateName(datasetNamesSetting)"
+          [attr.title]="datasetNamesSetting.tooltip ? datasetNamesSetting.tooltip : null">
+          {{datasetNamesSetting.name}}
+        </div>
+      </div>
+    </div>
+
+    <div class="setting">
+      <div class="title">Dataset Size</div>
+      <div class="conditions">
+        <div 
+          class="condition" 
+          *ngFor="let size of datasetSizes$ | async" 
           [ngClass]="{'activated': size.isActivated, 'single': settings.datasetSizes.length === 1, 'has-tooltip': !!size.tooltip}" 
           (click)="updateSize(size)"
           [attr.title]="size.tooltip ? size.tooltip : null">
@@ -68,7 +96,7 @@
       <div class="conditions">
         <div 
           class="condition" 
-          *ngFor="let workloadType of settings.workloadTypes" 
+          *ngFor="let workloadType of workloadTypes$ | async" 
           [ngClass]="{'activated': workloadType.isActivated, 'single': settings.workloadTypes.length === 1, 'has-tooltip': !!workloadType.tooltip}" 
           (click)="updateWorkloadType(workloadType)"
           [attr.title]="workloadType.tooltip ? workloadType.tooltip : null">

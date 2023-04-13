@@ -2,7 +2,7 @@ import { AfterContentInit, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import {
-  DatasetSize,
+  // DatasetSize,
   IBenchmark,
   IPercentages,
   IQueryIsolated,
@@ -130,13 +130,14 @@ export const PERCENTAGES_NAME_BY_KEY: Record<keyof IPercentages, string> = {
 export const TOOLTIP_OF_CONDITION: Record<RunConfigCondition, string> = {
   [RunConfigCondition.COLD]: 'The system has no pre-warmed caches before the test execution',
   [RunConfigCondition.HOT]: 'The system has pre-warmed caches before the test execution',
+  [RunConfigCondition.VULCANIC]: 'The system is vulcanic',
 };
 
-export const TOOLTIP_OF_DATASET_SIZE: Record<DatasetSize, string> = {
-  [DatasetSize.SMALL]: '10k vertices, 121k edges',
-  [DatasetSize.MEDIUM]: '100k vertices, 1.76M edges',
-  [DatasetSize.LARGE]: '1.63M vertices, 30M edges',
-};
+// export const TOOLTIP_OF_DATASET_SIZE: Record<DatasetSize, string> = {
+//   [DatasetSize.SMALL]: '10k vertices, 121k edges',
+//   [DatasetSize.MEDIUM]: '100k vertices, 1.76M edges',
+//   [DatasetSize.LARGE]: '1.63M vertices, 30M edges',
+// };
 
 export const TOOLTIP_OF_WORKLOAD_TYPE: Record<WorkloadType, string> = {
   [WorkloadType.ISOLATED]: 'Concurrent execution of a single isolated query',
@@ -172,16 +173,20 @@ export class OverviewComponent implements AfterContentInit {
     ),
   );
 
-  activatedHardwareAliases$ = this.settings$.pipe(
-    map((settings) =>
-      settings?.hardwareAliases
-        .filter((hardwareAlias) => hardwareAlias.isActivated)
-        .map((hardwareAlias) => hardwareAlias.name),
-    ),
+  activatedPlatforms$ = this.settings$.pipe(
+    map((settings) => settings?.platforms.filter((platform) => platform.isActivated).map((platform) => platform.name)),
   );
 
   activatedVendors$ = this.settings$.pipe(
     map((settings) => settings?.vendors.filter((vendor) => vendor.isActivated).map((vendor) => vendor.name)),
+  );
+
+  activatedNumberOfWorkers$ = this.settings$.pipe(
+    map((settings) => settings?.numberOfWorkers.filter((worker) => worker.isActivated).map((worker) => worker.size)),
+  );
+
+  activatedDatasetNames$ = this.settings$.pipe(
+    map((settings) => settings?.datasetNames.filter((name) => name.isActivated).map((name) => name.name)),
   );
 
   activatedDatasetSizes$ = this.settings$.pipe(
@@ -211,33 +216,38 @@ export class OverviewComponent implements AfterContentInit {
     this.store.select(BenchmarkSelectors.selectBenchmarks),
     this.activatedConditions$,
     this.activatedVendors$,
+    this.activatedNumberOfWorkers$,
+    this.activatedDatasetNames$,
     this.activatedDatasetSizes$,
     this.activatedQueryCategories$,
     this.activatedWorkloadTypes$,
-    this.activatedHardwareAliases$,
+    this.activatedPlatforms$,
   ]).pipe(
     map(
       ([
         benchmarks,
         activatedConditions,
         activatedVendors,
+        activatedNumberOfWorkers,
+        activatedDatasetNames,
         activatedSizes,
         activatedQueryCategories,
         activatedWorkloadTypes,
-        activatedHardwareAliases,
+        activatedPlatforms,
       ]) =>
         benchmarks
           ?.filter(
             (benchmark) =>
               activatedConditions?.includes(benchmark.runConfig.condition) &&
               activatedVendors?.includes(benchmark.runConfig.vendor) &&
-              activatedHardwareAliases?.includes(benchmark.runConfig.hardwareAlias),
+              activatedPlatforms?.includes(benchmark.runConfig.platform) &&
+              activatedNumberOfWorkers?.includes(benchmark.runConfig.numberWorkers),
           )
           .map((benchmark) => {
-            const filteredDatasetsBySize = benchmark.datasets.filter((dataset) =>
-              activatedSizes?.includes(dataset.size),
+            const filteredDatasets = benchmark.datasets.filter(
+              (dataset) => activatedSizes?.includes(dataset.size) && activatedDatasetNames?.includes(dataset.name),
             );
-            const filteredDatasetByQueries = filteredDatasetsBySize.map((dataset) => {
+            const filteredDatasetByQueries = filteredDatasets.map((dataset) => {
               const filteredWorkloadsByType = dataset.workloads.filter((workload) =>
                 activatedWorkloadTypes?.includes(workload.workloadType),
               );

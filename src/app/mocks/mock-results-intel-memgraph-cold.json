@@ -2,7 +2,7 @@
   "runConfig": {
     "vendor": "Memgraph",
     "condition": "cold",
-    "hardwareAlias": "intel"
+    "platform": "intel"
   },
   "datasets": [
       {

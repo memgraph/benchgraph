@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, takeUntil, withLatestFrom } from 'rxjs';
-import { DatasetSize, RunConfigCondition, WorkloadType } from '../../models/benchmark.model';
+import { RunConfigCondition, WorkloadType } from '../../models/benchmark.model';
 import { Unsubscribe } from '../../services/unsubscribe';
 import { AppState } from '../../state';
 import {
   BenchmarkActions,
   BenchmarkSelectors,
   IBenchmarkSettingsCondition,
+  IBenchmarkSettingsDatasetName,
+  IBenchmarkSettingsNumberOfWorkers,
   IBenchmarkSettingsQueryCategory,
   IBenchmarkSettingsQueryCategoryQuery,
   IBenchmarkSettingsSize,
@@ -42,6 +44,8 @@ export class BaseComponent extends Unsubscribe implements OnInit {
           const params = this.route.snapshot.queryParamMap;
 
           this.setConditionFromParams(params);
+          this.setNumberOfWorkersFromParams(params);
+          this.setDatasetNameFromParams(params);
           this.setSizeFromParams(params);
           this.setWorkloadTypesFromParams(params);
           this.setQuerySelectionFromParams(params, settings?.queryCategories);
@@ -53,6 +57,8 @@ export class BaseComponent extends Unsubscribe implements OnInit {
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((settings) => {
         const condition = settings?.conditions.find((condition) => condition.isActivated)?.name;
+        const numberOfWorkers = settings?.numberOfWorkers.find((condition) => condition.isActivated)?.size;
+        const datasetName = settings?.datasetNames.find((dataset) => dataset.isActivated)?.name;
         const datasetSize = settings?.datasetSizes.find((dataset) => dataset.isActivated)?.name;
         const workloadType = settings?.workloadTypes.find((workloadType) => workloadType.isActivated)?.name;
 
@@ -70,6 +76,8 @@ export class BaseComponent extends Unsubscribe implements OnInit {
         });
         const queryParams: Params = {
           condition,
+          numberOfWorkers,
+          datasetName,
           datasetSize,
           workloadType,
           querySelection: JSON.stringify(querySelection),
@@ -93,10 +101,32 @@ export class BaseComponent extends Unsubscribe implements OnInit {
     this.store.dispatch(BenchmarkActions.updateCondition({ condition }));
   }
 
+  setNumberOfWorkersFromParams(params: ParamMap) {
+    const numberOfWorkers: IBenchmarkSettingsNumberOfWorkers = {
+      isActivated: true,
+      size: Number(params.get('numberOfWorkers')),
+    };
+    if (!numberOfWorkers.size) {
+      return;
+    }
+    this.store.dispatch(BenchmarkActions.updateNumberOfWorkers({ numberOfWorkers }));
+  }
+
+  setDatasetNameFromParams(params: ParamMap) {
+    const datasetNameSetting: IBenchmarkSettingsDatasetName = {
+      isActivated: true,
+      name: params.get('datasetName') ?? '',
+    };
+    if (!datasetNameSetting.name) {
+      return;
+    }
+    this.store.dispatch(BenchmarkActions.updateDatasetNames({ datasetNameSetting }));
+  }
+
   setSizeFromParams(params: ParamMap) {
     const size: IBenchmarkSettingsSize = {
       isActivated: true,
-      name: params.get('datasetSize') as DatasetSize,
+      name: params.get('datasetSize') ?? '',
     };
     if (!size.name) {
       return;

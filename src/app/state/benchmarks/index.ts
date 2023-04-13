@@ -2,8 +2,8 @@ import * as BenchmarkActions from './benchmarks.actions';
 import * as BenchmarkSelectors from './benchmarks.selectors';
 import { EntityState } from '../state-entity';
 import {
-  DatasetSize,
-  HardwareAlias,
+  // DatasetSize,
+  Platform,
   IBenchmark,
   QueryCategory,
   RunConfigCondition,
@@ -20,12 +20,16 @@ export interface IBenchmarkSetting {
   tooltip?: string;
 }
 
-export type IBenchmarkSettingsHardwareAlias = {
-  name: HardwareAlias;
+export type IBenchmarkSettingsPlatform = {
+  name: Platform;
 } & IBenchmarkSetting;
 
 export type IBenchmarkSettingsVendor = {
   name: RunConfigVendor;
+} & IBenchmarkSetting;
+
+export type IBenchmarkSettingsNumberOfWorkers = {
+  size: number;
 } & IBenchmarkSetting;
 
 export type IBenchmarkSettingsCondition = {
@@ -36,9 +40,19 @@ export type IBenchmarkSettingsWorkloadType = {
   name: WorkloadType;
 } & IBenchmarkSetting;
 
-export type IBenchmarkSettingsSize = {
-  name: DatasetSize;
+export type IBenchmarkSettingsDatasetName = {
+  name: string;
 } & IBenchmarkSetting;
+
+export type IBenchmarkSettingsSize = {
+  name: string;
+} & IBenchmarkSetting;
+
+export type DatasetSizesPerName = Record<string, string[]>;
+
+export type WorkloadTypePerDataset = Record<string, WorkloadType[]>;
+
+export type WorkloadTypePerCondition = Record<RunConfigCondition, WorkloadType[]>;
 
 export type IBenchmarkSettingsQueryCategoryQuery = {
   name: string;
@@ -58,11 +72,16 @@ export interface IBenchmarkSettingsMaxTimes {
 }
 
 export interface IBenchmarkSettings {
-  hardwareAliases: IBenchmarkSettingsHardwareAlias[];
+  platforms: IBenchmarkSettingsPlatform[];
   vendors: IBenchmarkSettingsVendor[];
+  numberOfWorkers: IBenchmarkSettingsNumberOfWorkers[];
   conditions: IBenchmarkSettingsCondition[];
   workloadTypes: IBenchmarkSettingsWorkloadType[];
+  workloadTypesPerDataset: WorkloadTypePerDataset;
+  workloadTypesPerCondition: WorkloadTypePerCondition;
+  datasetNames: IBenchmarkSettingsDatasetName[];
   datasetSizes: IBenchmarkSettingsSize[];
+  datasetSizesPerName: DatasetSizesPerName;
   queryCategories: IBenchmarkSettingsQueryCategory[];
   maxTimes: IBenchmarkSettingsMaxTimes;
 }

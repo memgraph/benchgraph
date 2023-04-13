@@ -47,7 +47,7 @@ const _benchmarksReducer = createReducer(
     };
   }),
 
-  on(BenchmarkActions.updateHardwareAlias, (state, { hardwareAlias }) => {
+  on(BenchmarkActions.updatePlatform, (state, { platform }) => {
     if (!state.settings) {
       return state;
     }
@@ -55,16 +55,16 @@ const _benchmarksReducer = createReducer(
       ...state,
       settings: {
         ...state.settings,
-        hardwareAliases: state.settings.hardwareAliases.map((stateHardwareAliase) => {
-          if (hardwareAlias.name === stateHardwareAliase.name) {
+        platforms: state.settings.platforms.map((statePlatforme) => {
+          if (platform.name === statePlatforme.name) {
             return {
-              ...stateHardwareAliase,
-              isActivated: hardwareAlias.isActivated,
+              ...statePlatforme,
+              isActivated: platform.isActivated,
             };
           }
           return {
-            ...stateHardwareAliase,
-            isActivated: !hardwareAlias.isActivated,
+            ...statePlatforme,
+            isActivated: !platform.isActivated,
           };
         }),
       },
@@ -126,6 +126,30 @@ const _benchmarksReducer = createReducer(
     };
   }),
 
+  on(BenchmarkActions.updateNumberOfWorkers, (state, { numberOfWorkers }) => {
+    if (!state.settings) {
+      return state;
+    }
+    return {
+      ...state,
+      settings: {
+        ...state.settings,
+        numberOfWorkers: state.settings.numberOfWorkers.map((stateNumberOfWorkers) => {
+          if (numberOfWorkers.size === stateNumberOfWorkers.size) {
+            return {
+              ...stateNumberOfWorkers,
+              isActivated: numberOfWorkers.isActivated,
+            };
+          }
+          return {
+            ...stateNumberOfWorkers,
+            isActivated: !numberOfWorkers.isActivated,
+          };
+        }),
+      },
+    };
+  }),
+
   on(BenchmarkActions.updateDatasetSizes, (state, { size }) => {
     if (!state.settings) {
       return state;
@@ -144,6 +168,30 @@ const _benchmarksReducer = createReducer(
           return {
             ...stateSize,
             isActivated: !size.isActivated,
+          };
+        }),
+      },
+    };
+  }),
+
+  on(BenchmarkActions.updateDatasetNames, (state, { datasetNameSetting }) => {
+    if (!state.settings) {
+      return state;
+    }
+    return {
+      ...state,
+      settings: {
+        ...state.settings,
+        datasetNames: state.settings.datasetNames.map((stateName) => {
+          if (datasetNameSetting.name === stateName.name) {
+            return {
+              ...stateName,
+              isActivated: datasetNameSetting.isActivated,
+            };
+          }
+          return {
+            ...stateName,
+            isActivated: !datasetNameSetting.isActivated,
           };
         }),
       },
