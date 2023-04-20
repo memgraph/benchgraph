@@ -2,7 +2,7 @@ import { AfterContentInit, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import {
-  // DatasetSize,
+  DatasetSize,
   IBenchmark,
   IPercentages,
   IQueryIsolated,
@@ -15,6 +15,7 @@ import {
   IWorkload,
   IWorkloadIsolated,
   IWorkloadMixed,
+  Platform,
   QueryCategory,
   RunConfigCondition,
   RunConfigVendor,
@@ -130,14 +131,21 @@ export const PERCENTAGES_NAME_BY_KEY: Record<keyof IPercentages, string> = {
 export const TOOLTIP_OF_CONDITION: Record<RunConfigCondition, string> = {
   [RunConfigCondition.COLD]: 'The system has no pre-warmed caches before the test execution',
   [RunConfigCondition.HOT]: 'The system has pre-warmed caches before the test execution',
-  [RunConfigCondition.VULCANIC]: 'The system is vulcanic',
+  [RunConfigCondition.VULCANIC]: 'The system has executed an identical workload before the measurement.',
 };
 
-// export const TOOLTIP_OF_DATASET_SIZE: Record<DatasetSize, string> = {
-//   [DatasetSize.SMALL]: '10k vertices, 121k edges',
-//   [DatasetSize.MEDIUM]: '100k vertices, 1.76M edges',
-//   [DatasetSize.LARGE]: '1.63M vertices, 30M edges',
-// };
+export const TOOLTIP_OF_PLATFORM: Record<Platform, string> = {
+  [Platform.AMD]: 'Ryzen 7 3800X, 64GB RAM',
+  [Platform.INTEL]: '2 x Xeon X5650 6C12T @ 2.67GHz, 144GB RAM',
+};
+
+export const TOOLTIP_OF_DATASET_SIZE: Record<DatasetSize, string> = {
+  [DatasetSize.SMALL]: '10k vertices, 121k edges',
+  [DatasetSize.MEDIUM]: '100k vertices, 1.76M edges',
+  [DatasetSize.LARGE]: '1.63M vertices, 30M edges',
+  [DatasetSize.SF_01]: '320k vertices, 1.5M edges',
+  [DatasetSize.SF_1]: '3M vertices, 1.7M edges',
+};
 
 export const TOOLTIP_OF_WORKLOAD_TYPE: Record<WorkloadType, string> = {
   [WorkloadType.ISOLATED]: 'Concurrent execution of a single isolated query',
@@ -337,11 +345,16 @@ export class OverviewComponent implements AfterContentInit {
       const groupedByName = _.groupBy(allResultsByVendor, 'queryName');
       const groupedByNamesObject = Object.values(groupedByName);
       const groupedByNamesToType = groupedByNamesObject.map((results) => {
-        const weakestMemory = results.reduce((a, b) => (a.memory.value > b.memory.value ? a : b));
+        const weakestMemory = results.reduce((a, b) =>
+          a.memory.value > b.memory.value && b.memory.value !== 0 ? a : b,
+        );
         const weakestThroughput = results.reduce((a, b) => (a.throughput.value < b.throughput.value ? a : b));
         const weakestLatency = results.reduce((a, b) => {
           if (isStatsByVendorExtendedIsolated(a) && isStatsByVendorExtendedIsolated(b)) {
-            return (a as IStatsByVendorIsolated).latency.value > (b as IStatsByVendorIsolated).latency.value ? a : b;
+            return (a as IStatsByVendorIsolated).latency.value > (b as IStatsByVendorIsolated).latency.value &&
+              (b as IStatsByVendorIsolated).latency.value !== 0
+              ? a
+              : b;
           }
           return a;
         });
@@ -356,7 +369,11 @@ export class OverviewComponent implements AfterContentInit {
               value: result.memory.value,
               isWeakest: weakestMemory.vendor === result.vendor,
               relativeValue:
-                weakestMemory.vendor === result.vendor ? 1 : weakestMemory.memory.value / result.memory.value,
+                weakestMemory.vendor === result.vendor
+                  ? 1
+                  : weakestMemory.memory.value !== 0
+                  ? weakestMemory.memory.value / result.memory.value
+                  : Infinity,
             },
             throughput: {
               value: result.throughput.value,
@@ -364,7 +381,9 @@ export class OverviewComponent implements AfterContentInit {
               relativeValue:
                 weakestThroughput.vendor === result.vendor
                   ? 1
-                  : result.throughput.value / weakestThroughput.throughput.value,
+                  : weakestThroughput.throughput.value !== 0
+                  ? result.throughput.value / weakestThroughput.throughput.value
+                  : Infinity,
             },
             percentages,
           };
@@ -375,7 +394,9 @@ export class OverviewComponent implements AfterContentInit {
               relativeValue:
                 weakestLatency.vendor === result.vendor
                   ? 1
-                  : (weakestLatency as IStatsByVendorIsolated).latency.value / result.latency.value,
+                  : (weakestLatency as IStatsByVendorIsolated).latency.value !== 0
+                  ? (weakestLatency as IStatsByVendorIsolated).latency.value / result.latency.value
+                  : Infinity,
             };
             returnValue = { ...returnValue, latency };
           }

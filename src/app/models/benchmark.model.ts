@@ -16,8 +16,8 @@ export interface IBenchmark {
     numberWorkers: number;
   };
   datasets: {
-    name: string;
-    size: string;
+    name: DatasetName;
+    size: DatasetSize;
     workloads: IWorkload[];
   }[];
 }
@@ -125,11 +125,19 @@ export enum Platform {
   INTEL = 'INTEL',
 }
 
-// export enum DatasetSize {
-//   SMALL = 'small',
-//   MEDIUM = 'medium',
-//   LARGE = 'large',
-// }
+export enum DatasetSize {
+  SMALL = 'small',
+  MEDIUM = 'medium',
+  LARGE = 'large',
+  SF_1 = 'sf1',
+  SF_01 = 'sf0.1',
+}
+
+export enum DatasetName {
+  POKEC = 'pokec',
+  LDBC_BI = 'ldbc_bi',
+  LDBC_INTERACTIVE = 'ldbc_interactive',
+}
 
 export enum WorkloadType {
   ISOLATED = 'isolated',

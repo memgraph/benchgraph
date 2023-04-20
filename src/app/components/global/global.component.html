@@ -90,9 +90,24 @@
                 <div class="relative">
                   <div class="relative-value" *ngIf="!statByVendor[vendorKey].isWeakest">× {{statByVendor[vendorKey].relativeValue | number: '1.2-2'}}</div>
                 </div>
-                <div *ngIf="vendorKey === ResultType.MEMORY" class="stats-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">{{statByVendor[vendorKey].value / (1024*1024) | number: '1.0-0'}}</div>
-                <div *ngIf="vendorKey === ResultType.THROUGHPUT" class="stats-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">{{statByVendor[vendorKey].value | number: '1.0-0'}}</div>
-                <div *ngIf="vendorKey === ResultType.LATENCY" class="stats-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">{{statByVendor[vendorKey].value | number: '1.2-2'}}</div>
+                <div *ngIf="vendorKey === ResultType.MEMORY" class="stats-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">
+                  <ng-container *ngIf="statByVendor[vendorKey].value !== 0; else failed">
+                    {{statByVendor[vendorKey].value / (1024*1024) | number: '1.0-0'}}
+                  </ng-container>
+                </div>
+                <div *ngIf="vendorKey === ResultType.THROUGHPUT" class="stats-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">
+                  <ng-container *ngIf="statByVendor[vendorKey].value !== 0; else failed">
+                    {{statByVendor[vendorKey].value | number: '1.0-0'}}
+                  </ng-container>
+                </div>
+                <div *ngIf="vendorKey === ResultType.LATENCY" class="stats-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">
+                  <ng-container *ngIf="statByVendor[vendorKey].value !== 0; else failed">
+                    {{statByVendor[vendorKey].value | number: '1.2-2'}}
+                  </ng-container>
+                </div>
+                <ng-template #failed>
+                  Failed
+                </ng-template>
               </div>
             </div>
             <div *ngIf="!isStatsByVendorIsolated(statByVendor) && vendorKey !== ResultType.LATENCY">

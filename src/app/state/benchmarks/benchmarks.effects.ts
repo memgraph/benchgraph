@@ -17,6 +17,7 @@ import {
   WorkloadTypePerDataset,
   BenchmarkSelectors,
   WorkloadTypePerCondition,
+  QueryCategoryWithQueries,
 } from '.';
 // import MemgraphCold from '../../../../results/memgraph_cold.json';
 // import MemgraphHot from '../../../../results/memgraph_hot.json';
@@ -39,9 +40,16 @@ import {
   isWorkloadRealistic,
   IWorkloadIsolated,
   IWorkloadMixed,
+  QueryCategory,
 } from 'src/app/models/benchmark.model';
 import { removeDuplicatesFromArray } from 'src/app/services/remove-duplicates';
-import { TOOLTIP_OF_CONDITION, TOOLTIP_OF_WORKLOAD_TYPE } from 'src/app/components/overview/overview.component';
+import {
+  TOOLTIP_OF_CONDITION,
+  TOOLTIP_OF_DATASET_SIZE,
+  TOOLTIP_OF_PLATFORM,
+  TOOLTIP_OF_WORKLOAD_TYPE,
+} from 'src/app/components/overview/overview.component';
+import { WorkloadType } from 'src/app/models/benchmark.model';
 
 export const LATENCY_PERCENTILE: keyof IQueryStatistics = 'p99';
 
@@ -87,6 +95,7 @@ export class BenchmarksEffects {
           const workloadTypesPerDataset = getWorkloadTypesPerDataset(benchmarks.benchmarks);
           const workloadTypesPerCondition = getWorkloadTypesPerCondition(benchmarks.benchmarks);
           const queryCategories: IBenchmarkSettingsQueryCategory[] = getQueryCategories(benchmarks.benchmarks);
+          const queryCategoriesPerDataset = getQueryCategoriesPerDatasetName(benchmarks.benchmarks);
           const maxTimes: IBenchmarkSettingsMaxTimes = getMaxTimes(benchmarks.benchmarks);
           this.store.dispatch(
             BenchmarkActions.setSettings({
@@ -96,6 +105,7 @@ export class BenchmarksEffects {
                 numberOfWorkers,
                 workloadTypesPerDataset,
                 workloadTypesPerCondition,
+                queryCategoriesPerDataset,
                 conditions,
                 datasetNames,
                 datasetSizes,
@@ -150,7 +160,10 @@ export class BenchmarksEffects {
               if (firstValidDatasetSize) {
                 this.store.dispatch(
                   BenchmarkActions.updateDatasetSizes({
-                    size: { ...firstValidDatasetSize, isActivated: true },
+                    size: {
+                      ...firstValidDatasetSize,
+                      isActivated: true,
+                    },
                   }),
                 );
               }
@@ -239,6 +252,7 @@ const getPlatforms = (benchmarks: IBenchmark[]): IBenchmarkSettingsPlatform[] =>
     return {
       name,
       isActivated: i === 0 ? true : false,
+      tooltip: TOOLTIP_OF_PLATFORM[name],
     };
   });
   return returnBenchmarks;
@@ -267,7 +281,6 @@ const getDatasetNames = (benchmarks: IBenchmark[]): IBenchmarkSettingsDatasetNam
       return {
         name,
         isActivated: i === 0 ? true : false,
-        // tooltip: TOOLTIP_OF_DATASET_SIZE[name],
       };
     },
   );
@@ -280,7 +293,7 @@ const getDatasetSizes = (benchmarks: IBenchmark[]): IBenchmarkSettingsSize[] => 
     return {
       name,
       isActivated: i === 0 ? true : false,
-      // tooltip: TOOLTIP_OF_DATASET_SIZE[name],
+      tooltip: TOOLTIP_OF_DATASET_SIZE[name],
     };
   });
   return returnDatasetSizes;
@@ -291,7 +304,7 @@ const getDatasetSizesPerName = (benchmarks: IBenchmark[]) => {
     benchmark.datasets.map((dataset) => ({ name: dataset.name, size: dataset.size })),
   );
 
-  const datasetSizes: DatasetSizesPerName = {};
+  const datasetSizes: DatasetSizesPerName = { pokec: [], ldbc_bi: [], ldbc_interactive: [] };
   datasetSizeName.forEach((innerArr) => {
     innerArr.forEach((obj) => {
       const { name, size } = obj;
@@ -313,7 +326,7 @@ const getWorkloadTypesPerDataset = (benchmarks: IBenchmark[]) => {
     ),
   );
 
-  const workloadTypes: WorkloadTypePerDataset = {};
+  const workloadTypes: WorkloadTypePerDataset = { pokec: [], ldbc_bi: [], ldbc_interactive: [] };
 
   workloadTypeAndDataset.forEach((innerArr) => {
     innerArr.forEach((objArr) => {
@@ -391,6 +404,59 @@ export const getQueryCategories = (benchmarks: IBenchmark[]): IBenchmarkSettings
     };
   });
   return returnArray;
+};
+
+export const getQueryCategoriesPerDatasetName = (
+  benchmarks: IBenchmark[],
+): Record<string, QueryCategoryWithQueries[]> => {
+  const queryCategories: Record<string, QueryCategoryWithQueries[]> = {};
+
+  benchmarks.forEach((benchmark) => {
+    benchmark.datasets.forEach((dataset) => {
+      const datasetName = dataset.name;
+      const queries = (
+        dataset.workloads.filter((workload) => workload.workloadType !== WorkloadType.REALISTIC) as (
+          | IWorkloadIsolated
+          | IWorkloadMixed
+        )[]
+      ).flatMap((workload) => workload.queries);
+      let queryCategoriesWithQueries: QueryCategoryWithQueries[] = [];
+      queries.forEach((query) => {
+        const queryCategoryWithQueriesIndex = queryCategoriesWithQueries.findIndex(
+          (category) => category.name === query.category,
+        );
+        if (queryCategoryWithQueriesIndex < 0) {
+          queryCategoriesWithQueries.push({ name: query.category, queries: [query.name] });
+        } else {
+          queryCategoriesWithQueries[queryCategoryWithQueriesIndex].queries.push(query.name);
+        }
+      });
+
+      queryCategoriesWithQueries = removeDuplicatesFromArray(queryCategoriesWithQueries);
+
+      if (!queryCategories[datasetName]) {
+        queryCategories[datasetName] = queryCategoriesWithQueries;
+      } else {
+        queryCategories[datasetName].push(...queryCategoriesWithQueries);
+      }
+    });
+  });
+  for (const key in queryCategories) {
+    if (queryCategories[key]) {
+      const reducedQueryCategories = Object.values(
+        queryCategories[key].reduce((acc, { name, queries }) => {
+          if (!acc[name]) {
+            acc[name] = { name, queries: new Set(queries) };
+          } else {
+            queries.forEach((query) => acc[name].queries.add(query));
+          }
+          return acc;
+        }, {} as Record<string, { name: QueryCategory; queries: Set<string> }>),
+      ).map(({ name, queries }) => ({ name, queries: Array.from(queries) }));
+      queryCategories[key] = reducedQueryCategories;
+    }
+  }
+  return queryCategories;
 };
 
 const getMaxTimes = (benchmarks: IBenchmark[]): IBenchmarkSettingsMaxTimes => {

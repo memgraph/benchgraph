@@ -9,6 +9,8 @@ import {
   RunConfigCondition,
   RunConfigVendor,
   WorkloadType,
+  DatasetSize,
+  DatasetName,
 } from 'src/app/models/benchmark.model';
 
 export { BenchmarkActions, BenchmarkSelectors };
@@ -41,22 +43,29 @@ export type IBenchmarkSettingsWorkloadType = {
 } & IBenchmarkSetting;
 
 export type IBenchmarkSettingsDatasetName = {
-  name: string;
+  name: DatasetName;
 } & IBenchmarkSetting;
 
 export type IBenchmarkSettingsSize = {
-  name: string;
+  name: DatasetSize;
 } & IBenchmarkSetting;
 
-export type DatasetSizesPerName = Record<string, string[]>;
+export type DatasetSizesPerName = Record<DatasetName, DatasetSize[]>;
 
-export type WorkloadTypePerDataset = Record<string, WorkloadType[]>;
+export type WorkloadTypePerDataset = Record<DatasetName, WorkloadType[]>;
 
 export type WorkloadTypePerCondition = Record<RunConfigCondition, WorkloadType[]>;
+
+export type QueryCategoryPerDataset = Record<string, QueryCategoryWithQueries[]>;
 
 export type IBenchmarkSettingsQueryCategoryQuery = {
   name: string;
 } & IBenchmarkSetting;
+
+export interface QueryCategoryWithQueries {
+  name: QueryCategory;
+  queries: string[];
+}
 
 export interface IBenchmarkSettingsQueryCategory {
   name: QueryCategory;
@@ -83,6 +92,7 @@ export interface IBenchmarkSettings {
   datasetSizes: IBenchmarkSettingsSize[];
   datasetSizesPerName: DatasetSizesPerName;
   queryCategories: IBenchmarkSettingsQueryCategory[];
+  queryCategoriesPerDataset: QueryCategoryPerDataset;
   maxTimes: IBenchmarkSettingsMaxTimes;
 }
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, takeUntil, withLatestFrom } from 'rxjs';
-import { RunConfigCondition, WorkloadType } from '../../models/benchmark.model';
+import { DatasetName, DatasetSize, Platform, RunConfigCondition, WorkloadType } from '../../models/benchmark.model';
 import { Unsubscribe } from '../../services/unsubscribe';
 import { AppState } from '../../state';
 import {
@@ -11,6 +11,7 @@ import {
   IBenchmarkSettingsCondition,
   IBenchmarkSettingsDatasetName,
   IBenchmarkSettingsNumberOfWorkers,
+  IBenchmarkSettingsPlatform,
   IBenchmarkSettingsQueryCategory,
   IBenchmarkSettingsQueryCategoryQuery,
   IBenchmarkSettingsSize,
@@ -43,6 +44,7 @@ export class BaseComponent extends Unsubscribe implements OnInit {
         if (isSet) {
           const params = this.route.snapshot.queryParamMap;
 
+          this.setPlatformFromParams(params);
           this.setConditionFromParams(params);
           this.setNumberOfWorkersFromParams(params);
           this.setDatasetNameFromParams(params);
@@ -56,6 +58,7 @@ export class BaseComponent extends Unsubscribe implements OnInit {
       .select(BenchmarkSelectors.selectSettings)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((settings) => {
+        const platform = settings?.platforms.find((platform) => platform.isActivated)?.name;
         const condition = settings?.conditions.find((condition) => condition.isActivated)?.name;
         const numberOfWorkers = settings?.numberOfWorkers.find((condition) => condition.isActivated)?.size;
         const datasetName = settings?.datasetNames.find((dataset) => dataset.isActivated)?.name;
@@ -79,6 +82,7 @@ export class BaseComponent extends Unsubscribe implements OnInit {
           numberOfWorkers,
           datasetName,
           datasetSize,
+          platform,
           workloadType,
           querySelection: JSON.stringify(querySelection),
         };
@@ -101,6 +105,17 @@ export class BaseComponent extends Unsubscribe implements OnInit {
     this.store.dispatch(BenchmarkActions.updateCondition({ condition }));
   }
 
+  setPlatformFromParams(params: ParamMap) {
+    const platform: IBenchmarkSettingsPlatform = {
+      isActivated: true,
+      name: params.get('platform') as Platform,
+    };
+    if (!platform.name) {
+      return;
+    }
+    this.store.dispatch(BenchmarkActions.updatePlatform({ platform }));
+  }
+
   setNumberOfWorkersFromParams(params: ParamMap) {
     const numberOfWorkers: IBenchmarkSettingsNumberOfWorkers = {
       isActivated: true,
@@ -115,7 +130,7 @@ export class BaseComponent extends Unsubscribe implements OnInit {
   setDatasetNameFromParams(params: ParamMap) {
     const datasetNameSetting: IBenchmarkSettingsDatasetName = {
       isActivated: true,
-      name: params.get('datasetName') ?? '',
+      name: (params.get('datasetName') as DatasetName) ?? DatasetName.POKEC,
     };
     if (!datasetNameSetting.name) {
       return;
@@ -126,7 +141,7 @@ export class BaseComponent extends Unsubscribe implements OnInit {
   setSizeFromParams(params: ParamMap) {
     const size: IBenchmarkSettingsSize = {
       isActivated: true,
-      name: params.get('datasetSize') ?? '',
+      name: (params.get('datasetSize') as DatasetSize) ?? DatasetSize.SMALL,
     };
     if (!size.name) {
       return;

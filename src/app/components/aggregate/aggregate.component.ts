@@ -69,9 +69,9 @@ export class AggregateComponent {
       const groupedResults = _.groupBy(allResultsByVendor, 'vendor');
       const groupedResultsObject = Object.values(groupedResults);
       const peakResultPerVendor: IAggregateResultsAbsolute[] = groupedResultsObject.map((vendor) => {
-        const throughputArray = vendor.map((result) => result.throughput);
+        const throughputArray = vendor.filter((result) => result.throughput !== 0).map((result) => result.throughput);
         const throughputAverage = throughputArray.reduce((a, b) => a + b, 0) / throughputArray.length;
-        const memoryArray = vendor.map((result) => result.memory);
+        const memoryArray = vendor.filter((result) => result.memory !== 0).map((result) => result.memory);
         const memoryAverage = memoryArray.reduce((a, b) => a + b, 0) / memoryArray.length;
         return {
           vendor: vendor[0].vendor,
@@ -83,20 +83,30 @@ export class AggregateComponent {
       const worstThroughputVendor = peakResultPerVendor.reduce((prev, curr) =>
         prev.throughput < curr.throughput ? prev : curr,
       );
+      const highestMemoryVendor = peakResultPerVendor.reduce((prev, curr) => (prev.memory > curr.memory ? prev : curr));
+      const highestThroughputVendor = peakResultPerVendor.reduce((prev, curr) =>
+        prev.throughput > curr.throughput ? prev : curr,
+      );
       const peakMemoryPerVendorWithRelativeTimes: IAggregateResults[] = peakResultPerVendor.map((result) => {
+        const relativeMemory = result.vendor === bestMemoryVendor.vendor ? 1 : result.memory / bestMemoryVendor.memory;
+        const relativeThroughput =
+          result.vendor === worstThroughputVendor.vendor ? 1 : result.throughput / worstThroughputVendor.throughput;
         let relativeThroughputToMax = 100;
-        if (settings?.maxTimes.throughput) {
-          relativeThroughputToMax = (result.throughput / settings?.maxTimes.throughput) * 100;
+        if (result.vendor !== highestThroughputVendor.vendor) {
+          relativeThroughputToMax = 100 / (highestThroughputVendor.throughput / result.throughput);
         }
         if (relativeThroughputToMax < 0.15) {
           relativeThroughputToMax = 0.15;
         }
+        let relativeMemoryToMax = 100;
+        if (result.vendor !== highestMemoryVendor.vendor) {
+          relativeMemoryToMax = 100 / (highestMemoryVendor.memory / result.memory);
+        }
         return {
           ...result,
-          relativeMemory: result.vendor === bestMemoryVendor.vendor ? 1 : result.memory / bestMemoryVendor.memory,
-          relativeMemoryToMax: settings?.maxTimes.memory ? (result.memory / settings?.maxTimes.memory) * 100 : 100,
-          relativeThroughput:
-            result.vendor === worstThroughputVendor.vendor ? 1 : result.throughput / worstThroughputVendor.throughput,
+          relativeMemory,
+          relativeMemoryToMax,
+          relativeThroughput,
           relativeThroughputToMax,
         };
       });

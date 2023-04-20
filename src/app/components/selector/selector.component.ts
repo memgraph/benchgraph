@@ -28,6 +28,7 @@ export class SelectorComponent {
   @Input() isCollapsed: boolean | null = false;
 
   settings$ = this.store.select(BenchmarkSelectors.selectSettings);
+
   datasetSizes$ = this.settings$.pipe(
     map((settings) => {
       const activatedDatasetName = settings?.datasetNames.find((datasetName) => datasetName.isActivated)?.name;
@@ -38,6 +39,7 @@ export class SelectorComponent {
       return settings.datasetSizes.filter((datasetSize) => availableDatasetSizes.includes(datasetSize.name));
     }),
   );
+
   workloadTypes$ = this.settings$.pipe(
     map((settings) => {
       const activatedDatasetName = settings?.datasetNames.find((datasetName) => datasetName.isActivated)?.name;
@@ -52,6 +54,30 @@ export class SelectorComponent {
           availableWorkloadTypesPerDataset.includes(workloadType.name) &&
           availableWorkloadTypesPerCondition.includes(workloadType.name),
       );
+    }),
+  );
+
+  queryCategories$ = this.settings$.pipe(
+    map((settings) => {
+      const activatedDatasetName = settings?.datasetNames.find((datasetName) => datasetName.isActivated)?.name;
+      if (!activatedDatasetName) {
+        return;
+      }
+      const availableQueryCategoryPerDataset = settings.queryCategoriesPerDataset[activatedDatasetName];
+      return settings?.queryCategories
+        .filter((queryCategory) =>
+          availableQueryCategoryPerDataset
+            .map((queryCategoryPerDataset) => queryCategoryPerDataset.name)
+            .includes(queryCategory.name),
+        )
+        .map((queryCategory) => {
+          const queries = queryCategory.queries.filter((query) =>
+            availableQueryCategoryPerDataset
+              .find((availableCategory) => availableCategory.name === queryCategory.name)
+              ?.queries.includes(query.name),
+          );
+          return { ...queryCategory, queries };
+        });
     }),
   );
   isRealisticActivated$ = this.settings$.pipe(
