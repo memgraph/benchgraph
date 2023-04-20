@@ -27,6 +27,8 @@ import _ from 'lodash';
 import { filterNullish } from 'src/app/services/filter-nullish';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { LATENCY_PERCENTILE } from 'src/app/state/benchmarks/benchmarks.effects';
+import { SegmentService } from 'src/app/services/segment.service';
+import { REPRODUCE_LINK } from '../sidenav/sidenav.component';
 
 export enum ITab {
   AGGREGATE = 'Aggregate Results',
@@ -170,6 +172,13 @@ export class OverviewComponent implements AfterContentInit {
 
   onScroll_ = new BehaviorSubject<Event | undefined>(undefined);
   onScroll$ = this.onScroll_.asObservable();
+
+  shouldShowBanner_ = new BehaviorSubject<boolean>(true);
+  shouldShowBanner$ = combineLatest([this.shouldShowBanner_.asObservable(), this.currentTab$]).pipe(
+    map(([shouldShow, currentTab]) => shouldShow && currentTab !== ITab.AGGREGATE),
+  );
+
+  reproduceLink = REPRODUCE_LINK;
 
   tabs = [ITab.AGGREGATE, ITab.GLOBAL, ITab.DETAILED];
 
@@ -426,7 +435,12 @@ export class OverviewComponent implements AfterContentInit {
   );
 
   ITab = ITab;
-  constructor(private readonly store: Store<AppState>, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private readonly store: Store<AppState>,
+    private router: Router,
+    private route: ActivatedRoute,
+    private segmentService: SegmentService,
+  ) {}
 
   ngAfterContentInit(): void {
     const tabFromParams = this.route.snapshot.queryParamMap.get('tab') as ITab | null;
@@ -449,6 +463,10 @@ export class OverviewComponent implements AfterContentInit {
 
   onScroll(event: Event) {
     this.onScroll_.next(event);
+  }
+
+  openLink(url: string) {
+    this.segmentService.trackEvent('Link Clicked', { linkUrl: url });
   }
 }
 

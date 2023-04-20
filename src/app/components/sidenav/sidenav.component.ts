@@ -13,6 +13,9 @@ export interface ISidenavLink {
   url: string;
 }
 
+export const REPRODUCE_LINK =
+  'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#reproducibility-and-validation';
+
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -31,7 +34,7 @@ export class SidenavComponent {
     },
     {
       title: 'Reproduce & Validate Results',
-      url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#reproducibility-and-validation',
+      url: REPRODUCE_LINK,
     },
     {
       title: 'Query List',

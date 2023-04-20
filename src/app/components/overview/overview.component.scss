@@ -1,5 +1,64 @@
 @import 'colors';
 
+.top-banner {
+  background-color: $brand-black;
+  width: 98%;
+  height: 4rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  position: relative;
+  margin: 0.625rem;
+  border-radius: 2px;
+  padding: 1rem;
+
+  &-data {
+    display: flex;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .hammer-pick {
+      height: 1.5rem;
+      margin-right: 0.5rem;
+    }
+
+    &-link {
+      display: flex;
+      cursor: pointer;
+      color: white;
+
+      &-text {
+        text-decoration: underline;
+        font-weight: bold;
+      }
+
+      .icon-ui-right {
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        margin-left: 0.5rem;
+        color: orange;
+        transition: 0.2s transform linear;
+      }
+
+      &:hover {
+        .icon-ui-right {
+          transform: translateX(0.5rem);
+        }
+      }
+    }
+  }
+
+  .close {
+    position: absolute;
+    right: 1rem;
+    cursor: pointer;
+  }
+}
+
 .overview {
   padding: 1rem;
   height: 100%;

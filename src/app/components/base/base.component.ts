@@ -94,26 +94,26 @@ export class BaseComponent extends Unsubscribe implements OnInit {
       });
   }
 
-  setConditionFromParams(params: ParamMap) {
-    const condition: IBenchmarkSettingsCondition = {
-      isActivated: true,
-      name: params.get('condition') as RunConfigCondition,
-    };
-    if (!condition.name) {
-      return;
-    }
-    this.store.dispatch(BenchmarkActions.updateCondition({ condition }));
-  }
-
   setPlatformFromParams(params: ParamMap) {
     const platform: IBenchmarkSettingsPlatform = {
       isActivated: true,
-      name: params.get('platform') as Platform,
+      name: (params.get('platform') as Platform) ?? Platform.AMD,
     };
     if (!platform.name) {
       return;
     }
     this.store.dispatch(BenchmarkActions.updatePlatform({ platform }));
+  }
+
+  setConditionFromParams(params: ParamMap) {
+    const condition: IBenchmarkSettingsCondition = {
+      isActivated: true,
+      name: (params.get('condition') as RunConfigCondition) ?? RunConfigCondition.COLD,
+    };
+    if (!condition.name) {
+      return;
+    }
+    this.store.dispatch(BenchmarkActions.updateCondition({ condition }));
   }
 
   setNumberOfWorkersFromParams(params: ParamMap) {
@@ -152,7 +152,7 @@ export class BaseComponent extends Unsubscribe implements OnInit {
   setWorkloadTypesFromParams(params: ParamMap) {
     const workloadType: IBenchmarkSettingsWorkloadType = {
       isActivated: true,
-      name: params.get('workloadType') as WorkloadType,
+      name: (params.get('workloadType') as WorkloadType) ?? WorkloadType.ISOLATED,
     };
     if (!workloadType.name) {
       return;

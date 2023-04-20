@@ -7,6 +7,8 @@ import { AppState } from '../../state';
 import { Store } from '@ngrx/store';
 import { BenchmarkSelectors } from '../../state/benchmarks';
 import { arrayHasDuplicates } from 'src/app/services/remove-duplicates';
+import { REPRODUCE_LINK } from '../sidenav/sidenav.component';
+import { SegmentService } from 'src/app/services/segment.service';
 
 export interface IAggregateResultsAbsolute {
   vendor: RunConfigVendor;
@@ -114,7 +116,9 @@ export class AggregateComponent {
     }),
   );
 
-  constructor(private readonly store: Store<AppState>) {}
+  reproduceLink = REPRODUCE_LINK;
+
+  constructor(private readonly store: Store<AppState>, private segmentService: SegmentService) {}
 
   shouldShowDecimal(results: IAggregateResults[], resultsKey: keyof IAggregateResultsRelative) {
     const mappedResults = results.map((result) => Math.floor(result[resultsKey]));
@@ -123,5 +127,9 @@ export class AggregateComponent {
 
   getBackgroundColor(vendor: RunConfigVendor) {
     return backgroundColorByVendor[vendor];
+  }
+
+  openLink(url: string) {
+    this.segmentService.trackEvent('Link Clicked', { linkUrl: url });
   }
 }
