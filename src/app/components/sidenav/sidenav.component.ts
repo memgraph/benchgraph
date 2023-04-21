@@ -14,7 +14,7 @@ export interface ISidenavLink {
 }
 
 export const REPRODUCE_LINK =
-  'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#reproducibility-and-validation';
+  'https://memgraph.com/blog/benchmark-memgraph-or-neo4j-with-benchgraph';
 
 @Component({
   selector: 'app-sidenav',
