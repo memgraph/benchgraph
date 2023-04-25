@@ -14,6 +14,7 @@ export interface ISidenavLink {
 }
 
 export const REPRODUCE_LINK = 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#prerequisites';
+export const TUTORIAL_LINK = 'https://memgraph.com/blog/benchmark-memgraph-or-neo4j-with-benchgraph';
 
 @Component({
   selector: 'app-sidenav',
@@ -57,8 +58,8 @@ export class SidenavComponent {
       url: 'https://memgraph.com/blog/introduction-to-benchgraph-and-its-architecture',
     },
     {
-      title: 'How to Benchmark Memgraph [or Neo4J] with Benchgraph?',
-      url: 'https://memgraph.com/blog/benchmark-memgraph-or-neo4j-with-benchgraph',
+      title: 'How to Benchmark Memgraph [or Neo4j] with Benchgraph?',
+      url: TUTORIAL_LINK,
     },
     {
       title: 'Memgraph vs. Neo4j: A Performance Comparison',

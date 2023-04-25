@@ -28,7 +28,7 @@ import { filterNullish } from 'src/app/services/filter-nullish';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { LATENCY_PERCENTILE } from 'src/app/state/benchmarks/benchmarks.effects';
 import { SegmentService } from 'src/app/services/segment.service';
-import { REPRODUCE_LINK } from '../sidenav/sidenav.component';
+import { TUTORIAL_LINK } from '../sidenav/sidenav.component';
 
 export enum ITab {
   AGGREGATE = 'Aggregate Results',
@@ -178,7 +178,7 @@ export class OverviewComponent implements AfterContentInit {
     map(([shouldShow, currentTab]) => shouldShow && currentTab !== ITab.AGGREGATE),
   );
 
-  reproduceLink = REPRODUCE_LINK;
+  tutorialLink = TUTORIAL_LINK;
 
   tabs = [ITab.AGGREGATE, ITab.GLOBAL, ITab.DETAILED];
 

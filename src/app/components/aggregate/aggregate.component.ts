@@ -7,7 +7,7 @@ import { AppState } from '../../state';
 import { Store } from '@ngrx/store';
 import { BenchmarkSelectors } from '../../state/benchmarks';
 import { arrayHasDuplicates } from 'src/app/services/remove-duplicates';
-import { REPRODUCE_LINK } from '../sidenav/sidenav.component';
+import { TUTORIAL_LINK } from '../sidenav/sidenav.component';
 import { SegmentService } from 'src/app/services/segment.service';
 
 export interface IAggregateResultsAbsolute {
@@ -116,7 +116,7 @@ export class AggregateComponent {
     }),
   );
 
-  reproduceLink = REPRODUCE_LINK;
+  tutorialLink = TUTORIAL_LINK;
 
   constructor(private readonly store: Store<AppState>, private segmentService: SegmentService) {}
 
