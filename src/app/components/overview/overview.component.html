@@ -1,3 +1,18 @@
+<div class="top-banner" *ngIf="shouldShowBanner$ | async">
+  <div class="top-banner-data">
+    <img class="hammer-pick" src="assets/img/hammer-pick.svg">
+    <div class="top-banner-data-text">
+      Recreate the benchmark using
+    </div>
+    <a class="top-banner-data-link" [href]="reproduceLink" target="_blank" (click)="openLink(reproduceLink)">
+      <div class="top-banner-data-link-text">
+        your own data
+      </div>
+      <span class="icon-ui-right"></span>
+    </a>
+  </div>
+  <div class="close" (click)="shouldShowBanner_.next(false)">×</div>
+</div>
 <div class="overview" *ngIf="currentTab$ | async as currentTab">
 
   <div class="overview-tabs">
@@ -12,7 +27,7 @@
 
   <div [ngSwitch]="currentTab" class="switch-wrapper" (scroll)="onScroll($event)">
     <app-aggregate *ngSwitchCase="ITab.AGGREGATE" [presentedBenchmarks]="presentedBenchmarks$ | async"></app-aggregate>
-    <app-global *ngSwitchCase="ITab.GLOBAL" [detailedQueries]="detailedQueries$ | async" [settings]="settings$ | async" [onScroll]="onScroll$ | async"></app-global>
+    <app-global *ngSwitchCase="ITab.GLOBAL" [detailedQueries]="detailedQueries$ | async" [settings]="settings$ | async" [onScroll]="onScroll$ | async" (closeBanner)="shouldShowBanner_.next(false)"></app-global>
     <app-detailed *ngSwitchCase="ITab.DETAILED" [detailedQueries]="detailedQueries$ | async" [settings]="settings$ | async"></app-detailed>
   </div>
 </div>

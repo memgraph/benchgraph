@@ -22,15 +22,16 @@
       </a>
     </div>
 
-    <div class="setting" *ngIf="shouldShowHardwareAlias$ | async">
-      <div class="title">Hardware Alias</div>
+    <div class="setting" *ngIf="shouldShowPlatform$ | async">
+      <div class="title">Platform</div>
       <div class="conditions">
         <div 
           class="condition"
-          *ngFor="let hardwareAlias of settings.hardwareAliases" 
-          [ngClass]="{'activated': hardwareAlias.isActivated, 'single': settings.hardwareAliases.length === 1}" 
-          (click)="updateHardwareAlias(hardwareAlias)">
-          {{hardwareAlias.name}}
+          *ngFor="let platform of settings.platforms" 
+          [ngClass]="{'activated': platform.isActivated, 'single': settings.platforms.length === 1}" 
+          (click)="updatePlatform(platform)"
+          [attr.title]="platform.tooltip ? platform.tooltip : null">
+          {{platform.name}}
         </div>
       </div>
     </div>
@@ -50,12 +51,41 @@
     </div>
 
     <div class="setting">
-      <div class="title">Dataset</div>
+      <div class="title">Number of Workers</div>
       <div class="conditions">
         <div 
           class="condition" 
-          *ngFor="let size of settings.datasetSizes" 
-          [ngClass]="{'activated': size.isActivated, 'single': settings.datasetSizes.length === 1, 'has-tooltip': !!size.tooltip}" 
+          *ngFor="let worker of settings.numberOfWorkers" 
+          [ngClass]="{'activated': worker.isActivated, 'single': settings.conditions.length === 1, 'has-tooltip': !!worker.tooltip}" 
+          (click)="updateWorker(worker)"
+          [attr.title]="worker.tooltip ? worker.tooltip : null">
+          {{worker.size}}
+        </div>
+      </div>
+    </div>
+
+    <div class="setting">
+      <div class="title">Dataset Name</div>
+      <div class="conditions">
+        <div 
+          class="condition" 
+          *ngFor="let datasetNamesSetting of settings.datasetNames" 
+          [ngClass]="{'activated': datasetNamesSetting.isActivated, 'single': settings.datasetNames.length === 1, 'has-tooltip': !!datasetNamesSetting.tooltip}" 
+          (click)="updateName(datasetNamesSetting)"
+          [attr.title]="datasetNamesSetting.tooltip ? datasetNamesSetting.tooltip : null">
+          {{datasetNamesSetting.name}}
+        </div>
+      </div>
+      <div class="disclaimer">DISCLAIMER: This is NOT an official implementation of an LDBC Benchmark.</div>
+    </div>
+
+    <div class="setting">
+      <div class="title">Dataset Size</div>
+      <div class="conditions" *ngIf="datasetSizes$ | async as datasetSizes">
+        <div 
+          class="condition" 
+          *ngFor="let size of datasetSizes" 
+          [ngClass]="{'activated': size.isActivated, 'single': datasetSizes.length === 1, 'has-tooltip': !!size.tooltip}" 
           (click)="updateSize(size)"
           [attr.title]="size.tooltip ? size.tooltip : null">
           {{size.name}}
@@ -65,28 +95,28 @@
 
     <div class="setting">
       <div class="title">Workload Type</div>
-      <div class="conditions">
+      <div class="conditions" *ngIf="workloadTypes$ | async as workloadTypes">
         <div 
           class="condition" 
-          *ngFor="let workloadType of settings.workloadTypes" 
-          [ngClass]="{'activated': workloadType.isActivated, 'single': settings.workloadTypes.length === 1, 'has-tooltip': !!workloadType.tooltip}" 
+          *ngFor="let workloadType of workloadTypes" 
+          [ngClass]="{'activated': workloadType.isActivated, 'single': workloadTypes.length === 1, 'has-tooltip': !!workloadType.tooltip}" 
           (click)="updateWorkloadType(workloadType)"
           [attr.title]="workloadType.tooltip ? workloadType.tooltip : null">
           {{workloadType.name}}
         </div>
       </div>
-      <div class="disclaimer">All workloads are executed with 12 concurrent clients.</div>
+      <!-- <div class="disclaimer">All workloads are executed with 12 concurrent clients.</div> -->
     </div>
 
     <div class="setting" *ngIf="!(isRealisticActivated$ | async)">
       <div class="title">Query Selection</div>
-      <div class="categories">
+      <div class="categories" *ngIf="queryCategories$ | async as queryCategories">
         <div 
           class="category" 
-          *ngFor="let category of settings.queryCategories" 
-          [ngClass]="{'activated': category.isActivated, 'single': settings.queryCategories.length === 1}">
+          *ngFor="let category of queryCategories" 
+          [ngClass]="{'activated': category.isActivated, 'single': queryCategories.length === 1}">
           <div class="category-main">
-            <div class="checkbox" [ngClass]="{'activated': category.isActivated}" (click)="updateCategory(category, settings.queryCategories)">
+            <div class="checkbox" [ngClass]="{'activated': category.isActivated}" (click)="updateCategory(category, queryCategories)">
               <span *ngIf="category.isActivated" class="icon-ui-ok"></span>
             </div>
             <div class="category-main-name">
@@ -98,12 +128,12 @@
             <div 
               class="icon-ui-down-open category-main-caret" 
               [ngClass]="{'expanded icon-ui-up-open': category.isExpanded, 'icon-ui-down-open': !category.isExpanded}"
-              (click)="updateCategory(category, settings.queryCategories, category.isExpanded)">
+              (click)="updateCategory(category, queryCategories, category.isExpanded)">
             </div>
           </div>
           <div class="category-queries" *ngIf="category.isExpanded">
             <div class="category-queries-query" *ngFor="let query of category.queries">
-              <div class="checkbox" [ngClass]="{'activated': query.isActivated}" (click)="updateQuery(category, query, settings.queryCategories)">
+              <div class="checkbox" [ngClass]="{'activated': query.isActivated}" (click)="updateQuery(category, query, queryCategories)">
                 <span *ngIf="query.isActivated" class="icon-ui-ok"></span>
               </div>
                 {{query.name}}

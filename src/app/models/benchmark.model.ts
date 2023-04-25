@@ -1,11 +1,22 @@
+// vendor, condition, platform, workers, datasetName, datasetSize, workloadType
+// numberWorkers: 24, 48, 96, 192 // bolje dinamicki
+// condition: hot, cold, vulcanic
+// platform: AMD, INTEL
+// datasetsName: ldbc_interactive (samo isolated), ldbc_bi (samo isolated), pokec
+
+export interface IBenchmarks {
+  benchmarks: IBenchmark[];
+}
+
 export interface IBenchmark {
   runConfig: {
     vendor: RunConfigVendor;
     condition: RunConfigCondition;
-    hardwareAlias: HardwareAlias;
+    platform: Platform;
+    numberWorkers: number;
   };
   datasets: {
-    name: string;
+    name: DatasetName;
     size: DatasetSize;
     workloads: IWorkload[];
   }[];
@@ -106,17 +117,26 @@ export enum RunConfigVendor {
 export enum RunConfigCondition {
   HOT = 'hot',
   COLD = 'cold',
+  VULCANIC = 'vulcanic',
 }
 
-export enum HardwareAlias {
-  RYZEN = 'ryzen',
-  INTEL = 'intel',
+export enum Platform {
+  AMD = 'AMD',
+  INTEL = 'INTEL',
 }
 
 export enum DatasetSize {
   SMALL = 'small',
   MEDIUM = 'medium',
   LARGE = 'large',
+  SF_1 = 'sf1',
+  SF_01 = 'sf0.1',
+}
+
+export enum DatasetName {
+  POKEC = 'pokec',
+  LDBC_BI = 'ldbc_bi',
+  LDBC_INTERACTIVE = 'ldbc_interactive',
 }
 
 export enum WorkloadType {

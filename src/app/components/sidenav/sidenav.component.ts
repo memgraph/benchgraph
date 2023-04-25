@@ -13,6 +13,8 @@ export interface ISidenavLink {
   url: string;
 }
 
+export const REPRODUCE_LINK = 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#prerequisites';
+
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -27,25 +29,37 @@ export class SidenavComponent {
   sidenavGitHubLinks: ISidenavLink[] = [
     {
       title: 'Methodology',
-      url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#fire-mgbench-benchmark-for-graph-databases',
+      url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#fire-benchgraph-benchmark-for-graph-databases',
     },
     {
-      title: 'Reproduce & Validate Results',
-      url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#reproducibility-and-validation',
+      title: 'Validate Results',
+      url: REPRODUCE_LINK,
     },
     {
       title: 'Query List',
       url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#query-list',
     },
-    { title: 'Raw Benchmark Results', url: 'https://github.com/memgraph/benchgraph/tree/main/results' },
+    { title: 'Raw Benchmark Results', url: 'https://github.com/memgraph/benchgraph/tree/main/results/benchmarks.json' },
     {
       title: 'Contribute',
       url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#raised_hands-contributions',
     },
     { title: 'Report Mistakes', url: 'https://github.com/memgraph/memgraph/issues' },
+    {
+      title: 'Changelog',
+      url: 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#changelog-benchgraph-public-benchmark',
+    },
   ];
 
   sidenavDocsLinks: ISidenavLink[] = [
+    {
+      title: 'Introduction to Benchgraph and its Architecture',
+      url: 'https://memgraph.com/blog/introduction-to-benchgraph-and-its-architecture',
+    },
+    {
+      title: 'How to Benchmark Memgraph [or Neo4J] with Benchgraph?',
+      url: 'https://memgraph.com/blog/benchmark-memgraph-or-neo4j-with-benchgraph',
+    },
     {
       title: 'Memgraph vs. Neo4j: A Performance Comparison',
       url: 'http://memgraph.com/blog/memgraph-vs-neo4j-performance-benchmark-comparison',

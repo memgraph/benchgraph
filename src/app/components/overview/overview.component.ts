@@ -15,6 +15,7 @@ import {
   IWorkload,
   IWorkloadIsolated,
   IWorkloadMixed,
+  Platform,
   QueryCategory,
   RunConfigCondition,
   RunConfigVendor,
@@ -26,6 +27,8 @@ import _ from 'lodash';
 import { filterNullish } from 'src/app/services/filter-nullish';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { LATENCY_PERCENTILE } from 'src/app/state/benchmarks/benchmarks.effects';
+import { SegmentService } from 'src/app/services/segment.service';
+import { REPRODUCE_LINK } from '../sidenav/sidenav.component';
 
 export enum ITab {
   AGGREGATE = 'Aggregate Results',
@@ -130,12 +133,20 @@ export const PERCENTAGES_NAME_BY_KEY: Record<keyof IPercentages, string> = {
 export const TOOLTIP_OF_CONDITION: Record<RunConfigCondition, string> = {
   [RunConfigCondition.COLD]: 'The system has no pre-warmed caches before the test execution',
   [RunConfigCondition.HOT]: 'The system has pre-warmed caches before the test execution',
+  [RunConfigCondition.VULCANIC]: 'The system has executed an identical workload before the measurement.',
+};
+
+export const TOOLTIP_OF_PLATFORM: Record<Platform, string> = {
+  [Platform.AMD]: 'Ryzen 7 3800X, 64GB RAM',
+  [Platform.INTEL]: '2 x Xeon X5650 6C12T @ 2.67GHz, 144GB RAM',
 };
 
 export const TOOLTIP_OF_DATASET_SIZE: Record<DatasetSize, string> = {
   [DatasetSize.SMALL]: '10k vertices, 121k edges',
   [DatasetSize.MEDIUM]: '100k vertices, 1.76M edges',
   [DatasetSize.LARGE]: '1.63M vertices, 30M edges',
+  [DatasetSize.SF_01]: '320k vertices, 1.5M edges',
+  [DatasetSize.SF_1]: '3M vertices, 1.7M edges',
 };
 
 export const TOOLTIP_OF_WORKLOAD_TYPE: Record<WorkloadType, string> = {
@@ -162,6 +173,13 @@ export class OverviewComponent implements AfterContentInit {
   onScroll_ = new BehaviorSubject<Event | undefined>(undefined);
   onScroll$ = this.onScroll_.asObservable();
 
+  shouldShowBanner_ = new BehaviorSubject<boolean>(true);
+  shouldShowBanner$ = combineLatest([this.shouldShowBanner_.asObservable(), this.currentTab$]).pipe(
+    map(([shouldShow, currentTab]) => shouldShow && currentTab !== ITab.AGGREGATE),
+  );
+
+  reproduceLink = REPRODUCE_LINK;
+
   tabs = [ITab.AGGREGATE, ITab.GLOBAL, ITab.DETAILED];
 
   settings$ = this.store.select(BenchmarkSelectors.selectSettings);
@@ -172,16 +190,20 @@ export class OverviewComponent implements AfterContentInit {
     ),
   );
 
-  activatedHardwareAliases$ = this.settings$.pipe(
-    map((settings) =>
-      settings?.hardwareAliases
-        .filter((hardwareAlias) => hardwareAlias.isActivated)
-        .map((hardwareAlias) => hardwareAlias.name),
-    ),
+  activatedPlatforms$ = this.settings$.pipe(
+    map((settings) => settings?.platforms.filter((platform) => platform.isActivated).map((platform) => platform.name)),
   );
 
   activatedVendors$ = this.settings$.pipe(
     map((settings) => settings?.vendors.filter((vendor) => vendor.isActivated).map((vendor) => vendor.name)),
+  );
+
+  activatedNumberOfWorkers$ = this.settings$.pipe(
+    map((settings) => settings?.numberOfWorkers.filter((worker) => worker.isActivated).map((worker) => worker.size)),
+  );
+
+  activatedDatasetNames$ = this.settings$.pipe(
+    map((settings) => settings?.datasetNames.filter((name) => name.isActivated).map((name) => name.name)),
   );
 
   activatedDatasetSizes$ = this.settings$.pipe(
@@ -211,33 +233,38 @@ export class OverviewComponent implements AfterContentInit {
     this.store.select(BenchmarkSelectors.selectBenchmarks),
     this.activatedConditions$,
     this.activatedVendors$,
+    this.activatedNumberOfWorkers$,
+    this.activatedDatasetNames$,
     this.activatedDatasetSizes$,
     this.activatedQueryCategories$,
     this.activatedWorkloadTypes$,
-    this.activatedHardwareAliases$,
+    this.activatedPlatforms$,
   ]).pipe(
     map(
       ([
         benchmarks,
         activatedConditions,
         activatedVendors,
+        activatedNumberOfWorkers,
+        activatedDatasetNames,
         activatedSizes,
         activatedQueryCategories,
         activatedWorkloadTypes,
-        activatedHardwareAliases,
+        activatedPlatforms,
       ]) =>
         benchmarks
           ?.filter(
             (benchmark) =>
               activatedConditions?.includes(benchmark.runConfig.condition) &&
               activatedVendors?.includes(benchmark.runConfig.vendor) &&
-              activatedHardwareAliases?.includes(benchmark.runConfig.hardwareAlias),
+              activatedPlatforms?.includes(benchmark.runConfig.platform) &&
+              activatedNumberOfWorkers?.includes(benchmark.runConfig.numberWorkers),
           )
           .map((benchmark) => {
-            const filteredDatasetsBySize = benchmark.datasets.filter((dataset) =>
-              activatedSizes?.includes(dataset.size),
+            const filteredDatasets = benchmark.datasets.filter(
+              (dataset) => activatedSizes?.includes(dataset.size) && activatedDatasetNames?.includes(dataset.name),
             );
-            const filteredDatasetByQueries = filteredDatasetsBySize.map((dataset) => {
+            const filteredDatasetByQueries = filteredDatasets.map((dataset) => {
               const filteredWorkloadsByType = dataset.workloads.filter((workload) =>
                 activatedWorkloadTypes?.includes(workload.workloadType),
               );
@@ -327,11 +354,16 @@ export class OverviewComponent implements AfterContentInit {
       const groupedByName = _.groupBy(allResultsByVendor, 'queryName');
       const groupedByNamesObject = Object.values(groupedByName);
       const groupedByNamesToType = groupedByNamesObject.map((results) => {
-        const weakestMemory = results.reduce((a, b) => (a.memory.value > b.memory.value ? a : b));
+        const weakestMemory = results.reduce((a, b) =>
+          a.memory.value > b.memory.value && b.memory.value !== 0 ? a : b,
+        );
         const weakestThroughput = results.reduce((a, b) => (a.throughput.value < b.throughput.value ? a : b));
         const weakestLatency = results.reduce((a, b) => {
           if (isStatsByVendorExtendedIsolated(a) && isStatsByVendorExtendedIsolated(b)) {
-            return (a as IStatsByVendorIsolated).latency.value > (b as IStatsByVendorIsolated).latency.value ? a : b;
+            return (a as IStatsByVendorIsolated).latency.value > (b as IStatsByVendorIsolated).latency.value &&
+              (b as IStatsByVendorIsolated).latency.value !== 0
+              ? a
+              : b;
           }
           return a;
         });
@@ -346,7 +378,11 @@ export class OverviewComponent implements AfterContentInit {
               value: result.memory.value,
               isWeakest: weakestMemory.vendor === result.vendor,
               relativeValue:
-                weakestMemory.vendor === result.vendor ? 1 : weakestMemory.memory.value / result.memory.value,
+                weakestMemory.vendor === result.vendor
+                  ? 1
+                  : weakestMemory.memory.value !== 0
+                  ? weakestMemory.memory.value / result.memory.value
+                  : Infinity,
             },
             throughput: {
               value: result.throughput.value,
@@ -354,7 +390,9 @@ export class OverviewComponent implements AfterContentInit {
               relativeValue:
                 weakestThroughput.vendor === result.vendor
                   ? 1
-                  : result.throughput.value / weakestThroughput.throughput.value,
+                  : weakestThroughput.throughput.value !== 0
+                  ? result.throughput.value / weakestThroughput.throughput.value
+                  : Infinity,
             },
             percentages,
           };
@@ -365,7 +403,9 @@ export class OverviewComponent implements AfterContentInit {
               relativeValue:
                 weakestLatency.vendor === result.vendor
                   ? 1
-                  : (weakestLatency as IStatsByVendorIsolated).latency.value / result.latency.value,
+                  : (weakestLatency as IStatsByVendorIsolated).latency.value !== 0
+                  ? (weakestLatency as IStatsByVendorIsolated).latency.value / result.latency.value
+                  : Infinity,
             };
             returnValue = { ...returnValue, latency };
           }
@@ -395,7 +435,12 @@ export class OverviewComponent implements AfterContentInit {
   );
 
   ITab = ITab;
-  constructor(private readonly store: Store<AppState>, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private readonly store: Store<AppState>,
+    private router: Router,
+    private route: ActivatedRoute,
+    private segmentService: SegmentService,
+  ) {}
 
   ngAfterContentInit(): void {
     const tabFromParams = this.route.snapshot.queryParamMap.get('tab') as ITab | null;
@@ -418,6 +463,10 @@ export class OverviewComponent implements AfterContentInit {
 
   onScroll(event: Event) {
     this.onScroll_.next(event);
+  }
+
+  openLink(url: string) {
+    this.segmentService.trackEvent('Link Clicked', { linkUrl: url });
   }
 }
 

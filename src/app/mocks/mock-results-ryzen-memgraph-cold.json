@@ -2,7 +2,7 @@
   "runConfig": {
     "vendor": "Memgraph",
     "condition": "cold",
-    "hardwareAlias": "ryzen"
+    "platform": "ryzen"
   },
   "datasets": [
       {

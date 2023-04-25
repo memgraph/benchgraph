@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { AfterContentInit, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BehaviorSubject, map, takeUntil } from 'rxjs';
 import {
@@ -52,6 +52,8 @@ export class GlobalComponent extends Unsubscribe implements AfterContentInit, On
   @Input() set onScroll(value: Event | null | undefined) {
     this.onScroll_.next(value);
   }
+
+  @Output() closeBanner = new EventEmitter<void>();
 
   vendors$ = this.detailedQueries$.pipe(
     map((detailedQueries) =>
@@ -159,7 +161,7 @@ export class GlobalComponent extends Unsubscribe implements AfterContentInit, On
 
   getQueryIndex(detailedQueries: IQueriesByCategory[], categoryIndex: number, queryIndex: number) {
     let returnIndex = 0;
-    for (let i = 0; i < detailedQueries.length - 1; i++) {
+    for (let i = 0; i < detailedQueries.length; i++) {
       if (i === categoryIndex) {
         returnIndex += queryIndex;
         break;
@@ -219,6 +221,7 @@ export class GlobalComponent extends Unsubscribe implements AfterContentInit, On
   }
 
   changeActivatedResultType(resultType: keyof IStatsResultTypesIsolated) {
+    this.closeBanner.next();
     this.activatedResultType = resultType;
     const activatedElement = document.getElementById(resultType);
     activatedElement?.scrollIntoView();

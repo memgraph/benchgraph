@@ -78,14 +78,23 @@
                   </div>
                 </div>
                 <div *ngIf="vendorKey === ResultType.MEMORY" class="cell-data-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">
-                  {{statByVendor[vendorKey].value / (1024*1024) | number: '1.0-0'}}
+                  <ng-container *ngIf="statByVendor[vendorKey].value !== 0; else failed">
+                    {{statByVendor[vendorKey].value / (1024*1024) | number: '1.0-0'}}
+                  </ng-container>
                 </div>
                 <div *ngIf="vendorKey === ResultType.THROUGHPUT" class="cell-data-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">
-                  {{statByVendor[vendorKey].value | number: '1.0-0'}}
+                  <ng-container *ngIf="statByVendor[vendorKey].value !== 0; else failed">
+                    {{statByVendor[vendorKey].value | number: '1.0-0'}}
+                  </ng-container>
                 </div>
                 <div *ngIf="vendorKey === ResultType.LATENCY" class="cell-data-value" [ngClass]="{'weakest': statByVendor[vendorKey].isWeakest}">
-                  {{statByVendor[vendorKey].value | number: '1.2-2'}}
+                  <ng-container *ngIf="statByVendor[vendorKey].value !== 0; else failed">
+                    {{statByVendor[vendorKey].value | number: '1.2-2'}}
+                  </ng-container>
                 </div>
+                <ng-template #failed>
+                  Failed
+                </ng-template>
               </div>
             </div>
           </td>

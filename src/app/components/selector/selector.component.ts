@@ -9,7 +9,9 @@ import {
   BenchmarkActions,
   BenchmarkSelectors,
   IBenchmarkSettingsCondition,
-  IBenchmarkSettingsHardwareAlias,
+  IBenchmarkSettingsDatasetName,
+  IBenchmarkSettingsNumberOfWorkers,
+  IBenchmarkSettingsPlatform,
   IBenchmarkSettingsQueryCategory,
   IBenchmarkSettingsQueryCategoryQuery,
   IBenchmarkSettingsSize,
@@ -26,6 +28,58 @@ export class SelectorComponent {
   @Input() isCollapsed: boolean | null = false;
 
   settings$ = this.store.select(BenchmarkSelectors.selectSettings);
+
+  datasetSizes$ = this.settings$.pipe(
+    map((settings) => {
+      const activatedDatasetName = settings?.datasetNames.find((datasetName) => datasetName.isActivated)?.name;
+      if (!activatedDatasetName) {
+        return;
+      }
+      const availableDatasetSizes = settings.datasetSizesPerName[activatedDatasetName];
+      return settings.datasetSizes.filter((datasetSize) => availableDatasetSizes.includes(datasetSize.name));
+    }),
+  );
+
+  workloadTypes$ = this.settings$.pipe(
+    map((settings) => {
+      const activatedDatasetName = settings?.datasetNames.find((datasetName) => datasetName.isActivated)?.name;
+      const activatedCondition = settings?.conditions.find((condition) => condition.isActivated)?.name;
+      if (!activatedDatasetName || !activatedCondition) {
+        return;
+      }
+      const availableWorkloadTypesPerDataset = settings.workloadTypesPerDataset[activatedDatasetName];
+      const availableWorkloadTypesPerCondition = settings.workloadTypesPerCondition[activatedCondition];
+      return settings.workloadTypes.filter(
+        (workloadType) =>
+          availableWorkloadTypesPerDataset.includes(workloadType.name) &&
+          availableWorkloadTypesPerCondition.includes(workloadType.name),
+      );
+    }),
+  );
+
+  queryCategories$ = this.settings$.pipe(
+    map((settings) => {
+      const activatedDatasetName = settings?.datasetNames.find((datasetName) => datasetName.isActivated)?.name;
+      if (!activatedDatasetName) {
+        return;
+      }
+      const availableQueryCategoryPerDataset = settings.queryCategoriesPerDataset[activatedDatasetName];
+      return settings?.queryCategories
+        .filter((queryCategory) =>
+          availableQueryCategoryPerDataset
+            .map((queryCategoryPerDataset) => queryCategoryPerDataset.name)
+            .includes(queryCategory.name),
+        )
+        .map((queryCategory) => {
+          const queries = queryCategory.queries.filter((query) =>
+            availableQueryCategoryPerDataset
+              .find((availableCategory) => availableCategory.name === queryCategory.name)
+              ?.queries.includes(query.name),
+          );
+          return { ...queryCategory, queries };
+        });
+    }),
+  );
   isRealisticActivated$ = this.settings$.pipe(
     map(
       (settings) =>
@@ -35,8 +89,8 @@ export class SelectorComponent {
     ),
   );
 
-  shouldShowHardwareAlias$ = this.settings$.pipe(
-    map((settings) => !!settings?.hardwareAliases.find((hardwareAlias) => !!hardwareAlias.name)),
+  shouldShowPlatform$ = this.settings$.pipe(
+    map((settings) => !!settings?.platforms.find((platform) => !!platform.name)),
   );
 
   contributeLink = 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#raised_hands-contributions';
@@ -56,14 +110,22 @@ export class SelectorComponent {
     this.store.dispatch(BenchmarkActions.updateCondition({ condition: { ...condition, isActivated: true } }));
   }
 
-  updateHardwareAlias(hardwareAlias: IBenchmarkSettingsHardwareAlias) {
-    this.store.dispatch(
-      BenchmarkActions.updateHardwareAlias({ hardwareAlias: { ...hardwareAlias, isActivated: true } }),
-    );
+  updateWorker(worker: IBenchmarkSettingsNumberOfWorkers) {
+    this.store.dispatch(BenchmarkActions.updateNumberOfWorkers({ numberOfWorkers: { ...worker, isActivated: true } }));
+  }
+
+  updatePlatform(platform: IBenchmarkSettingsPlatform) {
+    this.store.dispatch(BenchmarkActions.updatePlatform({ platform: { ...platform, isActivated: true } }));
   }
 
   updateWorkloadType(workloadType: IBenchmarkSettingsWorkloadType) {
     this.store.dispatch(BenchmarkActions.updateWorkloadType({ workloadType: { ...workloadType, isActivated: true } }));
+  }
+
+  updateName(datasetNameSetting: IBenchmarkSettingsDatasetName) {
+    this.store.dispatch(
+      BenchmarkActions.updateDatasetNames({ datasetNameSetting: { ...datasetNameSetting, isActivated: true } }),
+    );
   }
 
   updateSize(size: IBenchmarkSettingsSize) {

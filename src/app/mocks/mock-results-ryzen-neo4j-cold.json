@@ -2,7 +2,7 @@
   "runConfig": {
     "vendor": "Neo4j",
     "condition": "cold",
-    "hardwareAlias": "ryzen"
+    "platform": "ryzen"
   },
   "datasets": [
       {
