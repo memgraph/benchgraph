@@ -48,6 +48,7 @@ class QueryCategory(Enum):
     AGGREGATE = "aggregate"
     ANALYTICAL = "analytical"
     UPDATE = "update"
+    BIG = "big"
 
 
 class WorkloadType(Enum):
@@ -481,20 +482,25 @@ class TranslateJson:
         percentages: Percentages
     ) -> List[Workload]:
         result: List[Workload] = []
+        empty_database = 0
+        imported_data = 0
         for key, item in workloads.items():
             # key - __import__, imported_data, empty_database, arango, ...
             # somewhere here we should save data from imported_data and empty_database -> maybe in workloads Dict
-            empty_database = 0
-            imported_data = 0
             
             if key == "__import__":
                 continue
             
-            if key == "empty_database":
-                empty_database = int(item["memory"])
+            if key == "empty_db":
+                print(item)
+                empty_database = item["database"]["memory"]
+                print(f"empty_database: {empty_database}")
+                continue
                 
             if key == "imported_data":
-                imported_data = int(item["memory"])
+                imported_data = item["database"]["memory"]
+                print(f"imported_data: {imported_data}")
+                continue
 
             print(f"3. {key}")
             workloads = []
