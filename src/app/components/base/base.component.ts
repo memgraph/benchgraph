@@ -97,7 +97,7 @@ export class BaseComponent extends Unsubscribe implements OnInit {
   setPlatformFromParams(params: ParamMap) {
     const platform: IBenchmarkSettingsPlatform = {
       isActivated: true,
-      name: (params.get('platform') as Platform) ?? Platform.AMD,
+      name: (params.get('platform') as Platform) ?? Platform.INTEL,
     };
     if (!platform.name) {
       return;

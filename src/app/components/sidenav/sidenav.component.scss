@@ -5,7 +5,6 @@
   width: 4rem;
   background: $brand-black;
   color: $brand-light;
-  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -44,69 +43,75 @@
     top: 0;
     left: 2rem;
     background: $brand-black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     color: $brand-light;
     padding-right: 2rem;
+    display: flex;
+    flex-direction: column;
 
     .title {
       font-size: 2rem;
       font-weight: 600;
       line-height: 4rem;
       margin-bottom: 2rem;
+      margin-top: 6rem;
     }
 
-    .github {
-      margin-bottom: 1rem;
+    &-inner {
       display: flex;
-      align-items: flex-end;
-      gap: 1rem;
-      cursor: pointer;
-      width: fit-content;
-      color: white;
-
-      img {
-        align-self: center;
-      }
-
-      &-title {
-        border-bottom: 1px solid transparent;
-        transition: all 0.3s linear;
-      }
-
-      &:hover {
-        .github-title {
-          border-bottom: 1px solid $brand-light;
+      flex-direction: column;
+      overflow-y: auto;
+  
+      .github {
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: flex-end;
+        gap: 1rem;
+        cursor: pointer;
+        width: fit-content;
+        color: white;
+  
+        img {
+          align-self: center;
+        }
+  
+        &-title {
+          border-bottom: 1px solid transparent;
+          transition: all 0.3s linear;
+        }
+  
+        &:hover {
+          .github-title {
+            border-bottom: 1px solid $brand-light;
+          }
         }
       }
-    }
-
-    .subtitle {
-      font-weight: 500;
-      font-size: 1.5rem;
-      line-height: 2.5rem;
-      color: $brand-ash;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .docs {
-      display: flex;
-      cursor: pointer;
-      gap: 1rem;
-      width: fit-content;
-      color: white;
-      margin-bottom: 1rem;
-
-      &-title {
-        border-bottom: 1px solid transparent;
-        transition: all 0.3s linear;
+  
+      .subtitle {
+        font-weight: 500;
+        font-size: 1.5rem;
+        line-height: 2.5rem;
+        color: $brand-ash;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
       }
-
-      &:hover {
-        .docs-title {
-          border-bottom: 1px solid $brand-light;
+  
+      .docs {
+        display: flex;
+        cursor: pointer;
+        gap: 1rem;
+        width: fit-content;
+        color: white;
+        margin-bottom: 1rem;
+  
+        &-title {
+          border-bottom: 1px solid transparent;
+          transition: all 0.3s linear;
+        }
+  
+        &:hover {
+          .docs-title {
+            border-bottom: 1px solid $brand-light;
+          }
         }
       }
     }
