@@ -48,7 +48,6 @@ class QueryCategory(Enum):
     AGGREGATE = "aggregate"
     ANALYTICAL = "analytical"
     UPDATE = "update"
-    BIG = "big"
 
 
 class WorkloadType(Enum):
