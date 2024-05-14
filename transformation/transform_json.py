@@ -411,6 +411,7 @@ class TranslateJson:
             data[RUN_CONFIGURATION_KEY])
 
         for key, value in data.items():
+            # key - run_configuration, pokec, ...
             print(f"1. {key}")
             if key != RUN_CONFIGURATION_KEY:
                 datasets = TranslateJson._process_datasets(
@@ -456,6 +457,7 @@ class TranslateJson:
     ) -> List[Dataset]:
         result: List[Dataset] = []
         for value_key, workload_collection in values.items():
+            # value_key - small, medium, large, ...
             print(f"2. {value_key}")
             workloads = TranslateJson._process_workloads(
                 workloads=workload_collection,
@@ -479,8 +481,24 @@ class TranslateJson:
         percentages: Percentages
     ) -> List[Workload]:
         result: List[Workload] = []
+        empty_database = 0
+        imported_data = 0
         for key, item in workloads.items():
+            # key - __import__, imported_data, empty_database, arango, ...
+            # somewhere here we should save data from imported_data and empty_database -> maybe in workloads Dict
+            
             if key == "__import__":
+                continue
+            
+            if key == "empty_db":
+                print(item)
+                empty_database = item["database"]["memory"]
+                print(f"empty_database: {empty_database}")
+                continue
+                
+            if key == "imported_data":
+                imported_data = item["database"]["memory"]
+                print(f"imported_data: {imported_data}")
                 continue
 
             print(f"3. {key}")
@@ -492,7 +510,9 @@ class TranslateJson:
                         queries=TranslateJson._process_queries(
                             queries=item,
                             workloadType=workloadType,
-                            percentagesString=""
+                            percentagesString="",
+                            empty_database=empty_database,
+                            imported_data=imported_data
                         )
                     )
                 )
@@ -502,7 +522,9 @@ class TranslateJson:
                         queries=TranslateJson._process_queries(
                             queries=item,
                             workloadType=workloadType,
-                            percentagesString=percentages.get_string()
+                            percentagesString=percentages.get_string(),
+                            empty_database=empty_database,
+                            imported_data=imported_data
                         ),
                         percentages=percentages
                     )
@@ -512,7 +534,7 @@ class TranslateJson:
                     workloads.append(
                         WorkloadRealistic(
                             percentages=percentages,
-                            stats=TranslateJson._process_stats(value["without_fine_grained_authorization"], False)
+                            stats=TranslateJson._process_stats(value["without_fine_grained_authorization"], False, empty_database, imported_data)
                         )
                     )
             else:
@@ -526,7 +548,9 @@ class TranslateJson:
     def _process_queries(
         queries: Dict[str, Any],
         workloadType: WorkloadType,
-        percentagesString: str
+        percentagesString: str,
+        empty_database: int,
+        imported_data: int
     ) -> List[Query]:
         result: List[Query] = []
         for key, query in queries.items():
@@ -536,7 +560,9 @@ class TranslateJson:
                     composite_name=key,
                     query=query,
                     workloadType=workloadType,
-                    percentagesString=percentagesString
+                    percentagesString=percentagesString,
+                    empty_database=empty_database,
+                    imported_data=imported_data
                 )
             )
 
@@ -547,7 +573,9 @@ class TranslateJson:
         composite_name: str,
         query: Dict[str, Any],
         workloadType: WorkloadType,
-        percentagesString: str
+        percentagesString: str,
+        empty_database: int,
+        imported_data: int
     ) -> Query:
         tempList = composite_name.replace(percentagesString, "").split("_")
         name = "_".join(tempList[:-1])
@@ -558,7 +586,9 @@ class TranslateJson:
                 category=category,
                 stats=TranslateJson._process_stats(
                     stats=query["without_fine_grained_authorization"],
-                    withQuery=False
+                    withQuery=False,
+                    empty_database=empty_database,
+                    imported_data=imported_data
                 )
             )
         elif workloadType == WorkloadType.ISOLATED:
@@ -567,7 +597,9 @@ class TranslateJson:
                 category=category,
                 stats=TranslateJson._process_stats(
                     stats=query["without_fine_grained_authorization"],
-                    withQuery=True
+                    withQuery=True,
+                    empty_database=empty_database,
+                    imported_data=imported_data
                 )
             )
 
@@ -576,7 +608,9 @@ class TranslateJson:
     @staticmethod
     def _process_stats(
         stats: str,
-        withQuery: bool
+        withQuery: bool,
+        empty_database: int,
+        imported_data: int
     ) -> Stats:
 
         result = StatsWithQuery(
@@ -586,7 +620,7 @@ class TranslateJson:
         ) if withQuery else Stats()
 
         result.database = TranslateJson._get_stats_database(
-            stats.get("database", {}))
+            stats.get("database", {}), empty_database, imported_data)
         result.duration = stats["duration"]
         result.executedQueries = stats["count"]
         result.numWorkers = stats["num_workers"]
@@ -612,8 +646,8 @@ class TranslateJson:
         return result
 
     @staticmethod
-    def _get_stats_database(database) -> Database:
+    def _get_stats_database(database, empty_database, imported_data) -> Database:
         return Database(
             cpu=database.get("cpu", 0),
-            memory=database.get("memory", 0),
+            memory=database.get("memory", 0) + empty_database + imported_data
         )
