@@ -97,7 +97,7 @@ export class BaseComponent extends Unsubscribe implements OnInit {
   setPlatformFromParams(params: ParamMap) {
     const platform: IBenchmarkSettingsPlatform = {
       isActivated: true,
-      name: (params.get('platform') as Platform) ?? Platform.INTEL,
+      name: (params.get('platform') as Platform) ?? Platform.AMD,
     };
     if (!platform.name) {
       return;
@@ -117,13 +117,13 @@ export class BaseComponent extends Unsubscribe implements OnInit {
   }
 
   setNumberOfWorkersFromParams(params: ParamMap) {
-    const numberOfWorkers: IBenchmarkSettingsNumberOfWorkers = {
-      isActivated: true,
-      size: Number(params.get('numberOfWorkers')),
-    };
-    if (!numberOfWorkers.size) {
-      return;
-    }
+    const parmsSize = Number(params.get('numberOfWorkers'));
+    const numberOfWorkers: IBenchmarkSettingsNumberOfWorkers | undefined = parmsSize
+      ? {
+          isActivated: true,
+          size: parmsSize,
+        }
+      : undefined;
     this.store.dispatch(BenchmarkActions.updateNumberOfWorkers({ numberOfWorkers }));
   }
 
@@ -141,7 +141,7 @@ export class BaseComponent extends Unsubscribe implements OnInit {
   setSizeFromParams(params: ParamMap) {
     const size: IBenchmarkSettingsSize = {
       isActivated: true,
-      name: (params.get('datasetSize') as DatasetSize) ?? DatasetSize.SMALL,
+      name: (params.get('datasetSize') as DatasetSize) ?? DatasetSize.MEDIUM,
     };
     if (!size.name) {
       return;

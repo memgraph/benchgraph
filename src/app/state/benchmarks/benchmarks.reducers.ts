@@ -134,18 +134,33 @@ const _benchmarksReducer = createReducer(
       ...state,
       settings: {
         ...state.settings,
-        numberOfWorkers: state.settings.numberOfWorkers.map((stateNumberOfWorkers) => {
-          if (numberOfWorkers.size === stateNumberOfWorkers.size) {
-            return {
-              ...stateNumberOfWorkers,
-              isActivated: numberOfWorkers.isActivated,
-            };
-          }
-          return {
-            ...stateNumberOfWorkers,
-            isActivated: !numberOfWorkers.isActivated,
-          };
-        }),
+        numberOfWorkers: numberOfWorkers
+          ? state.settings.numberOfWorkers.map((stateNumberOfWorkers) => {
+              if (numberOfWorkers.size === stateNumberOfWorkers.size) {
+                return {
+                  ...stateNumberOfWorkers,
+                  isActivated: numberOfWorkers.isActivated,
+                };
+              }
+              return {
+                ...stateNumberOfWorkers,
+                isActivated: !numberOfWorkers.isActivated,
+              };
+            })
+          : state.settings.numberOfWorkers.some((stateNumberOfWorkers) => stateNumberOfWorkers.size === 24)
+          ? state.settings.numberOfWorkers.map((stateNumberOfWorkers) => {
+              if (stateNumberOfWorkers.size === 24) {
+                return {
+                  ...stateNumberOfWorkers,
+                  isActivated: true,
+                };
+              }
+              return {
+                ...stateNumberOfWorkers,
+                isActivated: false,
+              };
+            })
+          : state.settings.numberOfWorkers,
       },
     };
   }),

@@ -32,7 +32,7 @@ export const updateVendor = createAction('[Benchmarks] Update Vendor', props<{ v
 
 export const updateNumberOfWorkers = createAction(
   '[Benchmarks] Update Number of Workers',
-  props<{ numberOfWorkers: IBenchmarkSettingsNumberOfWorkers }>(),
+  props<{ numberOfWorkers: IBenchmarkSettingsNumberOfWorkers | undefined }>(),
 );
 
 export const updateDatasetNames = createAction(

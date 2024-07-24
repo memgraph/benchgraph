@@ -44058,25 +44058,25 @@
                   "name": "complex_query_11",
                   "category": "analytical",
                   "stats": {
-                    "executedQueries": 4526,
-                    "duration": 0.109264349,
+                    "executedQueries": 5584,
+                    "duration": 3.91624211525,
                     "numWorkers": 12,
                     "retries": 0,
-                    "throughput": 41422.47715217706,
+                    "throughput": 1425.8566849724855,
                     "database": {
-                      "cpu": 0.92,
-                      "memory": 127950848
+                      "cpu": 107.29,
+                      "memory": 5270102016
                     },
                     "queryStatistics": {
-                      "iterations": 4526,
-                      "min": 0.00007843,
-                      "max": 0.037250643,
-                      "mean": 0.00028881359854175876,
-                      "p99": 0.000552143,
-                      "p95": 0.000345641,
-                      "p90": 0.000288112,
+                      "iterations": 5584,
+                      "min": 0.000132517,
+                      "max": 0.061711469,
+                      "mean": 0.008415394035995697,
+                      "p99": 0.01285711,
+                      "p95": 0.011447627,
+                      "p90": 0.010819532,
                       "p75": 0,
-                      "p50": 0.000171571
+                      "p50": 0.008318076
                     }
                   }
                 },
@@ -44084,25 +44084,25 @@
                   "name": "complex_query_12",
                   "category": "analytical",
                   "stats": {
-                    "executedQueries": 300,
-                    "duration": 0.04548169975,
+                    "executedQueries": 301,
+                    "duration": 3.3978710509999996,
                     "numWorkers": 12,
                     "retries": 0,
-                    "throughput": 6596.059550302976,
+                    "throughput": 88.58488020356604,
                     "database": {
-                      "cpu": 0.4,
-                      "memory": 119218176
+                      "cpu": 101.16,
+                      "memory": 5310251008
                     },
                     "queryStatistics": {
-                      "iterations": 300,
-                      "min": 0.00010864,
-                      "max": 0.038678541,
-                      "mean": 0.001818220246666667,
-                      "p99": 0.03867372,
-                      "p95": 0.001020875,
-                      "p90": 0.000451242,
+                      "iterations": 301,
+                      "min": 0.073198536,
+                      "max": 0.229178037,
+                      "mean": 0.13546107978405303,
+                      "p99": 0.223324926,
+                      "p95": 0.185128057,
+                      "p90": 0.171388045,
                       "p75": 0,
-                      "p50": 0.000258301
+                      "p50": 0.148245972
                     }
                   }
                 },
@@ -44110,25 +44110,25 @@
                   "name": "complex_query_13",
                   "category": "analytical",
                   "stats": {
-                    "executedQueries": 224990,
-                    "duration": 3.0291687755,
+                    "executedQueries": 205997,
+                    "duration": 3.2086849452500004,
                     "numWorkers": 12,
                     "retries": 0,
-                    "throughput": 74274.50124922892,
+                    "throughput": 64199.82127100049,
                     "database": {
-                      "cpu": 22.62,
-                      "memory": 120098816
+                      "cpu": 97.63,
+                      "memory": 5297766400
                     },
                     "queryStatistics": {
-                      "iterations": 224990,
-                      "min": 0.000054741,
-                      "max": 0.037158843,
-                      "mean": 0.00016073526589626173,
-                      "p99": 0.000371232,
-                      "p95": 0.000281081,
-                      "p90": 0.000241101,
+                      "iterations": 205997,
+                      "min": 0.000058769,
+                      "max": 0.041172665,
+                      "mean": 0.0001861470216410877,
+                      "p99": 0.000490582,
+                      "p95": 0.000342165,
+                      "p90": 0.000294604,
                       "p75": 0,
-                      "p50": 0.00014105
+                      "p50": 0.000155312
                     }
                   }
                 },
@@ -44136,25 +44136,25 @@
                   "name": "complex_query_1",
                   "category": "analytical",
                   "stats": {
-                    "executedQueries": 4438,
-                    "duration": 0.1583699185833333,
+                    "executedQueries": 3319,
+                    "duration": 2.8599269394166664,
                     "numWorkers": 12,
                     "retries": 0,
-                    "throughput": 28022.998557423336,
+                    "throughput": 1160.5191567155803,
                     "database": {
-                      "cpu": 1.38,
-                      "memory": 118513664
+                      "cpu": 95.93,
+                      "memory": 5319057408
                     },
                     "queryStatistics": {
-                      "iterations": 4438,
-                      "min": 0.00012739,
-                      "max": 0.06921194,
-                      "mean": 0.0004271338292023431,
-                      "p99": 0.000557463,
-                      "p95": 0.000400662,
-                      "p90": 0.000344152,
+                      "iterations": 3319,
+                      "min": 0.000160686,
+                      "max": 0.128410704,
+                      "mean": 0.010339288893040074,
+                      "p99": 0.029530751,
+                      "p95": 0.022087408,
+                      "p90": 0.018963932,
                       "p75": 0,
-                      "p50": 0.000222612
+                      "p50": 0.011029052
                     }
                   }
                 },
@@ -44162,25 +44162,25 @@
                   "name": "complex_query_2",
                   "category": "analytical",
                   "stats": {
-                    "executedQueries": 770,
-                    "duration": 0.04672298291666666,
+                    "executedQueries": 850,
+                    "duration": 3.9512108464166666,
                     "numWorkers": 12,
                     "retries": 0,
-                    "throughput": 16480.11218319136,
+                    "throughput": 215.1239285979539,
                     "database": {
-                      "cpu": 0.45,
-                      "memory": 123641856
+                      "cpu": 108.32,
+                      "memory": 5566816256
                     },
                     "queryStatistics": {
-                      "iterations": 770,
-                      "min": 0.000079421,
-                      "max": 0.033059043,
-                      "mean": 0.0007273184714285714,
-                      "p99": 0.032957552,
-                      "p95": 0.000455972,
-                      "p90": 0.000374322,
+                      "iterations": 850,
+                      "min": 0.002278774,
+                      "max": 0.134456389,
+                      "mean": 0.05578013657764705,
+                      "p99": 0.103288969,
+                      "p95": 0.08036515,
+                      "p90": 0.078017167,
                       "p75": 0,
-                      "p50": 0.000188861
+                      "p50": 0.055796476
                     }
                   }
                 },
@@ -44189,24 +44189,24 @@
                   "category": "analytical",
                   "stats": {
                     "executedQueries": 300,
-                    "duration": 0.0627593825,
+                    "duration": 36.38221157533333,
                     "numWorkers": 12,
                     "retries": 0,
-                    "throughput": 4780.161755096937,
+                    "throughput": 8.245787900463867,
                     "database": {
-                      "cpu": 0.59,
-                      "memory": 120528896
+                      "cpu": 497.5,
+                      "memory": 5312565248
                     },
                     "queryStatistics": {
                       "iterations": 300,
-                      "min": 0.000151001,
-                      "max": 0.054688398,
-                      "mean": 0.0025091716666666665,
-                      "p99": 0.054668108,
-                      "p95": 0.001454497,
-                      "p90": 0.000591612,
+                      "min": 0.574329882,
+                      "max": 2.053002531,
+                      "mean": 1.4552857529299987,
+                      "p99": 1.997651741,
+                      "p95": 1.94207385,
+                      "p90": 1.905519541,
                       "p75": 0,
-                      "p50": 0.000293271
+                      "p50": 1.522066755
                     }
                   }
                 },
@@ -44214,25 +44214,25 @@
                   "name": "complex_query_4",
                   "category": "analytical",
                   "stats": {
-                    "executedQueries": 4204,
-                    "duration": 0.11724758816666668,
+                    "executedQueries": 4451,
+                    "duration": 3.471273968083334,
                     "numWorkers": 12,
                     "retries": 0,
-                    "throughput": 35855.7482139764,
+                    "throughput": 1282.2381756452437,
                     "database": {
-                      "cpu": 0.97,
-                      "memory": 126849024
+                      "cpu": 105.19,
+                      "memory": 5319725056
                     },
                     "queryStatistics": {
-                      "iterations": 4204,
-                      "min": 0.000067951,
-                      "max": 0.053662554,
-                      "mean": 0.00033400239081826855,
-                      "p99": 0.000573843,
-                      "p95": 0.000324322,
-                      "p90": 0.000274811,
+                      "iterations": 4451,
+                      "min": 0.000088249,
+                      "max": 0.08405739,
+                      "mean": 0.009357825037968986,
+                      "p99": 0.018512891,
+                      "p95": 0.015831367,
+                      "p90": 0.013896139,
                       "p75": 0,
-                      "p50": 0.000158361
+                      "p50": 0.008919793
                     }
                   }
                 },
@@ -44241,24 +44241,24 @@
                   "category": "analytical",
                   "stats": {
                     "executedQueries": 300,
-                    "duration": 0.04427447025,
+                    "duration": 16.30244573441667,
                     "numWorkers": 12,
                     "retries": 0,
-                    "throughput": 6775.913936542244,
+                    "throughput": 18.40214682430498,
                     "database": {
-                      "cpu": 0.42,
-                      "memory": 122167296
+                      "cpu": 261.91,
+                      "memory": 6345560064
                     },
                     "queryStatistics": {
                       "iterations": 300,
-                      "min": 0.000113301,
-                      "max": 0.037424834,
-                      "mean": 0.0017701534433333332,
-                      "p99": 0.037384283,
-                      "p95": 0.001415027,
-                      "p90": 0.000501672,
+                      "min": 0.250239118,
+                      "max": 1.185740838,
+                      "mean": 0.6520952949599997,
+                      "p99": 1.135209284,
+                      "p95": 1.029896266,
+                      "p90": 0.955096788,
                       "p75": 0,
-                      "p50": 0.000252722
+                      "p50": 0.638407308
                     }
                   }
                 },
@@ -44267,24 +44267,24 @@
                   "category": "analytical",
                   "stats": {
                     "executedQueries": 300,
-                    "duration": 0.037104317750000004,
+                    "duration": 9.18079031825,
                     "numWorkers": 12,
                     "retries": 0,
-                    "throughput": 8085.3123892838585,
+                    "throughput": 32.676925362694114,
                     "database": {
-                      "cpu": 0.35,
-                      "memory": 118951936
+                      "cpu": 174.47,
+                      "memory": 5331877888
                     },
                     "queryStatistics": {
                       "iterations": 300,
-                      "min": 0.000104921,
-                      "max": 0.030399319,
-                      "mean": 0.0014817166766666666,
-                      "p99": 0.030353799,
-                      "p95": 0.001167085,
-                      "p90": 0.000435142,
+                      "min": 0.000243021,
+                      "max": 0.58204631,
+                      "mean": 0.36722927650000015,
+                      "p99": 0.545247068,
+                      "p95": 0.48276057,
+                      "p90": 0.464064407,
                       "p75": 0,
-                      "p50": 0.000263492
+                      "p50": 0.371160774
                     }
                   }
                 },
@@ -44292,25 +44292,25 @@
                   "name": "complex_query_7",
                   "category": "analytical",
                   "stats": {
-                    "executedQueries": 2365,
-                    "duration": 0.10265684074999998,
+                    "executedQueries": 2151,
+                    "duration": 3.5282895572500004,
                     "numWorkers": 12,
                     "retries": 0,
-                    "throughput": 23037.91917539602,
+                    "throughput": 609.6438416116052,
                     "database": {
-                      "cpu": 0.98,
-                      "memory": 127426560
+                      "cpu": 104.77,
+                      "memory": 5513441280
                     },
                     "queryStatistics": {
-                      "iterations": 2365,
-                      "min": 0.00009106,
-                      "max": 0.063251791,
-                      "mean": 0.0005201500469344608,
-                      "p99": 0.000558693,
-                      "p95": 0.000347691,
-                      "p90": 0.000303262,
+                      "iterations": 2151,
+                      "min": 0.000443545,
+                      "max": 0.156550208,
+                      "mean": 0.019682361195722902,
+                      "p99": 0.075811748,
+                      "p95": 0.056650402,
+                      "p90": 0.042029349,
                       "p75": 0,
-                      "p50": 0.000182851
+                      "p50": 0.01523831
                     }
                   }
                 },
@@ -44318,25 +44318,25 @@
                   "name": "complex_query_8",
                   "category": "analytical",
                   "stats": {
-                    "executedQueries": 180218,
-                    "duration": 2.5263644026666667,
+                    "executedQueries": 191806,
+                    "duration": 3.6687685860833334,
                     "numWorkers": 12,
                     "retries": 0,
-                    "throughput": 71334.91898863582,
+                    "throughput": 52280.75728940056,
                     "database": {
-                      "cpu": 18.61,
-                      "memory": 128135168
+                      "cpu": 98.05,
+                      "memory": 5286019072
                     },
                     "queryStatistics": {
-                      "iterations": 180218,
-                      "min": 0.000064441,
-                      "max": 0.013807218,
-                      "mean": 0.00016741593365812577,
-                      "p99": 0.000381322,
-                      "p95": 0.000291311,
-                      "p90": 0.000251511,
+                      "iterations": 191806,
+                      "min": 0.000068037,
+                      "max": 0.020360933,
+                      "mean": 0.00022865696180515504,
+                      "p99": 0.000409662,
+                      "p95": 0.000339715,
+                      "p90": 0.000311141,
                       "p75": 0,
-                      "p50": 0.000150811
+                      "p50": 0.000219431
                     }
                   }
                 },
@@ -44345,24 +44345,24 @@
                   "category": "analytical",
                   "stats": {
                     "executedQueries": 300,
-                    "duration": 0.05664869558333333,
+                    "duration": 73.85986025666666,
                     "numWorkers": 12,
                     "retries": 0,
-                    "throughput": 5295.7971390300345,
+                    "throughput": 4.061746108880861,
                     "database": {
-                      "cpu": 0.53,
-                      "memory": 119787520
+                      "cpu": 951.02,
+                      "memory": 15481651200
                     },
                     "queryStatistics": {
                       "iterations": 300,
-                      "min": 0.000102051,
-                      "max": 0.049406302,
-                      "mean": 0.0022649260866666665,
-                      "p99": 0.049358971,
-                      "p95": 0.001520778,
-                      "p90": 0.000517363,
+                      "min": 0.000269636,
+                      "max": 5.09279291,
+                      "mean": 2.954391720263335,
+                      "p99": 4.821048767,
+                      "p95": 4.509266678,
+                      "p90": 4.254014368,
                       "p75": 0,
-                      "p50": 0.000274181
+                      "p50": 2.80738674
                     }
                   }
                 }
@@ -46746,329 +46746,6 @@
                       "p90": 0.320542844,
                       "p75": 0,
                       "p50": 0.267083901
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "ldbc_interactive",
-          "size": "sf1",
-          "workloads": [
-            {
-              "workloadType": "isolated",
-              "queries": [
-                {
-                  "name": "complex_query_11",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 4526,
-                    "duration": 0.09782225066666667,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 46267.592180254884,
-                    "database": {
-                      "cpu": 0.81,
-                      "memory": 120954880
-                    },
-                    "queryStatistics": {
-                      "iterations": 4526,
-                      "min": 0.000071631,
-                      "max": 0.027345224,
-                      "mean": 0.00025858003115333616,
-                      "p99": 0.000539073,
-                      "p95": 0.000351771,
-                      "p90": 0.000287431,
-                      "p75": 0,
-                      "p50": 0.000168701
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_12",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 300,
-                    "duration": 0.023747266166666666,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 12633.033120296648,
-                    "database": {
-                      "cpu": 0.19,
-                      "memory": 119640064
-                    },
-                    "queryStatistics": {
-                      "iterations": 300,
-                      "min": 0.000112721,
-                      "max": 0.017659407,
-                      "mean": 0.0009488178399999997,
-                      "p99": 0.017059944,
-                      "p95": 0.001036275,
-                      "p90": 0.000492783,
-                      "p75": 0,
-                      "p50": 0.000261711
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_13",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 224990,
-                    "duration": 3.031697030333334,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 74212.5607370676,
-                    "database": {
-                      "cpu": 22.65,
-                      "memory": 118284288
-                    },
-                    "queryStatistics": {
-                      "iterations": 224990,
-                      "min": 0.00005774,
-                      "max": 0.02858778,
-                      "mean": 0.00016090206540290478,
-                      "p99": 0.000374152,
-                      "p95": 0.000281611,
-                      "p90": 0.000242841,
-                      "p75": 0,
-                      "p50": 0.000143201
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_1",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 4438,
-                    "duration": 0.14814458100000003,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 29957.221317464184,
-                    "database": {
-                      "cpu": 1.3,
-                      "memory": 127451136
-                    },
-                    "queryStatistics": {
-                      "iterations": 4438,
-                      "min": 0.00012083,
-                      "max": 0.059271901,
-                      "mean": 0.0003995631070301938,
-                      "p99": 0.000553823,
-                      "p95": 0.000397382,
-                      "p90": 0.000344682,
-                      "p75": 0,
-                      "p50": 0.000222821
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_2",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 770,
-                    "duration": 0.037247328249999996,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 20672.62368006221,
-                    "database": {
-                      "cpu": 0.38,
-                      "memory": 121151488
-                    },
-                    "queryStatistics": {
-                      "iterations": 770,
-                      "min": 0.000085931,
-                      "max": 0.024214219,
-                      "mean": 0.0005796674389610387,
-                      "p99": 0.023924718,
-                      "p95": 0.000431652,
-                      "p90": 0.000356822,
-                      "p75": 0,
-                      "p50": 0.000189211
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_3",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 300,
-                    "duration": 0.05040864891666668,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 5951.359666392697,
-                    "database": {
-                      "cpu": 0.47,
-                      "memory": 121184256
-                    },
-                    "queryStatistics": {
-                      "iterations": 300,
-                      "min": 0.000139541,
-                      "max": 0.042975911,
-                      "mean": 0.00201508362,
-                      "p99": 0.04285943,
-                      "p95": 0.001325186,
-                      "p90": 0.000521432,
-                      "p75": 0,
-                      "p50": 0.000288682
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_4",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 4204,
-                    "duration": 0.11746504566666666,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 35789.37015807912,
-                    "database": {
-                      "cpu": 0.99,
-                      "memory": 125358080
-                    },
-                    "queryStatistics": {
-                      "iterations": 4204,
-                      "min": 0.000085631,
-                      "max": 0.050364408,
-                      "mean": 0.00033446234847764024,
-                      "p99": 0.000466782,
-                      "p95": 0.000339622,
-                      "p90": 0.000290431,
-                      "p75": 0,
-                      "p50": 0.000176951
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_5",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 300,
-                    "duration": 0.02840544458333334,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 10561.355557026645,
-                    "database": {
-                      "cpu": 0.28,
-                      "memory": 122478592
-                    },
-                    "queryStatistics": {
-                      "iterations": 300,
-                      "min": 0.000105981,
-                      "max": 0.02225911,
-                      "mean": 0.0011350410433333335,
-                      "p99": 0.021978149,
-                      "p95": 0.001264776,
-                      "p90": 0.000442372,
-                      "p75": 0,
-                      "p50": 0.000251062
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_6",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 300,
-                    "duration": 0.025938986833333334,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 11565.602077197555,
-                    "database": {
-                      "cpu": 0.24,
-                      "memory": 117993472
-                    },
-                    "queryStatistics": {
-                      "iterations": 300,
-                      "min": 0.000108251,
-                      "max": 0.019408766,
-                      "mean": 0.0010365211666666667,
-                      "p99": 0.019253295,
-                      "p95": 0.001099255,
-                      "p90": 0.000440772,
-                      "p75": 0,
-                      "p50": 0.000267741
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_7",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 2365,
-                    "duration": 0.09819774391666665,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 24084.056371060877,
-                    "database": {
-                      "cpu": 0.94,
-                      "memory": 131223552
-                    },
-                    "queryStatistics": {
-                      "iterations": 2365,
-                      "min": 0.00009447,
-                      "max": 0.058435147,
-                      "mean": 0.0004975100799154336,
-                      "p99": 0.000564033,
-                      "p95": 0.000357172,
-                      "p90": 0.000303492,
-                      "p75": 0,
-                      "p50": 0.000186551
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_8",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 180218,
-                    "duration": 2.5595413589166665,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 70410.27071985968,
-                    "database": {
-                      "cpu": 19.06,
-                      "memory": 134324224
-                    },
-                    "queryStatistics": {
-                      "iterations": 180218,
-                      "min": 0.00006247,
-                      "max": 0.035666546,
-                      "mean": 0.0001696859252571881,
-                      "p99": 0.000386072,
-                      "p95": 0.000293101,
-                      "p90": 0.000252951,
-                      "p75": 0,
-                      "p50": 0.000151581
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_9",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 300,
-                    "duration": 0.04487977225,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 6684.525900195495,
-                    "database": {
-                      "cpu": 0.44,
-                      "memory": 123863040
-                    },
-                    "queryStatistics": {
-                      "iterations": 300,
-                      "min": 0.000094011,
-                      "max": 0.038506469,
-                      "mean": 0.0017943540166666667,
-                      "p99": 0.038146017,
-                      "p95": 0.000654973,
-                      "p90": 0.000517122,
-                      "p75": 0,
-                      "p50": 0.000286632
                     }
                   }
                 }
@@ -54032,329 +53709,6 @@
                       "p90": 0.234333422,
                       "p75": 0,
                       "p50": 0.194499177
-                    }
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "ldbc_interactive",
-          "size": "sf1",
-          "workloads": [
-            {
-              "workloadType": "isolated",
-              "queries": [
-                {
-                  "name": "complex_query_11",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 4526,
-                    "duration": 3.70877454925,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 1220.3491853974413,
-                    "database": {
-                      "cpu": 73.15,
-                      "memory": 6024511488
-                    },
-                    "queryStatistics": {
-                      "iterations": 4526,
-                      "min": 0.000284612,
-                      "max": 0.977938773,
-                      "mean": 0.009832524143614654,
-                      "p99": 0.053435,
-                      "p95": 0.014023471,
-                      "p90": 0.010391773,
-                      "p75": 0,
-                      "p50": 0.006304032
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_12",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 300,
-                    "duration": 4.298288693916667,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 69.79521883315739,
-                    "database": {
-                      "cpu": 75.51,
-                      "memory": 5886181376
-                    },
-                    "queryStatistics": {
-                      "iterations": 300,
-                      "min": 0.084817098,
-                      "max": 1.594383447,
-                      "mean": 0.1719305183766666,
-                      "p99": 1.592844509,
-                      "p95": 0.394244448,
-                      "p90": 0.132588338,
-                      "p75": 0,
-                      "p50": 0.095602952
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_13",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 224990,
-                    "duration": 5.590880132833333,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 40242.3222559737,
-                    "database": {
-                      "cpu": 91.44,
-                      "memory": 4446019584
-                    },
-                    "queryStatistics": {
-                      "iterations": 224990,
-                      "min": 0.00009115,
-                      "max": 0.385450633,
-                      "mean": 0.0002973255774078871,
-                      "p99": 0.001673818,
-                      "p95": 0.000641843,
-                      "p90": 0.000409012,
-                      "p75": 0,
-                      "p50": 0.00018696
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_1",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 4438,
-                    "duration": 3.7642006835,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 1179.0019643356245,
-                    "database": {
-                      "cpu": 73.44,
-                      "memory": 3754065920
-                    },
-                    "queryStatistics": {
-                      "iterations": 4438,
-                      "min": 0.000392912,
-                      "max": 1.310280641,
-                      "mean": 0.01017621943961244,
-                      "p99": 0.031114346,
-                      "p95": 0.015257757,
-                      "p90": 0.01205362,
-                      "p75": 0,
-                      "p50": 0.007081576
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_2",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 770,
-                    "duration": 3.70867077375,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 207.6215568796416,
-                    "database": {
-                      "cpu": 68.48,
-                      "memory": 6280290304
-                    },
-                    "queryStatistics": {
-                      "iterations": 770,
-                      "min": 0.002458092,
-                      "max": 0.895199127,
-                      "mean": 0.05779633197142857,
-                      "p99": 0.883203457,
-                      "p95": 0.092822986,
-                      "p90": 0.061266167,
-                      "p75": 0,
-                      "p50": 0.041711779
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_3",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 300,
-                    "duration": 71.25842318783333,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 4.21002860544944,
-                    "database": {
-                      "cpu": 879.02,
-                      "memory": 6827831296
-                    },
-                    "queryStatistics": {
-                      "iterations": 300,
-                      "min": 1.194250844,
-                      "max": 4.429871198,
-                      "mean": 2.8503342736299997,
-                      "p99": 4.391830207,
-                      "p95": 3.227661834,
-                      "p90": 3.082140262,
-                      "p75": 0,
-                      "p50": 2.869448993
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_4",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 4204,
-                    "duration": 5.81271072025,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 723.2425975292969,
-                    "database": {
-                      "cpu": 97.38,
-                      "memory": 6587023360
-                    },
-                    "queryStatistics": {
-                      "iterations": 4204,
-                      "min": 0.000271371,
-                      "max": 1.072336879,
-                      "mean": 0.016591095806612752,
-                      "p99": 0.054485613,
-                      "p95": 0.022308721,
-                      "p90": 0.020349942,
-                      "p75": 0,
-                      "p50": 0.012504312
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_5",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 300,
-                    "duration": 31.43346816541667,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 9.543967545078662,
-                    "database": {
-                      "cpu": 402.19,
-                      "memory": 9982779392
-                    },
-                    "queryStatistics": {
-                      "iterations": 300,
-                      "min": 0.712443375,
-                      "max": 2.768596237,
-                      "mean": 1.2573369883799987,
-                      "p99": 2.715201629,
-                      "p95": 1.530119368,
-                      "p90": 1.447730855,
-                      "p75": 0,
-                      "p50": 1.23093523
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_6",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 300,
-                    "duration": 12.215414547666667,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 24.559133775554482,
-                    "database": {
-                      "cpu": 170.93,
-                      "memory": 4212031488
-                    },
-                    "queryStatistics": {
-                      "iterations": 300,
-                      "min": 0.001348316,
-                      "max": 1.790875499,
-                      "mean": 0.48861483933666655,
-                      "p99": 1.774905879,
-                      "p95": 0.620166233,
-                      "p90": 0.544007311,
-                      "p75": 0,
-                      "p50": 0.448128762
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_7",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 2365,
-                    "duration": 2.9593082653333336,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 799.1732485948397,
-                    "database": {
-                      "cpu": 62.18,
-                      "memory": 4133810176
-                    },
-                    "queryStatistics": {
-                      "iterations": 2365,
-                      "min": 0.001052836,
-                      "max": 1.111392679,
-                      "mean": 0.015014607390697671,
-                      "p99": 0.08002142,
-                      "p95": 0.024488323,
-                      "p90": 0.018283362,
-                      "p75": 0,
-                      "p50": 0.007396107
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_8",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 180218,
-                    "duration": 5.686232494333333,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 31693.744527610837,
-                    "database": {
-                      "cpu": 90.76,
-                      "memory": 3115782144
-                    },
-                    "queryStatistics": {
-                      "iterations": 180218,
-                      "min": 0.000101801,
-                      "max": 0.600147789,
-                      "mean": 0.0003782136535196259,
-                      "p99": 0.002183881,
-                      "p95": 0.000771054,
-                      "p90": 0.000479892,
-                      "p75": 0,
-                      "p50": 0.000240811
-                    }
-                  }
-                },
-                {
-                  "name": "complex_query_9",
-                  "category": "analytical",
-                  "stats": {
-                    "executedQueries": 300,
-                    "duration": 42.94994760933333,
-                    "numWorkers": 12,
-                    "retries": 0,
-                    "throughput": 6.984874643591134,
-                    "database": {
-                      "cpu": 537.56,
-                      "memory": 5433819136
-                    },
-                    "queryStatistics": {
-                      "iterations": 300,
-                      "min": 0.002221641,
-                      "max": 3.147961819,
-                      "mean": 1.7179962162999998,
-                      "p99": 3.028478092,
-                      "p95": 2.088479704,
-                      "p90": 2.02368736,
-                      "p75": 0,
-                      "p50": 1.752283836
                     }
                   }
                 }
