@@ -96,8 +96,8 @@ export class SelectorComponent {
   contributeLink = 'https://github.com/memgraph/memgraph/tree/master/tests/mgbench#raised_hands-contributions';
 
   tooltipByVendor: Record<RunConfigVendor, string> = {
-    [RunConfigVendor.MEMGRAPH]: 'Memgraph 2.4',
-    [RunConfigVendor.NEO4J]: 'Neo4j Community Edition v5.1',
+    [RunConfigVendor.MEMGRAPH]: 'Memgraph 2.16',
+    [RunConfigVendor.NEO4J]: 'Neo4j Community Edition v5.19',
   };
 
   constructor(

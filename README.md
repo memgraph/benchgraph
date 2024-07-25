@@ -4,7 +4,7 @@ Benchgraph is now hosted on the vercel memgraph.com site as github pages was giv
 
 To deploy a new version:
 
-(1) Build as normal
+(1) Build as normal (npm run build:deploy)
 
 (2) Edit the resulting html
 

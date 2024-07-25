@@ -137,8 +137,8 @@ export const TOOLTIP_OF_CONDITION: Record<RunConfigCondition, string> = {
 };
 
 export const TOOLTIP_OF_PLATFORM: Record<Platform, string> = {
-  [Platform.AMD]: 'Ryzen 7 3800X, 64GB RAM',
-  [Platform.INTEL]: '2 x Xeon X5650 6C12T @ 2.67GHz, 144GB RAM',
+  [Platform.AMD]: 'r7a.4xlarge',
+  [Platform.INTEL]: 'r7i.4xlarge',
 };
 
 export const TOOLTIP_OF_DATASET_SIZE: Record<DatasetSize, string> = {
